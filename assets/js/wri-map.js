@@ -22,16 +22,16 @@
   const state = { years: new Set([2017, 2018, 2019, 2020]), time: "all", who: null, view: "wards", ctx: { rail: true, metro: false, express: true, roads: false, green: true } };
   let A, map, popup, layers = {}, heatCv;
 
+  // Basemap: OpenStreetMap standard tiles (no key), rendered as inverted greyscale to suit the dark theme.
   const style = {
     version: 8,
     sources: {
-      base: { type: "raster", tileSize: 256, tiles: ["a", "b", "c", "d"].map((s) => `https://${s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png`),
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>' },
-      labels: { type: "raster", tileSize: 256, tiles: ["a", "b", "c", "d"].map((s) => `https://${s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png`) }
+      base: { type: "raster", tileSize: 256, maxzoom: 19, tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }
     },
     layers: [
       { id: "bg", type: "background", paint: { "background-color": "#0a0d10" } },
-      { id: "base", type: "raster", source: "base", paint: { "raster-opacity": .9, "raster-saturation": -.6 } }
+      { id: "base", type: "raster", source: "base", paint: { "raster-saturation": -1, "raster-brightness-min": 0.9, "raster-brightness-max": 0.06, "raster-contrast": 0.15, "raster-opacity": 0.85 } }
     ]
   };
 
@@ -179,7 +179,6 @@
     map.addLayer({ id: "c-rail-stn", type: "circle", source: "ctx", filter: K("rail_stn"), minzoom: 11, paint: { "circle-radius": 2.4, "circle-color": "#07090b", "circle-stroke-color": "#e6ecef", "circle-stroke-width": 1.2 } });
     map.addLayer({ id: "c-metro-stn", type: "circle", source: "ctx", filter: K("metro_stn"), layout: { visibility: "none" }, paint: { "circle-radius": 2.6, "circle-color": "#07090b", "circle-stroke-color": "#c6f26b", "circle-stroke-width": 1.4 } });
     map.addLayer({ id: "c-airport", type: "circle", source: "ctx", filter: K("airport"), paint: { "circle-radius": 5, "circle-color": "rgba(94,200,216,.25)", "circle-stroke-color": "#5ec8d8", "circle-stroke-width": 1.2 } });
-    map.addLayer({ id: "labels", type: "raster", source: "labels", paint: { "raster-opacity": .7 } });
   }
 
   function setView() {
