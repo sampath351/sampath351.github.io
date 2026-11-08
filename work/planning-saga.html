@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planning Saga — Sampath Kakarla</title>
+  <meta name="description" content="Case study: the delivery system, automation and planning model behind 1.5M+ parcels across 35–40 cities.">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <!-- <link rel="stylesheet" href="https://use.typekit.net/KITID.css"> -->
+  <link rel="preload" href="../assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/demos.css">
+</head>
+<body>
+<header class="hud">
+  <a class="id" href="../index.html">SK<b>/</b>GEO</a>
+  <span class="live hide-m">CASE 01</span>
+  <span class="coord hide-m">35–40 CITIES · 5 CONTINENTS</span>
+  <nav aria-label="Case study">
+    <a href="#system">System</a>
+    <a href="#automation" class="opt">Automation</a>
+    <a href="#planning" class="opt">Planning</a>
+    <a href="#operations" class="opt">Ops</a>
+    <a href="../index.html#work">All work</a>
+  </nav>
+</header>
+
+<main>
+  <section class="cs-hero"><div class="wrap" id="cs-hero"></div></section>
+  <div class="cs-body"><div class="wrap"><div id="chapters"></div><nav class="next" id="next"></nav></div></div>
+</main>
+
+<!-- ============ DEMO 1: pipeline on a fictional town ============ -->
+<section class="demo" id="pipeline-demo" hidden aria-label="Ten-stage pipeline walkthrough on a fictional town">
+  <div class="demo-head"><span class="mono">INTERACTIVE · FICTIONAL TOWN · NO CLIENT DATA</span><button class="chip" id="pl-play">▶ Play</button></div>
+  <div class="pl">
+    <div class="pl-map"><svg id="pl-svg" viewBox="0 0 900 600" role="img" aria-label="Fictional town with parcels"></svg><div class="pl-tip" id="pl-tip" hidden></div></div>
+    <aside class="pl-side">
+      <div class="pl-phase mono" id="pl-phase"></div>
+      <h4 id="pl-title"></h4>
+      <p id="pl-desc"></p>
+      <div class="pl-stats" id="pl-stats"></div>
+      <div class="pl-gates" id="pl-gates"></div>
+    </aside>
+  </div>
+  <div class="pl-track" id="pl-track" role="tablist" aria-label="Stages"></div>
+</section>
+
+<!-- ============ DEMO 2: timeline planner ============ -->
+<section class="demo" id="planner-demo" hidden aria-label="Capacity and deadline planner">
+  <div class="demo-head"><span class="mono">WORKING RECREATION OF THE PLANNING WORKBOOK · PEOPLE AND CITY REMOVED</span><button class="chip" id="pz-reset">Reset</button></div>
+  <div class="pz">
+    <div class="pz-in">
+      <div class="pz-tabs" role="tablist">
+        <button role="tab" class="on" data-tab="scope">I · Scope</button>
+        <button role="tab" data-tab="team">II · Team &amp; prep</button>
+        <button role="tab" data-tab="rules">III · Rules</button>
+      </div>
+      <div class="pz-pane" data-pane="scope"></div>
+      <div class="pz-pane" data-pane="team" hidden></div>
+      <div class="pz-pane" data-pane="rules" hidden></div>
+    </div>
+    <div class="pz-out">
+      <div class="pz-ms" id="pz-ms"></div>
+      <div class="pz-req" id="pz-req"></div>
+      <svg class="pz-chart" id="pz-chart" viewBox="0 0 600 220" role="img" aria-label="Cumulative team hours, S1 and S2"></svg>
+      <details class="pz-week"><summary class="mono">IV · Weekly summary</summary><div class="pz-tbl" id="pz-weeks"></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO 3: operations system ============ -->
+<section class="demo" id="ops-demo" hidden aria-label="Operations system">
+  <div class="demo-head"><span class="mono">OPERATING SYSTEM · RECREATED WITH FICTIONAL CITIES</span></div>
+  <div class="ops-flow">
+    <div class="of"><span class="mono">IN</span><b>City brief</b><small>scope, client spec</small></div>
+    <div class="of"><span class="mono">01</span><b>Prep protocol</b><small>source audit, edge cases</small></div>
+    <div class="of hl"><span class="mono">02</span><b>City = project</b><small>stage lists + checklists</small></div>
+    <div class="of"><span class="mono">03</span><b>Allocation</b><small>timeline model → team</small></div>
+    <div class="of"><span class="mono">04</span><b>QA gates</b><small>neighbourhood → city</small></div>
+    <div class="of"><span class="mono">OUT</span><b>Delivery</b><small>GeoJSON to spec</small></div>
+    <div class="of loop"><span class="mono">↺</span><b>Retrospective</b><small>updates procedures</small></div>
+  </div>
+  <div class="board">
+    <div class="b-col"><h6>Capture</h6><div class="b-card"><b>City E</b><span>N3 · 2 people</span><i style="--p:.62"></i></div><div class="b-card"><b>City F</b><span>prep protocol</span><i style="--p:.08"></i></div></div>
+    <div class="b-col"><h6>Geometry</h6><div class="b-card"><b>City D</b><span>N5 · 1 person</span><i style="--p:.4"></i></div></div>
+    <div class="b-col"><h6>Address</h6><div class="b-card"><b>City C</b><span>API batch 14/20</span><i style="--p:.7"></i></div></div>
+    <div class="b-col"><h6>Quality</h6><div class="b-card"><b>City B</b><span>sampling · 2 flags</span><i style="--p:.85"></i></div></div>
+    <div class="b-col"><h6>Delivered</h6><div class="b-card done"><b>City A</b><span>retro done</span><i style="--p:1"></i></div></div>
+  </div>
+  <div class="funnel">
+    <span class="mono">HIRING PIPELINE</span>
+    <ol><li>Sourcing</li><li>Technical screen</li><li>Assignment: a real mapping task</li><li>Final interview</li><li>Onboarding & training</li><li>Performance reviews</li></ol>
+  </div>
+</section>
+
+<div class="lightbox" id="lb" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+<footer class="foot"><div class="wrap"><span>© <span id="year"></span> Sampath Kakarla</span><span>Client anonymised · all demo data fictional</span></div></footer>
+
+<script src="../assets/vendor/marked.umd.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/planner-model.js"></script>
+<script src="../assets/js/saga-demos.js"></script>
+<script>C.caseStudy("../content/work/planning-saga.json").then(() => window.SagaDemos && SagaDemos.init());</script>
+</body>
+</html>

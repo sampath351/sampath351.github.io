@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Road-Crash Fatalities, Mumbai — Sampath Kakarla</title>
+  <meta name="description" content="Case study: spatial patterns of 1,681 fatal road crashes in Mumbai, 2017–2020, for WRI India, rebuilt as an interactive ward-level map.">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <!-- <link rel="stylesheet" href="https://use.typekit.net/KITID.css"> -->
+  <link rel="preload" href="../assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header class="hud">
+  <a class="id" href="../index.html">SK<b>/</b>GEO</a>
+  <span class="live hide-m">CASE 02</span>
+  <span class="coord hide-m">19.0760° N  72.8777° E</span>
+  <nav aria-label="Case study">
+    <a href="#explore">Map</a>
+    <a href="#method" class="opt">Method</a>
+    <a href="#findings" class="opt">Findings</a>
+    <a href="#limits" class="opt">Limits</a>
+    <a href="../index.html#work">All work</a>
+  </nav>
+</header>
+
+<main>
+  <section class="cs-hero"><div class="wrap" id="cs-hero"></div></section>
+
+  <!-- ===================== MAP CONSOLE ===================== -->
+  <section class="console" id="explore" aria-label="Interactive fatality map">
+    <aside class="side">
+      <div class="ctl">
+        <h5>Analysis layer</h5>
+        <div class="layer-list" role="radiogroup" aria-label="Analysis layer">
+          <button class="lyr on" data-view="wards" role="radio" aria-checked="true"><i style="background:linear-gradient(90deg,#3b2a3a,#ef476f,#ffd166)"></i>Fatalities by ward<small>2017–20 · all filters</small></button>
+          <button class="lyr" data-view="density" role="radio" aria-checked="false"><i style="background:radial-gradient(#ffd166,#c23b55 60%,transparent)"></i>Fatal-crash density<small>2017–20 · ~250 m smoothing</small></button>
+          <button class="lyr" data-view="locations" role="radio" aria-checked="false"><i style="background:radial-gradient(#ffd166 40%,transparent 45%)"></i>Fatal-crash locations<small>2017–20 · ~35 m cells</small></button>
+          <button class="lyr" data-view="alldensity" role="radio" aria-checked="false"><i style="background:radial-gradient(#c6f26b,#2c7a80 60%,transparent)"></i>All-crash density<small>2018–20 · all severities</small></button>
+          <button class="lyr" data-view="share" role="radio" aria-checked="false"><i style="background:linear-gradient(90deg,#1d4a52,#5ec8d8,#c6f26b)"></i>Fatal share of crashes<small>2018–20 · by ward</small></button>
+        </div>
+      </div>
+      <div class="ctl">
+        <h5>Year</h5>
+        <div class="chips">
+          <button class="chip on" data-year="2017" aria-pressed="true">2017</button>
+          <button class="chip on" data-year="2018" aria-pressed="true">2018</button>
+          <button class="chip on" data-year="2019" aria-pressed="true">2019</button>
+          <button class="chip on" data-year="2020" aria-pressed="true">2020</button>
+        </div>
+        <p class="note" id="note-all" hidden style="margin:6px 0 0;color:var(--heat-1)">All-crash records are available for 2018–20 only.</p>
+      </div>
+      <div class="ctl">
+        <h5>Time of day</h5>
+        <div class="chips">
+          <button class="chip on" data-time="all" aria-pressed="true">All</button>
+          <button class="chip" data-time="peak" aria-pressed="false">Peak</button>
+          <button class="chip" data-time="off" aria-pressed="false">Off-peak</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <h5>Road user / age group <button class="chip" id="who-clear" style="padding:1px 6px;font-size:10px">clear</button></h5>
+        <div class="chips">
+          <button class="chip" data-who="v:ped" aria-pressed="false">Pedestrian</button>
+          <button class="chip" data-who="v:tw" aria-pressed="false">Two-wheeler</button>
+          <button class="chip" data-who="v:hv" aria-pressed="false">Heavy veh.</button>
+          <button class="chip" data-who="v:cyc" aria-pressed="false">Cyclist</button>
+        </div>
+        <div class="chips" style="margin-top:4px">
+          <button class="chip" data-who="ag:0_18" aria-pressed="false">&lt;18</button>
+          <button class="chip" data-who="ag:18_35" aria-pressed="false">18–35</button>
+          <button class="chip" data-who="ag:35_60" aria-pressed="false">35–60</button>
+          <button class="chip" data-who="ag:60" aria-pressed="false">60+</button>
+        </div>
+        <p class="note" style="margin:8px 0 0">Applies to "Fatalities by ward". One breakdown at a time, since road user and age are recorded separately rather than per person.</p>
+        <p class="note" id="note-2017" hidden style="margin:6px 0 0;color:var(--heat-1)">2017 records have no road-user field and count as zero here.</p>
+        <p class="note" id="note-who" hidden style="margin:6px 0 0;color:var(--heat-1)">Road-user and age filters only apply to the ward fatality layer.</p>
+      </div>
+
+      <div class="readout" id="readout" aria-live="polite"></div>
+      <p class="note" id="note-share" hidden style="margin:-12px 0 0">Wards with fewer than 25 recorded crashes in the selection are left blank to avoid unstable ratios.</p>
+      <div class="ctl">
+        <h5>Highest wards <span>click to zoom</span></h5>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="ctl">
+        <h5 id="months-t">By month</h5>
+        <div class="months" id="months"></div>
+        <p class="note" id="months-n" style="margin:4px 0 0"></p>
+      </div>
+      <div class="ctl">
+        <h5>Context layers</h5>
+        <div class="chips">
+          <button class="chip on" data-ctx="rail" aria-pressed="true">Suburban rail</button>
+          <button class="chip on" data-ctx="express" aria-pressed="true">Express highways</button>
+          <button class="chip" data-ctx="metro" aria-pressed="false">Metro / monorail</button>
+          <button class="chip" data-ctx="roads" aria-pressed="false">Major roads</button>
+          <button class="chip on" data-ctx="green" aria-pressed="true">Park, rivers, airport</button>
+        </div>
+      </div>
+      <p class="note">*Pedestrian share of fatalities, from 2018–20 records in the current selection. Source: Mumbai Traffic Police via WRI India, aggregated. Context: OpenStreetMap and 2021 project layers. Basemap © OpenStreetMap, © CARTO.</p>
+    </aside>
+    <div id="map">
+      <div class="map-legend" id="legend">
+        <div id="legend-t">Fatalities per ward</div>
+        <div class="ramp" id="legend-ramp" style="background:linear-gradient(90deg,#1b2530,#3b2a3a,#7a2f4a,#c23b55,#ef476f,#ff8a3d,#ffd166)"></div>
+        <div class="ends"><span id="legend-min">0</span><span id="legend-max">—</span></div>
+      </div>
+      <div class="map-hud" id="map-hud">hover or tap a ward</div>
+    </div>
+  </section>
+
+  <div class="cs-body"><div class="wrap"><div id="chapters"></div><nav class="next" id="next"></nav></div></div>
+</main>
+
+<div class="lightbox" id="lb" role="dialog" aria-label="Enlarged map"><img alt=""></div>
+<footer class="foot"><div class="wrap"><span>© <span id="year"></span> Sampath Kakarla</span><span>Data: Mumbai Traffic Police via WRI India · Boundaries: MCGM wards</span></div></footer>
+
+<script src="../assets/vendor/maplibre-gl.js"></script>
+<script src="../assets/vendor/marked.umd.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/wri-map.js"></script>
+<script>C.caseStudy("../content/work/wri-road-safety.json");</script>
+</body>
+</html>
