@@ -1,0 +1,480 @@
+{
+  "person": {
+    "name": "Sampath Kakarla",
+    "fullName": "Sampath Phani Sai Mallik Kakarla",
+    "location": "Vijayawada, India",
+    "coords": [
+      16.5062,
+      80.648
+    ],
+    "email": "sampathkakarla351@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/sampath351",
+    "github": "https://github.com/sampath351",
+    "cv": "assets/docs/Sampath_Kakarla_CV.pdf",
+    "portfolioPdf": ""
+  },
+  "hero": {
+    "kicker": "Geospatial operations · GIS engineering · Spatial data",
+    "headline": "Urban planner. Geospatial technical lead.",
+    "statement": "For four years I was the sole on-ground lead of a geospatial consultancy. I designed the delivery system, wrote the automations, hired and trained the team, and ran the client relationship behind 1.5 million+ mapped land parcels across 35–40 cities on five continents.",
+    "intro": "I work AI-first and verify everything. What I want next is the statistical and machine-learning depth to move from production mapping to spatial modelling.",
+    "glanceTitle": "Profile at a glance",
+    "glance": [
+      {
+        "value": "4 yrs",
+        "label": "Sole on-ground lead",
+        "detail": "Ran production, systems, team and client for a geospatial consultancy",
+        "link": "#experience"
+      },
+      {
+        "value": "1.5M+",
+        "label": "Parcels delivered",
+        "detail": "Attributed plot-level parcels, 35–40 cities, 5 continents",
+        "link": "work/planning-saga.html"
+      },
+      {
+        "value": "−83%",
+        "label": "Processing time",
+        "detail": "Address extraction after automation: 1.5 h → 0.25 h per 1,000 parcels",
+        "link": "work/planning-saga.html#automation"
+      },
+      {
+        "value": "~95%",
+        "label": "Timeline accuracy",
+        "detail": "Finish dates from the capacity & deadline model I built for city projects",
+        "link": "work/planning-saga.html#planning"
+      },
+      {
+        "value": "10",
+        "label": "Team built",
+        "detail": "Hired, trained and led a production team of up to 10",
+        "link": "#experience"
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "titleMuted": "four years leading delivery",
+    "intro": "Most of my professional work sits in one place: a small consultancy where I grew from GIS Associate to the person running the operation. Since September 2026 I've been with Artelia, posted at the client's office.",
+    "anchor": {
+      "org": "Planning Saga",
+      "orgNote": "VBJ Consultancy Pvt. Ltd.",
+      "period": "Jun 2022 – Jun 2026",
+      "place": "India · client and partner abroad",
+      "roles": [
+        {
+          "title": "GIS Associate",
+          "period": "Jun 2022 – Mar 2023"
+        },
+        {
+          "title": "Senior Associate & Technical Lead",
+          "period": "Mar 2023 – Aug 2024"
+        },
+        {
+          "title": "Operations & Development Lead",
+          "period": "Sep 2024 – Jun 2026"
+        }
+      ],
+      "summary": "One long-running brief: plot-level land-parcel data, city after city, for a global metaverse real-estate platform. The founding partner worked part-time and remotely from the Netherlands during her master's, so production, systems, people and the client relationship all ran through me on the ground.",
+      "pillars": [
+        {
+          "title": "Delivery system",
+          "points": [
+            "Designed and refined a 10-stage GIS delivery framework with QA gates at neighbourhood and city level",
+            "Wrote the workflow procedures for every stage, plus city-preparation protocols and post-delivery retrospectives"
+          ]
+        },
+        {
+          "title": "Automation & tooling",
+          "points": [
+            "Built a script layer integrated with the GIS workflow for checks, data extraction, API calls, cleaning, formatting to client spec and automated QA",
+            "Cut address-processing time by 83%, applied across 1M+ parcels",
+            "Built a capacity & deadline model in Google Sheets (formula logic written with AI help) that forecast city finish dates to ~95% accuracy"
+          ]
+        },
+        {
+          "title": "Team & operations",
+          "points": [
+            "Owned hiring end to end: sourcing, technical screening, assignment-based evaluation, interviews",
+            "Designed onboarding and training and ran performance reviews for a team of up to 10",
+            "Set up the ClickUp operating system: city-as-project, stage checklists, dashboards, time tracking"
+          ]
+        },
+        {
+          "title": "Client & growth",
+          "points": [
+            "Primary client liaison for ~3 years, with weekly progress and strategy reporting",
+            "Drafted the pre-final client–consultant service agreement",
+            "Led outreach to Dutch municipalities, Indian government tenders and freelance platforms, backed by city-level research and stakeholder interviews"
+          ]
+        }
+      ],
+      "link": "work/planning-saga.html",
+      "linkLabel": "Read the full case study"
+    },
+    "others": [
+      {
+        "hidden": false,
+        "role": "GIS Associate",
+        "org": "Artelia Consulting Engineers",
+        "period": "Sep 2026 – present",
+        "place": "Posted at APIIC (client office), Andhra Pradesh",
+        "points": [
+          "GIS support for APIIC projects under the BHAVYA scheme, working on site at the client's office"
+        ],
+        "link": ""
+      },
+      {
+        "hidden": false,
+        "role": "Guest Faculty, GIS & BIM",
+        "org": "RVS College of Architecture, Chennai",
+        "period": "Aug – Oct 2022",
+        "place": "Virtual, part-time",
+        "points": [
+          "Planned the course structure and taught weekly sessions to M.Arch students, from GIS data types and spatial analysis to thematic mapping and introductory BIM"
+        ],
+        "link": ""
+      },
+      {
+        "hidden": false,
+        "role": "Project Intern",
+        "org": "Lea Associates South Asia",
+        "period": "Jun – Sep 2021",
+        "place": "Visakhapatnam",
+        "points": [
+          "Worked on the Master Plan and Perspective Plan for the Visakhapatnam–Kakinada–Srikakulam Special Development Zone during public consultation and revision"
+        ],
+        "link": ""
+      },
+      {
+        "hidden": false,
+        "role": "GIS & Data Visualisation Intern",
+        "org": "World Resources Institute India (WIPRO Earthian programme)",
+        "period": "Apr – May 2021",
+        "place": "Remote",
+        "points": [
+          "Road-crash data analysis and mapping for Mumbai and Maharashtra districts; acknowledged in the published report Road Accidents in Maharashtra – 2020"
+        ],
+        "link": "work/wri-road-safety.html"
+      },
+      {
+        "hidden": false,
+        "role": "GIS & Planning Intern",
+        "org": "AMRUT Master Plan scheme, SPA Vijayawada (consultant)",
+        "period": "Jan – Jun 2021",
+        "place": "Bhimavaram",
+        "points": [
+          "Took co-ownership of the complete GIS dataset for the Bhimavaram land-use master plan and managed it through to the draft stage"
+        ],
+        "link": ""
+      }
+    ],
+    "education": {
+      "degree": "Bachelor of Planning",
+      "school": "School of Planning and Architecture, Vijayawada",
+      "period": "2018 – 2022",
+      "note": "First Class with Distinction · CGPA 7.74 / 10 · Dissertation (grade A) on earthquake-triggered landslide hazard, Mizoram",
+      "languages": "Telugu (native) · English (C1, IELTS Academic 7.5)"
+    }
+  },
+  "work": {
+    "title": "Selected work",
+    "titleMuted": "case studies with live maps",
+    "intro": "Each case study covers the context, data, method, results and limits, with an interactive map or tool you can use yourself.",
+    "items": [
+      {
+        "id": "saga",
+        "status": "live",
+        "href": "work/planning-saga.html",
+        "index": "01",
+        "title": "Engineering a city-scale parcel-mapping practice",
+        "org": "Planning Saga · 2022–2026",
+        "summary": "The 10-stage system, automation layer and capacity model behind 1.5M+ attributed parcels across 35–40 cities. Includes a working recreation of the planning workbook and a stage-by-stage walkthrough.",
+        "tags": [
+          "QGIS",
+          "Python",
+          "Apps Script",
+          "Google Maps APIs",
+          "ClickUp",
+          "Process design"
+        ],
+        "coords": "35–40 cities · 5 continents"
+      },
+      {
+        "id": "wri",
+        "status": "live",
+        "href": "work/wri-road-safety.html",
+        "index": "02",
+        "title": "Spatial patterns of road-crash fatalities in Mumbai",
+        "org": "World Resources Institute India · 2021",
+        "summary": "1,681 fatal crashes (2017–2020) analysed across Mumbai's 24 wards in ArcMap and Excel. Pedestrians made up 47% of road-user fatalities in 2018–20. The 2021 layers can now be explored on an interactive map.",
+        "tags": [
+          "ArcMap",
+          "Excel",
+          "Spatial join",
+          "Kernel density",
+          "Thematic mapping"
+        ],
+        "coords": "19.0760° N, 72.8777° E"
+      },
+      {
+        "id": "thesis",
+        "status": "soon",
+        "href": "",
+        "index": "03",
+        "title": "Earthquake-triggered landslide hazard, Mizoram",
+        "org": "B.Plan dissertation · 2022",
+        "summary": "A multi-criteria GIS model combining slope, lithology, land use and drainage into Landslide and Earthquake Hazard Indices. An interactive weighting explorer is in progress.",
+        "tags": [
+          "ArcGIS Pro",
+          "Multi-criteria analysis",
+          "Raster analysis"
+        ],
+        "coords": "23.1645° N, 92.9376° E"
+      }
+    ]
+  },
+  "approach": {
+    "title": "How I work",
+    "titleMuted": "AI-augmented, human-verified",
+    "intro": "I use AI daily, the way an engineer uses a good toolchain. It lets one person build what would otherwise need a small development team. I own the specification, the judgement and the checking.",
+    "items": [
+      {
+        "title": "Code & automation",
+        "body": "Python, Apps Script and API pipelines drafted and debugged with AI, then tested against real data before going near production. At Planning Saga the automation layer (checks, data pulls, API calls, cleaning, formatting to client spec, QA) and the capacity & deadline model were built this way.",
+        "tag": "Production"
+      },
+      {
+        "title": "Tools, end to end",
+        "body": "Complete tools built with AI as a pair-programmer: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and small quality-of-life apps for PC and phone.",
+        "tag": "Building"
+      },
+      {
+        "title": "Systems & documentation",
+        "body": "Workflow procedures, training material, client reports, proposals and a service-agreement draft, structured with AI and written and checked by me.",
+        "tag": "Operations"
+      },
+      {
+        "title": "Research & fast learning",
+        "body": "Getting productive quickly in new methods and tools, and desk research for business development, from Dutch municipal mapping needs to Indian tender markets.",
+        "tag": "Learning"
+      }
+    ],
+    "principleTitle": "My rule",
+    "principle": "AI drafts; data decides. Every output gets checked against something independent: a published total, a hand-checked sample, or a QA gate.",
+    "principleExample": "Example: the capacity & deadline model for city projects. AI helped write the formula logic across four sections and two scenarios. I set the rules and benchmarks, then checked its dates against actual completions, where it held to about 95%.",
+    "principleLink": "work/planning-saga.html#planning",
+    "note": "For context: my 2021 work, including the WRI analysis, predates these tools and was done without AI."
+  },
+  "evidence": {
+    "title": "Skills → evidence",
+    "titleMuted": "what I use, and where",
+    "intro": "No self-rated bars. Each skill points to the work where it was used.",
+    "cols": [
+      {
+        "key": "saga",
+        "label": "Planning Saga"
+      },
+      {
+        "key": "thesis",
+        "label": "Thesis"
+      },
+      {
+        "key": "wri",
+        "label": "WRI"
+      },
+      {
+        "key": "amrut",
+        "label": "AMRUT"
+      },
+      {
+        "key": "teach",
+        "label": "Teaching"
+      },
+      {
+        "key": "studio",
+        "label": "Studios"
+      }
+    ],
+    "rows": [
+      {
+        "group": "Code",
+        "skill": "Python: pandas, geopandas, requests",
+        "saga": 2
+      },
+      {
+        "group": "Code",
+        "skill": "API pipelines: Geocoding, Places, batch",
+        "saga": 2
+      },
+      {
+        "group": "Code",
+        "skill": "Google Apps Script & Sheets modelling",
+        "saga": 2
+      },
+      {
+        "group": "Code",
+        "skill": "AI-assisted development & prompt engineering",
+        "saga": 2
+      },
+      {
+        "group": "Code",
+        "skill": "GeoJSON & web-map data delivery",
+        "saga": 2
+      },
+      {
+        "group": "Spatial",
+        "skill": "Digitising, topology & geometry QA",
+        "saga": 2,
+        "amrut": 2
+      },
+      {
+        "group": "Spatial",
+        "skill": "Multi-criteria & raster analysis",
+        "thesis": 2
+      },
+      {
+        "group": "Spatial",
+        "skill": "Spatial joins, kernel density, hotspot mapping",
+        "wri": 2,
+        "saga": 1
+      },
+      {
+        "group": "Spatial",
+        "skill": "Spreadsheet data cleaning & harmonisation",
+        "wri": 2,
+        "saga": 1,
+        "amrut": 1
+      },
+      {
+        "group": "Spatial",
+        "skill": "Network analysis",
+        "studio": 2
+      },
+      {
+        "group": "Spatial",
+        "skill": "QGIS / ArcGIS / ArcGIS Pro",
+        "saga": 2,
+        "thesis": 2,
+        "wri": 2,
+        "amrut": 1,
+        "teach": 1
+      },
+      {
+        "group": "Delivery",
+        "skill": "Process design & QA frameworks",
+        "saga": 2
+      },
+      {
+        "group": "Delivery",
+        "skill": "Project planning & timeline modelling",
+        "saga": 2
+      },
+      {
+        "group": "Delivery",
+        "skill": "Hiring, training & team leadership",
+        "saga": 2,
+        "teach": 1
+      },
+      {
+        "group": "Delivery",
+        "skill": "Client management & business development",
+        "saga": 2
+      },
+      {
+        "group": "Delivery",
+        "skill": "Thematic cartography & reporting",
+        "wri": 2,
+        "thesis": 2,
+        "amrut": 1,
+        "teach": 2,
+        "studio": 1
+      }
+    ],
+    "toolbox": "Also used: SQL, SPSS, ClickUp (advanced), Google Workspace admin, AutoCAD, SketchUp, Adobe CC, LiDAR / point-cloud basics. Courses: Spatial Data Science in Urban Planning (TU Delft), Code in Place (Stanford), NASA ARSET Urban Heat Islands, MIT Linear Regression."
+  },
+  "lab": {
+    "title": "Lab",
+    "titleMuted": "GIS × code × ML",
+    "intro": "Short projects on open data, each with a notebook and a map.",
+    "items": [
+      {
+        "title": "Next experiment",
+        "note": "In progress",
+        "href": "",
+        "image": ""
+      }
+    ]
+  },
+  "academic": {
+    "title": "Academic & studio",
+    "titleMuted": "B.Plan, SPA Vijayawada",
+    "intro": "Studio and competition work, 2018–2022.",
+    "items": [
+      {
+        "year": "2022",
+        "title": "Design it Accessible: Kochi Smart City",
+        "tag": "2nd place · NOSPLAN '22 (NIUA)",
+        "note": "Universal accessibility design. Presented at NIUA's national workshop on disability inclusion, India Habitat Centre, New Delhi."
+      },
+      {
+        "year": "2021",
+        "title": "East Kolkata Wetlands practice applied to Pallikaranai",
+        "tag": "1st place · NOSPLAN '21",
+        "note": "Transferring a working wetland-management model to a threatened urban marsh."
+      },
+      {
+        "year": "2021",
+        "title": "Kasaragod Regional Plan",
+        "tag": "Regional planning",
+        "note": "Socio-economic development plan addressing backwardness, resource potential and growth promotion."
+      },
+      {
+        "year": "2020",
+        "title": "NMV Corridor, Vijayawada",
+        "tag": "Transport planning",
+        "note": "Travel behaviour across four wards; segregated cycle track and pedestrian network to IRC, ITDP and MoUD NMT guidance."
+      },
+      {
+        "year": "2020",
+        "title": "Autonagar Industrial Redevelopment",
+        "tag": "Local area plan",
+        "note": "Redevelopment plan for an automotive industrial core, Visakhapatnam."
+      },
+      {
+        "year": "2019",
+        "title": "Network Analysis for Suburbs",
+        "tag": "Independent project",
+        "note": "Shortest route, closest facility, service areas and OD matrix in ArcGIS Network Analyst."
+      },
+      {
+        "year": "2019",
+        "title": "Slum Livability Assessment",
+        "tag": "BINUCOM workshop",
+        "note": "Settlement characteristics and livability, Vijayawada; presented at the local dissemination workshop."
+      },
+      {
+        "year": "2019",
+        "title": "JNNURM Housing Site Study",
+        "tag": "Housing",
+        "note": "Buffer, terrain and infrastructure analysis for low-income housing typologies."
+      }
+    ]
+  },
+  "writing": {
+    "title": "Field notes",
+    "titleMuted": "",
+    "intro": "Short technical notes on methods, data problems and tools.",
+    "items": []
+  },
+  "personal": {
+    "title": "Off the map",
+    "intro": "Outside work I photograph streets, light and the places I pass through.",
+    "photos": [],
+    "extras": []
+  },
+  "contact": {
+    "title": "Let's talk.",
+    "note": "Open to graduate study and research collaborations in geoinformatics and spatial data science."
+  }
+}
