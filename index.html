@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sampath Kakarla — Geospatial Operations & GIS</title>
+  <meta name="description" content="Urban planner and geospatial technical lead. Four years as sole on-ground lead of a geospatial consultancy: 1.5M+ parcels across 35–40 cities. Case studies with interactive maps.">
+  <meta name="theme-color" content="#07090b">
+  <meta property="og:title" content="Sampath Kakarla — Geospatial Operations & GIS">
+  <meta property="og:description" content="Case studies with interactive maps and tools.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- ADOBE FONTS (Acumin Pro): paste your Web Project link below and uncomment. See README. -->
+  <!-- <link rel="stylesheet" href="https://use.typekit.net/KITID.css"> -->
+  <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<header class="hud" aria-label="Site status bar">
+  <a class="id" href="#top">SK<b>/</b>GEO</a>
+  <span class="live hide-m">ONLINE</span>
+  <span class="coord" id="hud-coord" aria-hidden="true"></span>
+  <nav aria-label="Primary">
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#approach" class="opt">Approach</a>
+    <a href="#evidence" class="opt">Skills</a>
+    <a href="#academic" class="opt">Academic</a>
+    <a href="#personal" class="opt">Personal</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <canvas id="terrain" aria-hidden="true"></canvas>
+    <div class="vignette"></div>
+    <div class="north" aria-hidden="true">
+      <svg width="18" height="26" viewBox="0 0 18 26"><path d="M9 0 L17 24 L9 18 L1 24 Z" fill="none" stroke="#6d7c86"/><path d="M9 0 L9 18 L1 24 Z" fill="#6d7c86"/></svg>N
+    </div>
+    <div class="wrap">
+      <div class="kicker" data-c="hero.kicker"></div>
+      <h1>Sampath<br><span class="thin">Kakarla</span></h1>
+      <p class="role" data-c="hero.headline"></p>
+      <p class="lede" data-c="hero.statement"></p>
+      <p class="lede sub" data-c="hero.intro"></p>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="glance-band" aria-label="Profile at a glance">
+    <div class="wrap">
+      <div class="glance-h mono" data-c="hero.glanceTitle"></div>
+      <div class="glance" id="glance"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>01</b> / EXPERIENCE</div>
+        <h2><span data-c="experience.title"></span> <em data-c="experience.titleMuted"></em></h2>
+        <p data-c="experience.intro"></p>
+      </div>
+      <article class="anchor rv" id="anchor"></article>
+      <div class="roles" id="roles"></div>
+      <div class="edu rv" id="edu"></div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>02</b> / SELECTED WORK</div>
+        <h2><span data-c="work.title"></span> <em data-c="work.titleMuted"></em></h2>
+        <p data-c="work.intro"></p>
+      </div>
+      <div class="work" id="work-list"></div>
+    </div>
+  </section>
+
+  <!-- APPROACH / AI -->
+  <section class="block" id="approach">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>03</b> / APPROACH</div>
+        <h2><span data-c="approach.title"></span> <em data-c="approach.titleMuted"></em></h2>
+        <p data-c="approach.intro"></p>
+      </div>
+      <div class="approach" id="approach-list"></div>
+      <aside class="principle rv" id="principle"></aside>
+    </div>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section class="block" id="evidence">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>04</b> / SKILLS → EVIDENCE</div>
+        <h2><span data-c="evidence.title"></span> <em data-c="evidence.titleMuted"></em></h2>
+        <p data-c="evidence.intro"></p>
+      </div>
+      <div class="matrix-wrap rv"><table class="matrix" id="matrix"></table></div>
+      <div class="matrix-key"><span><i class="m m2"></i>core to the project</span><span><i class="m m1"></i>used</span></div>
+      <p class="toolbox" data-c="evidence.toolbox"></p>
+    </div>
+  </section>
+
+  <!-- LAB -->
+  <section class="block" id="lab">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>05</b> / LAB</div>
+        <h2><span data-c="lab.title"></span> <em data-c="lab.titleMuted"></em></h2>
+        <p data-c="lab.intro"></p>
+      </div>
+      <div class="lab" id="lab-list"></div>
+    </div>
+  </section>
+
+  <!-- ACADEMIC -->
+  <section class="block" id="academic">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>06</b> / ACADEMIC</div>
+        <h2><span data-c="academic.title"></span> <em data-c="academic.titleMuted"></em></h2>
+        <p data-c="academic.intro"></p>
+      </div>
+      <div class="ledger" id="ledger"></div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section class="block" id="writing">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>07</b> / NOTES</div>
+        <h2><span data-c="writing.title"></span> <em data-c="writing.titleMuted"></em></h2>
+        <p data-c="writing.intro"></p>
+      </div>
+      <div id="writing-list"></div>
+    </div>
+  </section>
+
+  <!-- PERSONAL -->
+  <section class="block" id="personal">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="no"><b>08</b> / PERSONAL</div>
+        <h2 data-c="personal.title"></h2>
+        <p data-c="personal.intro"></p>
+      </div>
+      <div class="photos" id="photos"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block" id="contact">
+    <div class="wrap contact">
+      <div class="rv">
+        <h2 id="contact-title"></h2>
+        <p class="contact-note" data-c="contact.note"></p>
+      </div>
+      <div class="links rv" id="links"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><span>© <span id="year"></span> Sampath Kakarla</span><span>16.5062° N · 80.6480° E</span></div>
+</footer>
+
+<script src="assets/vendor/marked.umd.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

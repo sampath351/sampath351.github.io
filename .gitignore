@@ -1,0 +1,12 @@
+# Raw / record-level data must never be committed (the repo is public)
+data/wri/crashes.geojson
+*.private.*
+portfolio_private/
+# obsolete files from v1
+content/site.js
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+assets/docs/README.txt
+assets/img/personal/
