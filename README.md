@@ -71,6 +71,7 @@ Raw processed points are in `E:\SPAV\portfolio_private\` (not part of the repo; 
 To rebuild the public layers: `scripts/build_wri.py` (private step) → `scripts/build_wri_public.py` → `scripts/build_wri_public_extra.py` (public outputs).
 Planning Saga real-town data: drop the file into `E:\SPAV\portfolio_private\ps_town\` (see the README there). It is processed into a public layer only after you confirm permission.
 The Planning Saga demos use generated, fictional data only.
+Basemap on the WRI page: OpenStreetMap standard tiles (no API key), shown as inverted greyscale; keep the "© OpenStreetMap contributors" attribution.
 
 ---
 
