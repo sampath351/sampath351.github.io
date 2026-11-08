@@ -1,0 +1,114 @@
+{
+  "title": "Spatial patterns of road-crash fatalities in Mumbai, 2017–2020",
+  "crumb": "02 / WRI India",
+  "subtitle": "Fatal-crash records from the Mumbai Traffic Police, analysed across the city's 24 municipal wards during my internship at WRI India in 2021, using ArcMap and Excel. The original 2021 layers are presented below as an interactive map.",
+  "meta": [
+    {
+      "label": "Role",
+      "value": "GIS & Data Visualisation Intern"
+    },
+    {
+      "label": "When",
+      "value": "Apr–May 2021 · remote"
+    },
+    {
+      "label": "Data",
+      "value": "1,681 fatal crashes · 1,762 fatalities"
+    },
+    {
+      "label": "Output",
+      "value": "Acknowledged contributor, *Road Accidents in Maharashtra – 2020*"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "context",
+      "label": "Context",
+      "heading": "A road-safety review at two scales",
+      "body": "In 2021 WRI India was preparing a state-of-road-safety review for Maharashtra. I joined through WIPRO Earthian's sustainability engagement programme, as one of the students shortlisted from SPA Vijayawada. The work ran at two scales: **state level**, from district crash returns compiled by the Highway Police, and **city level**, from geolocated fatal-crash records for Mumbai from the Traffic Police.\n\nI was responsible for the data and the maps: cleaning and standardising the spreadsheets, building the GIS layers, and producing the thematic maps and charts used in the review deck and the published report."
+    },
+    {
+      "id": "question",
+      "label": "Problem",
+      "heading": "Where, when and which road users?",
+      "body": "City-wide totals hide the pattern. For Mumbai, the analysis set out to answer:\n\n- Which wards and corridors account for the most fatalities, and is that stable from year to year?\n- Which road users make up the fatalities, and which vehicles are involved?\n- Is this primarily a peak-hour congestion problem, or something else?"
+    },
+    {
+      "id": "data",
+      "label": "Data",
+      "heading": "Sources",
+      "body": "- **Fatal-crash records, 2017–2020:** 1,681 geolocated crashes. Each record carries the number of fatalities, peak/off-peak timing, a school-peak flag, the vehicles involved, and age bands. Road-user category is recorded from 2018 onwards.\n- **All reported crashes, 2018–2020:** 7,553 geolocated crashes of every severity (fatal, grievous and minor), linked to the fatal records by record ID.\n- **Boundaries and context:** the 24 BMC administrative wards, the OpenStreetMap road network, suburban rail and metro lines, the express highways, Sanjay Gandhi National Park and rivers.\n- **State-level returns:** district spreadsheets from the Highway Police, in several different formats."
+    },
+    {
+      "id": "method",
+      "label": "Method",
+      "heading": "From spreadsheets to ward-level analysis",
+      "body": "The analysis was done in ArcMap and Excel.",
+      "steps": [
+        {
+          "title": "Clean & harmonise",
+          "text": "Fixed column drift between years and standardised vehicle and road-user categories in Excel."
+        },
+        {
+          "title": "Point layers",
+          "text": "XY to point layers for each year in ArcMap, plus combined 2018–20 layers."
+        },
+        {
+          "title": "Ward join",
+          "text": "Spatial join to the 24 BMC wards, then tabulation by ward, road user, age and time of day."
+        },
+        {
+          "title": "Map & hotspot",
+          "text": "Thematic maps for each variable, plus a kernel-density surface to identify corridors and junctions."
+        },
+        {
+          "title": "Report",
+          "text": "Maps and charts for the review deck and the published Mumbai section of the report."
+        }
+      ],
+      "note": {
+        "title": "About the interactive map",
+        "body": "The map on this page was prepared for this portfolio from the original 2021 project layers. It shows aggregated data only (ward totals, smoothed density, ~35 m location cells), and its totals reconcile with the published figures: 467, 456, 420 and 338 fatal crashes, and 475, 447 and 350 fatalities for 2018–20."
+      }
+    },
+    {
+      "id": "findings",
+      "label": "Findings",
+      "heading": "Vulnerable road users, off-peak hours, a few wards",
+      "body": "> Pedestrians accounted for 47% of road-user fatalities in 2018–20, and two-wheeler riders for a further 41%.\n\n- **Off-peak, not rush hour.** About 60% of 2018–20 fatalities occurred outside peak hours. Off-peak crashes were also more likely to be fatal: 17.2% against 14.6% in peak hours. Both point to speed on less congested roads rather than congestion.\n- **Six wards, 41% of fatalities.** K/E, M/W, S, M/E, F/N and P/S account for 41% of 2018–20 fatalities. These wards are crossed by the Western and Eastern Express Highways and the major arterials. The 2021 report estimated that about 30% of fatalities occurred on the two express highways alone.\n- **Severity varies sharply by ward.** Across Mumbai, 16% of reported crashes in 2018–20 were fatal. In F/S, M/W and S it was roughly 1 in 4 to 1 in 5, against about 1 in 10 in A, D and K/W. Crash *volume* and crash *severity* are concentrated in different places.\n- **Vehicles involved vs. road users affected.** Two-wheelers, heavy vehicles and cars were the vehicles most often involved, while the fatalities were concentrated among pedestrians and two-wheeler riders.\n- **No monsoon spike.** June–September holds about 30% of both all crashes and fatal crashes, close to an even share. Rainfall alone does not explain the pattern. July–November accounts for 39% of fatal crashes.\n- **Working-age adults.** The 18–35 age group accounts for 46% of fatalities with a recorded age.\n\n<p class=\"note\">Figures recomputed from the original layers. The two-wheeler share comes out at 41% here, while the 2021 deck quoted 43%.</p>",
+      "figures": [
+        {
+          "src": "../assets/img/wri/heatmap.jpg",
+          "caption": "2021 · Fatality density, 2018–20",
+          "alt": "Kernel density map of fatal crashes along Mumbai's road network"
+        },
+        {
+          "src": "../assets/img/wri/ward-fatalities.jpg",
+          "caption": "2021 · Fatalities by ward",
+          "alt": "Ward choropleth of road-crash fatalities in Mumbai"
+        },
+        {
+          "src": "../assets/img/wri/road-users.jpg",
+          "caption": "2021 · Fatalities by road user",
+          "alt": "Map of road-crash fatalities by road-user category, 2018–2020"
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "label": "Limitations",
+      "heading": "What this analysis cannot show",
+      "body": "- **No exposure denominator.** These are raw counts. Wards with more road length, traffic or population will rank higher regardless of underlying risk. A fair comparison needs fatalities per vehicle-kilometre or per capita, and ward-level traffic data was not available.\n- **Per-crash, not per-person, attributes.** Road-user category and age are logged as counts per crash and are not linked to each other. Road-user categories also sum to more than total fatalities, so shares are reported against total fatalities and treated as approximate.\n- **Gaps by year.** 2017 has no road-user field, the vehicles involved are missing for some crashes, and 5 crashes fall just outside the ward polygons along the coastline.\n- **Location precision unknown.** Coordinates are used as recorded. A planar density surface also over-smooths along the road network.\n- **2020 is atypical.** Pandemic lockdowns reduced traffic for months, so 2020 does not sit on a simple trend line."
+    },
+    {
+      "id": "next",
+      "label": "Relevance",
+      "heading": "What I would do with it now",
+      "body": "This project is where I first ran into the limits of descriptive mapping. A density surface shows where fatal crashes occurred. It does not show whether a location is more dangerous than expected, or why. The next steps, and the skills I want to build, are:\n\n- **Network-constrained density** (NKDE) and Getis-Ord Gi* on road segments in place of planar heatmaps, to separate genuine hotspots from noise.\n- **Exposure-adjusted rates** using traffic counts or OSM-derived road and land-use proxies.\n- **A count model** (negative binomial or spatial GLM) relating segment-level fatalities to road design, speed and land use, giving engineers something they can act on."
+    }
+  ],
+  "next": {
+    "label": "Next: Landslide hazard, Mizoram (in preparation)",
+    "href": ""
+  }
+}
