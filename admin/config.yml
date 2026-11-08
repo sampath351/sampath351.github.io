@@ -1,0 +1,358 @@
+# Sveltia CMS configuration — the /admin editor.
+# Repository: sampath351/sampath351.github.io
+# Open https://sampath351.github.io/admin/ → "Sign in with token" (see README).
+#    Or locally: http://localhost:8000/admin/ → "Work with Local Repository" → pick the portfolio folder.
+
+backend:
+  name: github
+  repo: sampath351/sampath351.github.io
+  branch: main
+  commit_messages:
+    update: "Edit {{collection}}: {{slug}}"
+
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+
+collections:
+  # ------------------------------------------------------------------ HOME
+  - name: home
+    label: Home page
+    icon: home
+    files:
+      - name: site
+        label: Home page content
+        file: content/site.json
+        format: json
+        fields:
+          - name: person
+            label: About you
+            widget: object
+            collapsed: true
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: fullName, label: Full name, widget: string, required: false }
+              - { name: location, label: Location, widget: string, required: false }
+              - name: coords
+                label: Map coordinates for the header readout (lat, lon)
+                widget: list
+                required: false
+                field: { name: v, label: Value, widget: number, value_type: float }
+              - { name: email, label: Email, widget: string, required: false }
+              - { name: linkedin, label: LinkedIn URL, widget: string, required: false }
+              - { name: github, label: GitHub URL, widget: string, required: false }
+              - { name: cv, label: CV (PDF), widget: file, required: false }
+              - { name: portfolioPdf, label: Portfolio (PDF), widget: file, required: false }
+
+          - name: hero
+            label: Top of page
+            widget: object
+            fields:
+              - { name: kicker, label: Small line above name, widget: string, required: false }
+              - { name: headline, label: Headline under name, widget: string }
+              - { name: statement, label: Main statement, widget: text }
+              - { name: intro, label: Second line, widget: text, required: false }
+              - { name: glanceTitle, label: Numbers strip title, widget: string, required: false }
+              - name: glance
+                label: Numbers strip
+                widget: list
+                summary: "{{value}} — {{label}}"
+                fields:
+                  - { name: value, label: Number, widget: string }
+                  - { name: label, label: Label, widget: string }
+                  - { name: detail, label: Caption, widget: text }
+                  - { name: link, label: Evidence link, widget: string, required: false }
+
+          - name: experience
+            label: Experience
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: anchor
+                label: Main role (Planning Saga)
+                widget: object
+                fields:
+                  - { name: org, label: Organisation, widget: string }
+                  - { name: orgNote, label: Legal name / note, widget: string, required: false }
+                  - { name: period, label: Period, widget: string }
+                  - { name: place, label: Place, widget: string, required: false }
+                  - name: roles
+                    label: Promotions
+                    widget: list
+                    summary: "{{title}} ({{period}})"
+                    fields:
+                      - { name: title, label: Title, widget: string }
+                      - { name: period, label: Period, widget: string }
+                  - { name: summary, label: Summary, widget: text }
+                  - name: pillars
+                    label: Areas owned
+                    widget: list
+                    summary: "{{title}}"
+                    fields:
+                      - { name: title, label: Title, widget: string }
+                      - name: points
+                        label: Points
+                        widget: list
+                        field: { name: p, label: Point, widget: text }
+                  - { name: link, label: Case study link, widget: string, required: false }
+                  - { name: linkLabel, label: Link text, widget: string, required: false }
+              - name: others
+                label: Other roles
+                widget: list
+                summary: "{{role}} — {{org}}"
+                fields:
+                  - { name: hidden, label: Hide this role, widget: boolean, default: false }
+                  - { name: role, label: Role, widget: string }
+                  - { name: org, label: Organisation, widget: string }
+                  - { name: period, label: Period, widget: string }
+                  - { name: place, label: Place, widget: string, required: false }
+                  - name: points
+                    label: Points
+                    widget: list
+                    field: { name: p, label: Point, widget: text }
+                  - { name: link, label: Case study link, widget: string, required: false }
+              - name: education
+                label: Education
+                widget: object
+                fields:
+                  - { name: degree, label: Degree, widget: string }
+                  - { name: school, label: School, widget: string }
+                  - { name: period, label: Period, widget: string }
+                  - { name: note, label: Note, widget: text, required: false }
+                  - { name: languages, label: Languages, widget: string, required: false }
+
+          - name: work
+            label: Case-study cards
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: items
+                label: Cards
+                widget: list
+                summary: "{{index}} {{title}} [{{status}}]"
+                fields:
+                  - { name: id, label: "ID (saga / wri / thesis — controls thumbnail)", widget: string }
+                  - { name: status, label: Status, widget: select, options: [live, soon] }
+                  - { name: href, label: Page link, widget: string, required: false }
+                  - { name: index, label: Number, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: org, label: Organisation · year, widget: string }
+                  - { name: summary, label: Summary, widget: text }
+                  - name: tags
+                    label: Tags
+                    widget: list
+                    field: { name: t, label: Tag, widget: string }
+                  - { name: coords, label: Thumbnail caption, widget: string, required: false }
+
+          - name: approach
+            label: How I work (AI)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text }
+              - name: items
+                label: Practices
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { name: tag, label: Tag, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Text, widget: text }
+              - { name: principleTitle, label: Principle label, widget: string, required: false }
+              - { name: principle, label: Principle, widget: text }
+              - { name: principleExample, label: Example, widget: text, required: false }
+              - { name: principleLink, label: Example link, widget: string, required: false }
+              - { name: note, label: Small note under the example, widget: text, required: false }
+
+          - name: evidence
+            label: Skills → evidence table
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: cols
+                label: Columns (projects)
+                widget: list
+                summary: "{{key}} = {{label}}"
+                fields:
+                  - { name: key, label: "Key (saga, thesis, wri, amrut, teach, studio)", widget: string }
+                  - { name: label, label: Column label, widget: string }
+              - name: rows
+                label: Skills (0 = blank, 1 = used, 2 = core)
+                widget: list
+                summary: "{{group}} · {{skill}}"
+                fields:
+                  - { name: group, label: Group, widget: string }
+                  - { name: skill, label: Skill, widget: string }
+                  - { name: saga, label: Planning Saga, widget: number, value_type: int, min: 0, max: 2, required: false }
+                  - { name: thesis, label: Thesis, widget: number, value_type: int, min: 0, max: 2, required: false }
+                  - { name: wri, label: WRI, widget: number, value_type: int, min: 0, max: 2, required: false }
+                  - { name: amrut, label: AMRUT, widget: number, value_type: int, min: 0, max: 2, required: false }
+                  - { name: teach, label: Teaching, widget: number, value_type: int, min: 0, max: 2, required: false }
+                  - { name: studio, label: Studios, widget: number, value_type: int, min: 0, max: 2, required: false }
+              - { name: toolbox, label: Also used (one line), widget: text, required: false }
+
+          - name: lab
+            label: Lab
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: items
+                label: Experiments
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: note, label: Note, widget: string, required: false }
+                  - { name: href, label: Link (leave empty for a placeholder), widget: string, required: false }
+                  - { name: image, label: Image, widget: image, required: false }
+
+          - name: academic
+            label: Academic & studio
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: items
+                label: Projects
+                widget: list
+                summary: "{{year}} · {{title}}"
+                fields:
+                  - { name: year, label: Year, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: tag, label: "Tag (include the word 'place' to highlight an award)", widget: string }
+                  - { name: note, label: Note, widget: text }
+
+          - name: writing
+            label: Field notes
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: titleMuted, label: Title (grey part), widget: string, required: false }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: items
+                label: Notes
+                widget: list
+                required: false
+                fields:
+                  - { name: date, label: Date, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: href, label: Link, widget: string }
+                  - { name: note, label: One-line summary, widget: string, required: false }
+
+          - name: personal
+            label: Personal
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: Section title, widget: string }
+              - { name: intro, label: Intro, widget: text, required: false }
+              - name: photos
+                label: Photos (6 work best)
+                widget: list
+                required: false
+                summary: "{{caption}}"
+                fields:
+                  - { name: src, label: Photo, widget: image }
+                  - { name: caption, label: Caption, widget: string, required: false }
+              - name: extras
+                label: Other items (reserved)
+                widget: list
+                required: false
+                fields:
+                  - { name: label, label: Label, widget: string }
+                  - { name: note, label: Note, widget: text, required: false }
+
+          - name: contact
+            label: Contact
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Big title (last word turns orange)", widget: string }
+              - { name: note, label: Note, widget: text, required: false }
+
+  # ------------------------------------------------------------------ CASE STUDIES
+  - name: casestudies
+    label: Case studies
+    icon: map
+    files:
+      - name: saga
+        label: Planning Saga
+        file: content/work/planning-saga.json
+        format: json
+        fields: &csfields
+          - { name: title, label: Title, widget: string }
+          - { name: crumb, label: Breadcrumb, widget: string }
+          - { name: subtitle, label: Subtitle, widget: text }
+          - name: meta
+            label: Key facts row
+            widget: list
+            summary: "{{label}}: {{value}}"
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: value, label: Value, widget: string }
+          - name: chapters
+            label: Chapters
+            widget: list
+            summary: "{{label}} — {{heading}}"
+            fields:
+              - { name: id, label: "Anchor id (used in links — avoid changing)", widget: string, required: false }
+              - { name: label, label: Side label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: markdown }
+              - { name: embed, label: "Interactive block (do not change)", widget: string, required: false }
+              - name: steps
+                label: Process steps (optional)
+                widget: list
+                required: false
+                summary: "{{title}}"
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
+                  - { name: highlight, label: Highlight, widget: boolean, required: false }
+              - { name: bodyAfter, label: Text after steps (optional), widget: markdown, required: false }
+              - { name: code, label: Code block (optional), widget: code, output_code_only: true, required: false }
+              - { name: codeLabel, label: Code label, widget: string, required: false }
+              - name: note
+                label: Side note box (optional)
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: Title, widget: string, required: false }
+                  - { name: body, label: Text, widget: text, required: false }
+              - name: figures
+                label: Images (optional)
+                widget: list
+                required: false
+                summary: "{{caption}}"
+                fields:
+                  - { name: src, label: Image, widget: image }
+                  - { name: caption, label: Caption, widget: string }
+                  - { name: alt, label: Description for screen readers, widget: string, required: false }
+          - name: next
+            label: Next-page link
+            widget: object
+            required: false
+            fields:
+              - { name: label, label: Text, widget: string }
+              - { name: href, label: Link, widget: string, required: false }
+      - name: wri
+        label: WRI — Mumbai road-crash fatalities
+        file: content/work/wri-road-safety.json
+        format: json
+        fields: *csfields
