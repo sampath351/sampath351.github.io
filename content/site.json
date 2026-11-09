@@ -17,7 +17,7 @@
     "kicker": "Geospatial operations · GIS engineering · Spatial data",
     "headline": "Urban planner. Geospatial technical lead.",
     "statement": "For four years I was the sole on-ground lead of a geospatial consultancy. I designed the delivery system, wrote the automations, hired and trained the team, and ran the client relationship behind 1.5 million+ mapped land parcels across 35–40 cities on five continents.",
-    "intro": "I work AI-first and verify everything. What I want next is the statistical and machine-learning depth to move from production mapping to spatial modelling.",
+    "intro": "Currently a GIS Associate at Artelia Consulting Engineers, on APIIC's BHAVYA scheme projects. Next, I want the statistical and machine-learning depth to move from production mapping to spatial modelling.",
     "glanceTitle": "Profile at a glance",
     "glance": [
       {
@@ -45,17 +45,17 @@
         "link": "work/planning-saga.html#planning"
       },
       {
-        "value": "10",
-        "label": "Team built",
-        "detail": "Hired, trained and led a production team of up to 10",
+        "value": "20+",
+        "label": "People hired & trained",
+        "detail": "Over four years at Planning Saga: about 100 interviews and a core team of about 10 at any time",
         "link": "#experience"
       }
     ]
   },
   "experience": {
     "title": "Experience",
-    "titleMuted": "four years leading delivery",
-    "intro": "Most of my professional work sits in one place: a small consultancy where I grew from GIS Associate to the person running the operation. Since September 2026 I've been with Artelia, posted at the client's office.",
+    "titleMuted": "",
+    "intro": "Four years at Planning Saga, a geospatial consultancy, where I moved from GIS Associate to Senior Associate & Technical Lead within nine months, and to Operations & Development Lead just over two years in. Since September 2026 I have been a GIS Associate at Artelia Consulting Engineers, working on site at APIIC as my team's key point of contact for projects under the BHAVYA scheme.",
     "anchor": {
       "org": "Planning Saga",
       "orgNote": "VBJ Consultancy Pvt. Ltd.",
@@ -75,7 +75,7 @@
           "period": "Sep 2024 – Jun 2026"
         }
       ],
-      "summary": "One long-running brief: plot-level land-parcel data, city after city, for a global metaverse real-estate platform. The founding partner worked part-time and remotely from the Netherlands during her master's, so production, systems, people and the client relationship all ran through me on the ground.",
+      "summary": "One long-running brief: plot-level land-parcel data, city after city, for a global metaverse real-estate platform. The founding partner set the direction from the Netherlands; on the ground in India, I led production, systems, the team and the day-to-day client relationship.",
       "pillars": [
         {
           "title": "Delivery system",
@@ -89,22 +89,23 @@
           "points": [
             "Built a script layer integrated with the GIS workflow for checks, data extraction, API calls, cleaning, formatting to client spec and automated QA",
             "Cut address-processing time by 83%, applied across 1M+ parcels",
-            "Built a capacity & deadline model in Google Sheets (formula logic written with AI help) that forecast city finish dates to ~95% accuracy"
+            "Built a capacity & deadline model that forecast city finish dates to ~95% accuracy"
           ]
         },
         {
           "title": "Team & operations",
           "points": [
-            "Owned hiring end to end: sourcing, technical screening, assignment-based evaluation, interviews",
-            "Designed onboarding and training and ran performance reviews for a team of up to 10",
-            "Set up the ClickUp operating system: city-as-project, stage checklists, dashboards, time tracking"
+            "Owned hiring end to end: sourcing, technical screening, assignment-based evaluation and about 100 interviews",
+            "Built onboarding and training and ran performance reviews: 20+ people over four years, with a core team of about 10",
+            "Ran planning and allocation in ClickUp: city-as-project structure, stage checklists, dashboards and time tracking",
+            "Wrote the operating documentation: workflow processes, technology, administrative and hiring processes, and user manuals for every automation and tool we built"
           ]
         },
         {
           "title": "Client & growth",
           "points": [
-            "Primary client liaison for ~3 years, with weekly progress and strategy reporting",
-            "Drafted the pre-final client–consultant service agreement",
+            "Primary client liaison for 3+ years, with weekly progress and strategy reporting",
+            "Drafted the pre-final client–consultant service agreement, including its legal terms",
             "Led outreach to Dutch municipalities, Indian government tenders and freelance platforms, backed by city-level research and stakeholder interviews"
           ]
         }
@@ -118,9 +119,10 @@
         "role": "GIS Associate",
         "org": "Artelia Consulting Engineers",
         "period": "Sep 2026 – present",
-        "place": "Posted at APIIC (client office), Andhra Pradesh",
+        "place": "On site at APIIC (client), Andhra Pradesh",
         "points": [
-          "GIS support for APIIC projects under the BHAVYA scheme, working on site at the client's office"
+          "Key point of contact with APIIC for my team on projects under the BHAVYA scheme",
+          "Client communication and coordination, GIS and technical support, and presentations, building on four years of running delivery at Planning Saga"
         ],
         "link": ""
       },
@@ -153,7 +155,7 @@
         "period": "Apr – May 2021",
         "place": "Remote",
         "points": [
-          "Road-crash data analysis and mapping for Mumbai and Maharashtra districts; acknowledged in the published report Road Accidents in Maharashtra – 2020"
+          "Road-crash data analysis and mapping for Mumbai and Maharashtra districts. Credited in the published report [Road Accidents in Maharashtra – 2020](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf) (Maharashtra Police)"
         ],
         "link": "work/wri-road-safety.html"
       },
@@ -164,7 +166,7 @@
         "period": "Jan – Jun 2021",
         "place": "Bhimavaram",
         "points": [
-          "Took co-ownership of the complete GIS dataset for the Bhimavaram land-use master plan and managed it through to the draft stage"
+          "Shared responsibility for the complete GIS dataset of the Bhimavaram land-use master plan and managed it through to the draft stage"
         ],
         "link": ""
       }
@@ -173,13 +175,13 @@
       "degree": "Bachelor of Planning",
       "school": "School of Planning and Architecture, Vijayawada",
       "period": "2018 – 2022",
-      "note": "First Class with Distinction · CGPA 7.74 / 10 · Dissertation (grade A) on earthquake-triggered landslide hazard, Mizoram",
+      "note": "First Class with Distinction · CGPA 7.74 / 10 · Dissertation (grade A) on [earthquake-triggered landslide hazard in Aizawl, Mizoram](work/aizawl-landslides.html)",
       "languages": "Telugu (native) · English (C1, IELTS Academic 7.5)"
     }
   },
   "work": {
-    "title": "Selected work",
-    "titleMuted": "case studies with live maps",
+    "title": "Case studies",
+    "titleMuted": "",
     "intro": "Each case study covers the context, data, method, results and limits, with an interactive map or tool you can use yourself.",
     "items": [
       {
@@ -189,7 +191,7 @@
         "index": "01",
         "title": "Engineering a city-scale parcel-mapping practice",
         "org": "Planning Saga · 2022–2026",
-        "summary": "The 10-stage system, automation layer and capacity model behind 1.5M+ attributed parcels across 35–40 cities. Includes a working recreation of the planning workbook and a stage-by-stage walkthrough.",
+        "summary": "The 10-stage system, automation layer and capacity model behind 1.5M+ attributed parcels across 35–40 cities. Includes a working recreation of the capacity & deadline model and a stage-by-stage walkthrough.",
         "tags": [
           "QGIS",
           "Python",
@@ -207,9 +209,9 @@
         "index": "02",
         "title": "Spatial patterns of road-crash fatalities in Mumbai",
         "org": "World Resources Institute India · 2021",
-        "summary": "1,681 fatal crashes (2017–2020) analysed across Mumbai's 24 wards in ArcMap and Excel. Pedestrians made up 47% of road-user fatalities in 2018–20. The 2021 layers can now be explored on an interactive map.",
+        "summary": "1,681 fatal crashes (2017–2020) analysed across Mumbai's 24 wards in ArcGIS and Excel. Pedestrians made up 47% of road-user fatalities in 2018–20. The 2021 layers can now be explored on an interactive map.",
         "tags": [
-          "ArcMap",
+          "ArcGIS",
           "Excel",
           "Spatial join",
           "Kernel density",
@@ -219,24 +221,26 @@
       },
       {
         "id": "thesis",
-        "status": "soon",
-        "href": "",
+        "status": "live",
+        "href": "work/aizawl-landslides.html",
         "index": "03",
-        "title": "Earthquake-triggered landslide hazard, Mizoram",
+        "title": "Earthquake-triggered landslide hazard in Aizawl",
         "org": "B.Plan dissertation · 2022",
-        "summary": "A multi-criteria GIS model combining slope, lithology, land use and drainage into Landslide and Earthquake Hazard Indices. An interactive weighting explorer is in progress.",
+        "summary": "Two multi-criteria indices, landslide hazard and earthquake vulnerability, overlaid across Aizawl district to set a priority tehsil and a relief plan for Aizawl city. Rebuilt as a live model you can re-weight, with a look back at what the rebuild showed.",
         "tags": [
           "ArcGIS Pro",
           "Multi-criteria analysis",
-          "Raster analysis"
+          "Raster overlay",
+          "Hazard zonation",
+          "Disaster-risk planning"
         ],
-        "coords": "23.1645° N, 92.9376° E"
+        "coords": "23.7271° N, 92.7176° E"
       }
     ]
   },
   "approach": {
-    "title": "How I work",
-    "titleMuted": "AI-augmented, human-verified",
+    "title": "How I use AI",
+    "titleMuted": "",
     "intro": "I use AI daily, the way an engineer uses a good toolchain. It lets one person build what would otherwise need a small development team. I own the specification, the judgement and the checking.",
     "items": [
       {
@@ -246,7 +250,7 @@
       },
       {
         "title": "Tools, end to end",
-        "body": "Complete tools built with AI as a pair-programmer: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and small quality-of-life apps for PC and phone.",
+        "body": "Complete tools built with AI as a pair-programmer: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and personal quality-of-life tools such as custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries.",
         "tag": "Building"
       },
       {
@@ -264,11 +268,11 @@
     "principle": "AI drafts; data decides. Every output gets checked against something independent: a published total, a hand-checked sample, or a QA gate.",
     "principleExample": "Example: the capacity & deadline model for city projects. AI helped write the formula logic across four sections and two scenarios. I set the rules and benchmarks, then checked its dates against actual completions, where it held to about 95%.",
     "principleLink": "work/planning-saga.html#planning",
-    "note": "For context: my 2021 work, including the WRI analysis, predates these tools and was done without AI."
+    "note": "For context: everything before Planning Saga, including my B.Plan thesis, studio work and internships such as WRI India, predates these tools and was done without AI."
   },
   "evidence": {
-    "title": "Skills → evidence",
-    "titleMuted": "what I use, and where",
+    "title": "Skills",
+    "titleMuted": "",
     "intro": "No self-rated bars. Each skill points to the work where it was used.",
     "cols": [
       {
@@ -309,7 +313,7 @@
       },
       {
         "group": "Code",
-        "skill": "Google Apps Script & Sheets modelling",
+        "skill": "Apps Script automation & planning models",
         "saga": 2
       },
       {
@@ -331,6 +335,11 @@
       {
         "group": "Spatial",
         "skill": "Multi-criteria & raster analysis",
+        "thesis": 2
+      },
+      {
+        "group": "Spatial",
+        "skill": "Hazard zonation & disaster-risk planning",
         "thesis": 2
       },
       {
@@ -395,7 +404,7 @@
   },
   "lab": {
     "title": "Lab",
-    "titleMuted": "GIS × code × ML",
+    "titleMuted": "",
     "intro": "Short projects on open data, each with a notebook and a map.",
     "items": [
       {
@@ -407,10 +416,22 @@
     ]
   },
   "academic": {
-    "title": "Academic & studio",
-    "titleMuted": "B.Plan, SPA Vijayawada",
-    "intro": "Studio and competition work, 2018–2022.",
+    "title": "Studios & competitions",
+    "titleMuted": "",
+    "intro": "B.Plan studio and competition work at SPA Vijayawada (2018–2022), and a cartography competition entry from 2024.",
     "items": [
+      {
+        "year": "2024",
+        "title": "The Reverse Origami Structure of Japanese Locations",
+        "tag": "Cartography competition · GIN GeoBuzz, Netherlands",
+        "note": "How a Japanese address unfolds, from prefecture to ward, neighbourhood, chome, block and building, mapped for Shiba in Tokyo's Minato ward. [View the map (PDF) →](assets/docs/Cartography_GIN_GeoBuzz_2024.pdf)"
+      },
+      {
+        "year": "2022",
+        "title": "Earthquake-triggered landslide hazard, Aizawl district",
+        "tag": "B.Plan dissertation · grade A",
+        "note": "Landslide and earthquake indices overlaid to set a priority tehsil and a relief plan for Aizawl city. [Case study with live model →](work/aizawl-landslides.html)"
+      },
       {
         "year": "2022",
         "title": "Design it Accessible: Kochi Smart City",
@@ -468,13 +489,13 @@
     "items": []
   },
   "personal": {
-    "title": "Off the map",
-    "intro": "Outside work I photograph streets, light and the places I pass through.",
+    "title": "Personal",
+    "intro": "I photograph everything. I also build small quality-of-life tools for my own devices: custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries. They are for personal use, not for sale.",
     "photos": [],
     "extras": []
   },
   "contact": {
     "title": "Let's talk.",
-    "note": "Open to graduate study and research collaborations in geoinformatics and spatial data science."
+    "note": ""
   }
 }
