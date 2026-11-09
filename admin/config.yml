@@ -344,6 +344,7 @@ collections:
                   - { name: src, label: Image, widget: image }
                   - { name: caption, label: Caption, widget: string }
                   - { name: alt, label: Description for screen readers, widget: string, required: false }
+              - { name: figLayout, label: "Image layout (blank = 3 across; two; one = full width; tall = single portrait map)", widget: select, options: ["", "two", "one", "tall"], required: false }
           - name: next
             label: Next-page link
             widget: object
@@ -354,5 +355,10 @@ collections:
       - name: wri
         label: WRI — Mumbai road-crash fatalities
         file: content/work/wri-road-safety.json
+        format: json
+        fields: *csfields
+      - name: aizawl
+        label: Thesis — Aizawl landslide hazard
+        file: content/work/aizawl-landslides.json
         format: json
         fields: *csfields
