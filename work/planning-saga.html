@@ -14,20 +14,17 @@
 </head>
 <body>
 <header class="hud">
-  <a class="id" href="../index.html">SK<b>/</b>GEO</a>
-  <span class="live hide-m">CASE 01</span>
-  <span class="coord hide-m">35–40 CITIES · 5 CONTINENTS</span>
-  <nav aria-label="Case study">
-    <a href="#system">System</a>
-    <a href="#automation" class="opt">Automation</a>
-    <a href="#planning" class="opt">Planning</a>
-    <a href="#operations" class="opt">Ops</a>
-    <a href="../index.html#work">All work</a>
+  <a class="id" href="../index.html">Sampath Kakarla</a>
+  <button class="sec-btn" type="button" aria-expanded="false" aria-controls="rail">Sections</button>
+  <nav aria-label="Site">
+    <a href="../assets/docs/Sampath_Kakarla_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href="../index.html#contact">Contact</a>
   </nav>
 </header>
+<nav class="rail" id="rail" aria-label="On this page"></nav>
 
 <main>
-  <section class="cs-hero"><div class="wrap" id="cs-hero"></div></section>
+  <section class="cs-hero" id="top"><div class="wrap" id="cs-hero"></div></section>
   <div class="cs-body"><div class="wrap"><div id="chapters"></div><nav class="next" id="next"></nav></div></div>
 </main>
 
@@ -49,7 +46,7 @@
 
 <!-- ============ DEMO 2: timeline planner ============ -->
 <section class="demo" id="planner-demo" hidden aria-label="Capacity and deadline planner">
-  <div class="demo-head"><span class="mono">WORKING RECREATION OF THE PLANNING WORKBOOK · PEOPLE AND CITY REMOVED</span><button class="chip" id="pz-reset">Reset</button></div>
+  <div class="demo-head"><span class="mono">WORKING RECREATION OF THE CAPACITY &amp; DEADLINE MODEL · PEOPLE AND CITY REMOVED</span><button class="chip" id="pz-reset">Reset</button></div>
   <div class="pz">
     <div class="pz-in">
       <div class="pz-tabs" role="tablist">
@@ -100,6 +97,7 @@
 
 <script src="../assets/vendor/marked.umd.js"></script>
 <script src="../assets/js/content.js"></script>
+<script src="../assets/js/rail.js"></script>
 <script src="../assets/js/planner-model.js"></script>
 <script src="../assets/js/saga-demos.js"></script>
 <script>C.caseStudy("../content/work/planning-saga.json").then(() => window.SagaDemos && SagaDemos.init());</script>

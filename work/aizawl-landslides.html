@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Earthquake-Triggered Landslides, Aizawl — Sampath Kakarla</title>
+  <meta name="description" content="Case study: B.Plan dissertation (2022) on earthquake-triggered landslide hazard in Aizawl district, Mizoram, rebuilt as an interactive multi-criteria model you can re-weight.">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <!-- <link rel="stylesheet" href="https://use.typekit.net/KITID.css"> -->
+  <link rel="preload" href="../assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header class="hud">
+  <a class="id" href="../index.html">Sampath Kakarla</a>
+  <button class="sec-btn" type="button" aria-expanded="false" aria-controls="rail">Sections</button>
+  <nav aria-label="Site">
+    <a href="../assets/docs/Sampath_Kakarla_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<nav class="rail" id="rail" aria-label="On this page"></nav>
+
+<main>
+  <section class="cs-hero" id="top"><canvas class="cs-terrain" data-terrain="aizawl" data-root="../assets/" aria-hidden="true"></canvas><div class="vignette"></div><div class="wrap" id="cs-hero"></div><span class="terrain-cap" aria-hidden="true"></span></section>
+
+  <!-- ===================== MAP CONSOLE ===================== -->
+  <section class="console wide" id="explore" data-rail="Interactive model" aria-label="Interactive hazard model">
+    <aside class="side">
+      <div class="ctl">
+        <h5>Map layer</h5>
+        <div class="layer-list" role="radiogroup" aria-label="Map layer">
+          <button class="lyr on" data-view="combined" role="radio" aria-checked="true"><i class="sw5"></i>Combined hazard<small>landslide + earthquake · live</small></button>
+          <button class="lyr" data-view="lhi" role="radio" aria-checked="false"><i class="swc"></i>Landslide index<small>6 indicators · live</small></button>
+          <button class="lyr" data-view="eq" role="radio" aria-checked="false"><i class="sw5"></i>Earthquake index<small>2022 layer · fixed</small></button>
+          <button class="lyr" data-view="orig" role="radio" aria-checked="false"><i class="sw5"></i>Combined, as submitted<small>2022 output, for comparison</small></button>
+          <button class="lyr" data-view="ind" role="radio" aria-checked="false"><i class="swi"></i>One indicator<small>class scores, 0–9</small></button>
+        </div>
+        <div class="chips" id="ind-chips" hidden style="margin-top:6px"></div>
+      </div>
+
+      <div class="ctl" id="ctl-weights">
+        <h5>Indicator weights <button class="chip mini" id="reset">reset to 2022</button></h5>
+        <div class="sliders" id="sliders"></div>
+        <p class="note" style="margin:6px 0 0">Landslide index = Σ weight × class score ÷ Σ weights, on a 0–9 scale.</p>
+      </div>
+
+      <div class="ctl" id="ctl-gap">
+        <h5>Cells away from roads, streams, faults</h5>
+        <div class="chips">
+          <button class="chip on" data-gap="2022" aria-pressed="true">Unscored (2022)</button>
+          <button class="chip" data-gap="zero" aria-pressed="false">Score structure as 0</button>
+        </div>
+        <p class="note" id="gap-note" style="margin:6px 0 0"></p>
+      </div>
+
+      <div class="ctl" id="ctl-mix">
+        <h5>Overlay balance <span id="mix-v">50 / 50</span></h5>
+        <input type="range" class="rng" id="mix" min="0" max="100" step="10" value="50" aria-label="Landslide share of the combined index">
+        <div class="rng-ends"><span>earthquake</span><span>landslide</span></div>
+      </div>
+
+      <div class="ctl">
+        <h5 id="share-t">Share of district</h5>
+        <div class="stack" id="stack"></div>
+        <div class="stack-l" id="stack-l"></div>
+      </div>
+
+      <div class="ctl" id="ctl-inv">
+        <h5>Inventory check <span>402 GSI landslides</span></h5>
+        <div class="readout" id="readout" aria-live="polite"></div>
+        <p class="note" id="inv-note" style="margin:6px 0 0"></p>
+      </div>
+
+      <div class="ctl" id="ctl-teh">
+        <h5 id="teh-t">Tehsils, high + very high <span>click to zoom</span></h5>
+        <div class="bars teh" id="bars"></div>
+      </div>
+
+      <div class="ctl">
+        <h5>Overlays</h5>
+        <div class="chips" id="ov-chips">
+          <button class="chip on" data-ov="slides" aria-pressed="true">Landslides (GSI)</button>
+          <button class="chip" data-ov="quakes" aria-pressed="false">Earthquakes</button>
+          <button class="chip" data-ov="fac" aria-pressed="false">Facilities</button>
+          <button class="chip" data-ov="sites" aria-pressed="false">2022 relief sites</button>
+          <button class="chip on" data-ov="roads" aria-pressed="true">Roads</button>
+          <button class="chip" data-ov="faults" aria-pressed="false">Faults</button>
+          <button class="chip on" data-ov="admin" aria-pressed="true">Tehsils &amp; city</button>
+          <button class="chip on" data-ov="terrain" aria-pressed="true">Hillshade</button>
+        </div>
+      </div>
+      <p class="note">Rebuilt for this portfolio from the original 2022 layers on a 100 m grid. Class layers only; the source rasters are not published. Landslide inventory: Geological Survey of India. Earthquakes: global catalogues, mainly ISC, 1949–2015. Roads and hospitals: OpenStreetMap. Basemap © OpenStreetMap contributors.</p>
+    </aside>
+    <div id="map">
+      <div class="map-legend" id="legend"></div>
+      <div class="probe" id="probe" hidden></div>
+      <div class="map-hud" id="map-hud">hover or tap the map</div>
+    </div>
+  </section>
+
+  <div class="cs-body"><div class="wrap"><div id="chapters"></div><nav class="next" id="next"></nav></div></div>
+</main>
+
+<div class="lightbox" id="lb" role="dialog" aria-label="Enlarged map"><img alt=""></div>
+<footer class="foot"><div class="wrap"><span>© <span id="year"></span> Sampath Kakarla</span><span>B.Plan dissertation · School of Planning and Architecture, Vijayawada · 2022</span></div></footer>
+
+<script src="../assets/vendor/maplibre-gl.js"></script>
+<script src="../assets/vendor/marked.umd.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/rail.js"></script>
+<script src="../assets/js/terrain.js"></script>
+<script src="../assets/js/aizawl-map.js"></script>
+<script>C.caseStudy("../content/work/aizawl-landslides.json");</script>
+</body>
+</html>
