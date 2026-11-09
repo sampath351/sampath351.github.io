@@ -4,6 +4,9 @@ data/wri/crashes.geojson
 portfolio_private/
 # obsolete files from v1
 content/site.js
+# local preview helper
+preview.bat
+out/
 # OS / editor
 Thumbs.db
 desktop.ini
