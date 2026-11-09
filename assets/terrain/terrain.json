@@ -1,0 +1,47 @@
+{
+ "aizawl": {
+  "min": 132.8,
+  "max": 1342.3,
+  "bbox": [
+   92.64,
+   23.67,
+   92.86,
+   23.784
+  ],
+  "label": "Aizawl, Mizoram",
+  "src": "30 m DEM from my B.Plan thesis",
+  "base": 150,
+  "step": 40,
+  "major": 200
+ },
+ "vijayawada": {
+  "min": 8.4,
+  "max": 234.6,
+  "bbox": [
+   80.49,
+   16.465,
+   80.77,
+   16.617
+  ],
+  "label": "Vijayawada, Andhra Pradesh",
+  "src": "SRTM-based Terrain Tiles (Mapzen / AWS Open Data)",
+  "base": 16,
+  "step": 6,
+  "major": 30
+ },
+ "mumbai": {
+  "min": 0.0,
+  "max": 460.9,
+  "bbox": [
+   72.8,
+   19.1,
+   73.04,
+   19.228
+  ],
+  "label": "Mumbai, Maharashtra",
+  "src": "SRTM-based Terrain Tiles (Mapzen / AWS Open Data)",
+  "base": 20,
+  "step": 15,
+  "major": 75
+ }
+}
