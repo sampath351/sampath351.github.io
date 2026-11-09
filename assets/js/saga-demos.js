@@ -138,7 +138,7 @@ window.SagaDemos = (function () {
   }
 
   /* =====================================================================
-     2) Capacity & deadline planner (recreation of the planning workbook)
+     2) Capacity & deadline planner (recreation of the capacity & deadline model)
      ===================================================================== */
   function planner() {
     const box = $("#planner-demo"); if (!box || !window.PlannerModel) return;

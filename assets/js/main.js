@@ -1,4 +1,4 @@
-/* Home page: renders content/site.json, draws the contour hero, runs the HUD. */
+/* Home page: renders content/site.json. Hero contours: terrain.js. Section rail: rail.js. */
 (async function () {
   const { esc, md, mdInline, fill, reveal } = window.C;
   const $ = (s, el = document) => el.querySelector(s);
@@ -69,11 +69,12 @@
     : `<div class="slot rv"><span class="t">${esc(l.title)}</span><span class="n">${esc(l.note)}</span></div>`).join("");
 
   $("#ledger").innerHTML = S.academic.items.map((a) => `
-    <div class="row rv"><span class="y">${esc(a.year)}</span><h4>${esc(a.title)}</h4><span class="tg ${/place/i.test(a.tag) ? "win" : ""}">${esc(a.tag)}</span><p>${mdInline(a.note)}</p></div>`).join("");
+    <div class="row rv"><span class="y">${esc(a.year)}</span><h4>${esc(a.title)}</h4><span class="tg ${/place|winner|award/i.test(a.tag) ? "win" : ""}">${esc(a.tag)}</span><p>${mdInline(a.note)}</p></div>`).join("");
 
-  $("#writing-list").innerHTML = S.writing.items.length
-    ? `<div class="ledger">${S.writing.items.map((w) => `<a class="row" href="${esc(w.href)}"><span class="y">${esc(w.date)}</span><h4>${esc(w.title)}</h4><span class="tg"></span><p>${esc(w.note)}</p></a>`).join("")}</div>`
-    : `<div class="empty">// first notes coming soon</div>`;
+  // Field notes only appear once there is at least one note
+  const notes = (S.writing.items || []).filter((w) => w.title);
+  $("#writing").hidden = !notes.length;
+  $("#writing-list").innerHTML = notes.length ? `<div class="ledger">${notes.map((w) => `<a class="row" href="${esc(w.href)}"><span class="y">${esc(w.date)}</span><h4>${esc(w.title)}</h4><span class="tg"></span><p>${esc(w.note)}</p></a>`).join("")}</div>` : "";
 
   const ph = S.personal.photos || [];
   $("#photos").innerHTML = (ph.length ? ph : Array(6).fill(null)).map((x, i) => x
@@ -93,100 +94,12 @@
     ? `<a href="${esc(href)}" ${/^http/.test(href) ? 'target="_blank" rel="noopener"' : ""}><span>${esc(v)}</span><span class="k">${k} ↗</span></a>`
     : `<div class="na"><span>${esc(v)}</span><span class="k">${k}</span></div>`).join("");
   $("#year").textContent = new Date().getFullYear();
+  if (p.cv && $("#hud-cv")) $("#hud-cv").href = p.cv;
+  document.dispatchEvent(new Event("content:ready"));
 
-  /* ---------------- noise ---------------- */
-  const perm = new Uint8Array(512);
-  (function () { let s = 1337; const q = [...Array(256).keys()];
-    for (let i = 255; i > 0; i--) { s = (s * 16807) % 2147483647; const j = s % (i + 1); [q[i], q[j]] = [q[j], q[i]]; }
-    for (let i = 0; i < 512; i++) perm[i] = q[i & 255]; })();
-  const fade = (x) => x * x * x * (x * (x * 6 - 15) + 10);
-  const lerp = (a, b, x) => a + (b - a) * x;
-  const hsh = (x, y, z) => perm[(perm[(perm[x & 255] + y) & 255] + z) & 255] / 255;
-  function noise3(x, y, z) {
-    const X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z);
-    const u = fade(x - X), v = fade(y - Y), w = fade(z - Z);
-    return lerp(
-      lerp(lerp(hsh(X, Y, Z), hsh(X + 1, Y, Z), u), lerp(hsh(X, Y + 1, Z), hsh(X + 1, Y + 1, Z), u), v),
-      lerp(lerp(hsh(X, Y, Z + 1), hsh(X + 1, Y, Z + 1), u), lerp(hsh(X, Y + 1, Z + 1), hsh(X + 1, Y + 1, Z + 1), u), v), w);
-  }
-  const fbm = (x, y, z) => noise3(x, y, z) * .55 + noise3(x * 2.1, y * 2.1, z) * .3 + noise3(x * 4.3, y * 4.3, z) * .15;
+  /* hero contours: assets/js/terrain.js (real terrain of Vijayawada) */
 
-  /* ---------------- contour hero (marching squares over fBm terrain) ---------------- */
-  (function terrain() {
-    const cv = $("#terrain"); if (!cv) return;
-    const ctx = cv.getContext("2d");
-    const CELL = 9, LEVELS = 22;
-    let W, H, cols, rows, field, tt = 0, mouse = null, raf;
-    function size() {
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      W = cv.clientWidth; H = cv.clientHeight;
-      cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cols = Math.ceil(W / CELL) + 1; rows = Math.ceil(H / CELL) + 1;
-      field = new Float32Array(cols * rows);
-    }
-    function sample(z) {
-      const sc = 1 / 260;
-      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
-        let v = fbm(i * CELL * sc, j * CELL * sc, z);
-        if (mouse) { const dx = i * CELL - mouse.x, dy = j * CELL - mouse.y; v += .12 * Math.exp(-(dx * dx + dy * dy) / 14000); }
-        field[j * cols + i] = v;
-      }
-    }
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (let L = 1; L < LEVELS; L++) {
-        const iso = .18 + L * (.66 / LEVELS), major = L % 5 === 0;
-        ctx.beginPath();
-        for (let j = 0; j < rows - 1; j++) for (let i = 0; i < cols - 1; i++) {
-          const a = field[j * cols + i], b = field[j * cols + i + 1], c = field[(j + 1) * cols + i + 1], d = field[(j + 1) * cols + i];
-          const k = (a > iso) * 8 + (b > iso) * 4 + (c > iso) * 2 + (d > iso);
-          if (k === 0 || k === 15) continue;
-          const x = i * CELL, y = j * CELL;
-          const top = [x + CELL * (iso - a) / (b - a), y], right = [x + CELL, y + CELL * (iso - b) / (c - b)];
-          const bot = [x + CELL * (iso - d) / (c - d), y + CELL], left = [x, y + CELL * (iso - a) / (d - a)];
-          const seg = (P, Q) => { ctx.moveTo(P[0], P[1]); ctx.lineTo(Q[0], Q[1]); };
-          switch (k) {
-            case 1: case 14: seg(left, bot); break; case 2: case 13: seg(bot, right); break;
-            case 3: case 12: seg(left, right); break; case 4: case 11: seg(top, right); break;
-            case 5: seg(left, top); seg(bot, right); break; case 6: case 9: seg(top, bot); break;
-            case 7: case 8: seg(left, top); break; case 10: seg(top, right); seg(left, bot); break;
-          }
-        }
-        const hi = L / LEVELS;
-        ctx.strokeStyle = major ? `rgba(255,138,61,${.38 + hi * .4})` : `rgba(94,200,216,${.10 + hi * .22})`;
-        ctx.lineWidth = major ? 1.1 : .7; ctx.stroke();
-      }
-      ctx.fillStyle = "rgba(230,236,239,.45)";
-      for (let j = 3; j < rows; j += 9) for (let i = 3 + (j % 2) * 4; i < cols; i += 9) { if (field[j * cols + i] > .6) ctx.fillRect(i * CELL - 1, j * CELL - 1, 2, 2); }
-    }
-    function frame() { tt += .0016; sample(tt); draw(); if (!reduce) raf = requestAnimationFrame(frame); }
-    size(); frame();
-    addEventListener("resize", () => { size(); if (reduce) frame(); });
-    cv.parentElement.addEventListener("pointermove", (e) => { const r = cv.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top }; });
-    cv.parentElement.addEventListener("pointerleave", () => { mouse = null; });
-    new IntersectionObserver(([en]) => { if (reduce) return; cancelAnimationFrame(raf); if (en.isIntersecting) raf = requestAnimationFrame(frame); }).observe(cv);
-    window.__terrainField = () => ({ field, cols, CELL });
-  })();
-
-  /* ---------------- HUD: cursor → lat/long ---------------- */
-  (function hud() {
-    const out = $("#hud-coord"); if (!out) return;
-    const [lat0, lon0] = p.coords;
-    const fmt = (v, P, N) => `${Math.abs(v).toFixed(4)}° ${v >= 0 ? P : N}`;
-    const set = (lat, lon, el) => out.textContent = `${fmt(lat, "N", "S")}  ${fmt(lon, "E", "W")}${el != null ? `  ·  ${el} m` : ""}`;
-    set(lat0, lon0);
-    addEventListener("pointermove", (e) => {
-      const lat = lat0 + (innerHeight / 2 - e.clientY) * 0.00018, lon = lon0 + (e.clientX - innerWidth / 2) * 0.00018;
-      let el = null; const tf = window.__terrainField && window.__terrainField();
-      if (tf && scrollY < innerHeight) { const v = tf.field[Math.round((e.clientY + scrollY) / tf.CELL) * tf.cols + Math.round(e.clientX / tf.CELL)]; if (v) el = Math.round(12 + v * 180); }
-      set(lat, lon, el);
-    }, { passive: true });
-    const links = [...document.querySelectorAll(".hud nav a[href^='#']")];
-    const io = new IntersectionObserver((ens) => ens.forEach((en) => { if (en.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-    links.forEach((a) => { const s = document.getElementById(a.getAttribute("href").slice(1)); if (s) io.observe(s); });
-  })();
-
-  /* ---------------- card thumbnails (procedural, no real data) ---------------- */
+  /* ---------------- card thumbnails ---------------- */
   document.querySelectorAll(".card").forEach((card) => {
     const cv = card.querySelector("canvas"), r = cv.getBoundingClientRect();
     const dpr = Math.min(devicePixelRatio || 1, 2); cv.width = r.width * dpr; cv.height = r.height * dpr;
@@ -208,13 +121,16 @@
     };
   }
   function hazardThumb(c, W, H) {
-    const img = c.createImageData(Math.ceil(W), Math.ceil(H)); const ramp = [[26, 152, 80], [166, 217, 106], [255, 209, 102], [255, 138, 61], [239, 71, 111]];
-    for (let y = 0; y < img.height; y++) for (let x = 0; x < img.width; x++) {
-      const v = Math.min(.999, Math.max(0, fbm(x / 70, y / 70, 3.3) * 1.5 - .25)), k = v * 4, i = Math.floor(k), f = k - i;
-      const a = ramp[i], b = ramp[Math.min(4, i + 1)], o = (y * img.width + x) * 4;
-      img.data[o] = (a[0] + (b[0] - a[0]) * f) * .55; img.data[o + 1] = (a[1] + (b[1] - a[1]) * f) * .55; img.data[o + 2] = (a[2] + (b[2] - a[2]) * f) * .55; img.data[o + 3] = 255;
-    }
-    c.putImageData(img, 0, 0);
+    // drawn from the public class layer of the thesis page: the 2022 combined hazard map of Aizawl district
+    const img = new Image(); img.src = "data/aizawl/grid2.png";
+    img.onload = () => {
+      const t = document.createElement("canvas"); t.width = img.width; t.height = img.height;
+      const tc = t.getContext("2d"); tc.drawImage(img, 0, 0); const px = tc.getImageData(0, 0, t.width, t.height).data;
+      const out = tc.createImageData(t.width, t.height), pal = [[42, 85, 96], [63, 154, 140], [216, 197, 106], [255, 138, 61], [255, 61, 110]];
+      for (let i = 0; i < px.length; i += 4) { const k = px[i] & 15; if (!k) continue; const col = pal[k - 1]; out.data[i] = col[0]; out.data[i + 1] = col[1]; out.data[i + 2] = col[2]; out.data[i + 3] = k >= 4 ? 255 : 150; }
+      tc.putImageData(out, 0, 0);
+      const s = Math.min(W / t.width, H / t.height) * .96; c.imageSmoothingEnabled = true; c.drawImage(t, (W - t.width * s) / 2, (H - t.height * s) / 2, t.width * s, t.height * s);
+    };
   }
   function parcelThumb(c, W, H) {
     let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647; const out = [];

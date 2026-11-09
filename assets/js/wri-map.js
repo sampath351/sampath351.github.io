@@ -255,6 +255,7 @@
   map = new maplibregl.Map({ container: "map", style, center: [72.875, 19.07], zoom: 10.4, minZoom: 9, maxZoom: 15.5,
     maxBounds: [[72.4, 18.7], [73.4, 19.5]], attributionControl: { compact: true }, cooperativeGestures: matchMedia("(max-width: 860px)").matches });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
+  new ResizeObserver(() => map.resize()).observe(document.getElementById("map"));   // layout can shift after load (section rail)
   map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-right");
   popup = new maplibregl.Popup({ closeButton: true, maxWidth: "280px" });
 

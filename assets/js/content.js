@@ -47,7 +47,7 @@ window.C = (function () {
         ${c.code ? `<pre class="code"><span class="fn">${esc(c.codeLabel || "")}</span>${esc(c.code)}</pre>` : ""}
         ${c.bodyAfter ? md(c.bodyAfter) : ""}
         ${c.note && c.note.body ? `<div class="honest"><b>${esc(c.note.title)}</b>${mdInline(c.note.body)}</div>` : ""}
-        ${c.figures && c.figures.length ? `<div class="figs">${c.figures.map((f) => `<figure><img src="${esc(f.src)}" alt="${esc(f.alt || f.caption)}" loading="lazy"><figcaption>${esc(f.caption)}</figcaption></figure>`).join("")}</div>` : ""}
+        ${c.figures && c.figures.length ? `<div class="figs ${esc(c.figLayout || "")}">${c.figures.map((f) => `<figure><img src="${esc(f.src)}" alt="${esc(f.alt || f.caption)}" loading="lazy"><figcaption>${esc(f.caption)}</figcaption></figure>`).join("")}</div>` : ""}
         </div>`;
       ch.appendChild(art);
       if (c.embed) {
@@ -66,6 +66,7 @@ window.C = (function () {
     }
     const y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
     if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView(), 50); }
+    document.dispatchEvent(new Event("content:ready"));
     return d;
   }
 
