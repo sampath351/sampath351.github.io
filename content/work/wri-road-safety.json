@@ -1,7 +1,7 @@
 {
   "title": "Spatial patterns of road-crash fatalities in Mumbai, 2017–2020",
   "crumb": "02 / WRI India",
-  "subtitle": "Fatal-crash records from the Mumbai Traffic Police, analysed across the city's 24 municipal wards during my internship at WRI India in 2021, using ArcMap and Excel. The original 2021 layers are presented below as an interactive map.",
+  "subtitle": "Fatal-crash records from the Mumbai Traffic Police, analysed across the city's 24 municipal wards during my internship at WRI India in 2021, using ArcGIS and Excel. The original 2021 layers are presented below as an interactive map.",
   "meta": [
     {
       "label": "Role",
@@ -17,7 +17,7 @@
     },
     {
       "label": "Output",
-      "value": "Acknowledged contributor, *Road Accidents in Maharashtra – 2020*"
+      "value": "Credited in [*Road Accidents in Maharashtra – 2020*](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf)"
     }
   ],
   "chapters": [
@@ -43,7 +43,7 @@
       "id": "method",
       "label": "Method",
       "heading": "From spreadsheets to ward-level analysis",
-      "body": "The analysis was done in ArcMap and Excel.",
+      "body": "The analysis was done in ArcGIS and Excel.",
       "steps": [
         {
           "title": "Clean & harmonise",
@@ -51,7 +51,7 @@
         },
         {
           "title": "Point layers",
-          "text": "XY to point layers for each year in ArcMap, plus combined 2018–20 layers."
+          "text": "XY to point layers for each year in ArcGIS, plus combined 2018–20 layers."
         },
         {
           "title": "Ward join",
@@ -68,7 +68,7 @@
       ],
       "note": {
         "title": "About the interactive map",
-        "body": "The map on this page was prepared for this portfolio from the original 2021 project layers. It shows aggregated data only (ward totals, smoothed density, ~35 m location cells), and its totals reconcile with the published figures: 467, 456, 420 and 338 fatal crashes, and 475, 447 and 350 fatalities for 2018–20."
+        "body": "The map on this page was prepared for this portfolio from the original 2021 project layers. It shows aggregated data only (ward totals, smoothed density, ~35 m location cells), and its totals reconcile with the figures published in [*Road Accidents in Maharashtra – 2020*](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf): 467, 456, 420 and 338 fatal crashes, and 475, 447 and 350 fatalities for 2018–20."
       }
     },
     {
@@ -108,7 +108,7 @@
     }
   ],
   "next": {
-    "label": "Next: Landslide hazard, Mizoram (in preparation)",
-    "href": ""
+    "label": "Next: Earthquake-triggered landslide hazard, Aizawl",
+    "href": "aizawl-landslides.html"
   }
 }

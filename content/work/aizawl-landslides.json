@@ -1,0 +1,170 @@
+{
+  "title": "Earthquake-triggered landslide hazard in Aizawl district",
+  "crumb": "03 / B.Plan thesis",
+  "subtitle": "My undergraduate dissertation (2022): a landslide hazard index and an earthquake vulnerability index for Aizawl district, Mizoram, overlaid to find where the two coincide, narrowed to a priority tehsil and turned into a relief plan. The model is rebuilt below so you can change its weights and see what moves.",
+  "meta": [
+    {
+      "label": "Programme",
+      "value": "B.Plan dissertation · SPA Vijayawada"
+    },
+    {
+      "label": "When",
+      "value": "Nov 2021 – May 2022"
+    },
+    {
+      "label": "Tools",
+      "value": "ArcGIS Pro · multi-criteria overlay"
+    },
+    {
+      "label": "Outcome",
+      "value": "Dissertation grade A"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "context",
+      "label": "Context",
+      "heading": "A capital built on ridges, in seismic zone V",
+      "body": "Aizawl sits on a chain of steep ridges in Mizoram, in seismic zone V, the highest earthquake-hazard category in India. The district has five tehsils, one city, two towns and about a hundred villages, on terrain rising to around 1,900 m. Landslides happen every year here, mostly after monsoon rain. Mizoram's disaster management plan, which I used as a baseline, recorded 68 landslide fatalities and 600 houses fully destroyed by landslides between 2013 and 2019.\n\nAn earthquake changes the scale of the problem. Moderate shaking can set off hundreds of slope failures at once, across a city that has grown densely, and upwards, on those same slopes. The district and state plans I reviewed dealt with each hazard on its own, and mostly with relief and response. My dissertation asked what changes when you plan for the two together."
+    },
+    {
+      "id": "question",
+      "label": "Problem",
+      "heading": "Four questions, from district to city",
+      "body": "1. Where is the ground most susceptible to landslides?\n2. Where would an earthquake do the most harm, given the terrain, land use and access to services?\n3. Where do the two overlap, and which tehsil should be studied first?\n4. What should planning change there, before and after an event?"
+    },
+    {
+      "id": "data",
+      "label": "Data",
+      "heading": "Sources",
+      "body": "- **Terrain:** a 30 m DEM, from which I derived slope, aspect, altitude, drainage density and the stream network.\n- **Land cover:** a 10 m classification (water, dense forest, vegetation, barren land, built-up).\n- **Geology:** Geological Survey of India lithology at 1:50,000 (Bhuban and Bokabil formations) and mapped faults.\n- **Landslide inventory:** 402 GSI records in the district, 2007–2020, used for validation.\n- **Earthquakes:** 48 catalogued events within about 15 km of the district, 1949–2015, mainly from the ISC catalogue.\n- **Access and exposure:** OpenStreetMap roads and hospitals, and government offices, communication centres, schools and community buildings.\n- **Boundaries:** district, five tehsils and the Aizawl municipal area."
+    },
+    {
+      "id": "method",
+      "label": "Method",
+      "heading": "Two indices, one overlay",
+      "body": "Both indices are weighted sums. Each indicator is reclassified into classes with a score, multiplied by an indicator weight, and added up. I set the weights by how strongly each factor drives landslides or earthquake damage in this terrain, drawing on the hazard-zonation studies I reviewed. All of the analysis was done in ArcGIS Pro in 2022, before I used any AI tools.",
+      "steps": [
+        {
+          "title": "Landslide index",
+          "text": "Slope, structure, land cover, lithology, drainage density and aspect, weighted 9 down to 4."
+        },
+        {
+          "title": "Earthquake index",
+          "text": "Land cover, slope, distance to streams, altitude, distance to hospitals and to roads, weighted 5 down to 1."
+        },
+        {
+          "title": "Overlay",
+          "text": "Both indices on a common 1–5 scale, combined 50/50 into five hazard classes."
+        },
+        {
+          "title": "Tehsil priority",
+          "text": "High-hazard area by tehsil, then settlements and facilities in the priority tehsil."
+        },
+        {
+          "title": "Proposals",
+          "text": "Policy and regional measures, and a siting plan for shelters and refugee parking."
+        }
+      ],
+      "bodyAfter": "The landslide index, as applied:\n\n| Indicator | Weight | Classes (score) |\n|---|---|---|\n| Slope | 9 | 0–18° (0) · 18–35° (4) · over 35° (8) |\n| Structure | 8 | stream (6) · road (8) · fault (9) |\n| Land cover | 7 | water (1) · dense forest (4) · vegetation (6) · barren (7) · built-up (8) |\n| Lithology | 6 | three GSI groups (7–9) |\n| Drainage density | 5 | lower (6) · higher (8) |\n| Aspect | 4 | north (3) rising to south (7) |\n\nThe index runs from 0 to 9: below 4 is low, 4–6.5 moderate and above 6.5 high.",
+      "note": {
+        "title": "About the interactive map",
+        "body": "The map above was rebuilt for this portfolio from my original 2022 layers, on a 100 m grid. With the 2022 settings, the live combined layer matches the submitted map on about 93% of cells; the rest differ because the 30 m inputs are aggregated to 100 m. Only class layers are published, not the source rasters."
+      }
+    },
+    {
+      "id": "landslide",
+      "label": "Landslides",
+      "heading": "Steep slopes and linear features carry the score",
+      "body": "Slope has the largest weight, and the structure indicator adds roads, streams and faults: the places where slopes are cut, undercut or fractured. In the 2022 map the high-hazard cells run in narrow bands along those features and across the steepest valley sides. Of the district's 104 villages and municipal wards, 14 fell in the high-risk class. In 2022 I compared it with the GSI landslide inventory by eye; the overlay section below has a measured check.\n\n<button class=\"jump\" data-jump data-view=\"lhi\" data-fly=\"district\" data-on=\"slides\">Show the landslide index</button> <button class=\"jump\" data-jump data-view=\"ind\" data-ind=\"1\">Show the structure layer</button>",
+      "figures": [
+        {
+          "src": "../assets/img/thesis/lhi-2022.jpg",
+          "caption": "2022 · Landslide hazard zonation with active landslides",
+          "alt": "2022 landslide hazard zonation map of Aizawl district with active landslide locations"
+        }
+      ],
+      "figLayout": "tall"
+    },
+    {
+      "id": "earthquake",
+      "label": "Earthquakes",
+      "heading": "A vulnerability index more than a hazard map",
+      "body": "The whole district is in zone V, so shaking intensity alone doesn't separate one place from another. The earthquake index therefore combined ground conditions (slope, altitude, distance to streams) with what is exposed and how quickly help can arrive (land cover, distance to roads and to hospitals). The result singles out Aizawl's urban area, and 43 of the 104 villages and wards came out as high risk.\n\n<button class=\"jump\" data-jump data-view=\"eq\" data-fly=\"district\" data-on=\"quakes\">Show the earthquake index</button>",
+      "figures": [
+        {
+          "src": "../assets/img/thesis/eq-2022.jpg",
+          "caption": "2022 · Earthquake risk zonation with past earthquakes",
+          "alt": "2022 earthquake risk zonation map of Aizawl district with past earthquake locations"
+        }
+      ],
+      "figLayout": "tall"
+    },
+    {
+      "id": "overlay",
+      "label": "Overlay",
+      "heading": "Where both coincide: Tlangnuam and Aizawl city",
+      "body": "Overlaying the two indices gives five classes. High and very high cover about 12% of the district, spread across all five tehsils. Very-high cells are a different story: they are rare everywhere except in and around Aizawl, where they cluster on the built-up ridges.\n\n| | High + very high, share of area | Share of the district's very-high area |\n|---|---|---|\n| Tlangnuam | 12.5% | 81% |\n| Thingsulthliah | 12.2% | 6% |\n| Phullen | 12.2% | 8% |\n| Darlawn | 11.4% | 1% |\n| Aibawk | 10.8% | 4% |\n| *Aizawl municipal area* | *23.0%* | *82%* |\n\nOn the share of high-hazard land, the five tehsils sit within two points of each other, and the order shifts with resolution and weights: in the 100 m rebuild above, Phullen edges ahead of Tlangnuam. That number alone can't carry the choice. What separates Tlangnuam is the very-high class. About four-fifths of it lies inside Aizawl's municipal boundary, where most of the district's people live and where 18 of the 20 mapped hospitals stand, and the municipal area has twice the district's share of high-hazard land. That is why Tlangnuam, and the city within it, became the focus.\n\nFor this page I also checked the submitted map against the landslide inventory. The high and very-high classes cover about 12% of the district but contain about 40% of the 402 recorded landslides, roughly 3.4 times what their area alone would predict. The map panel runs the same check live as you change the model. The caveats are under *Looking back*.\n\n<button class=\"jump\" data-jump data-view=\"orig\" data-fly=\"district\" data-on=\"slides,admin\">Show the submitted map</button> <button class=\"jump\" data-jump data-view=\"combined\" data-fly=\"tlangnuam\" data-on=\"admin\">Zoom to Tlangnuam</button>",
+      "figLayout": "two",
+      "figures": [
+        {
+          "src": "../assets/img/thesis/combined-2022.jpg",
+          "caption": "2022 · Potential hazard zones for earthquake-triggered landslides",
+          "alt": "2022 map of combined hazard zones for earthquake-triggered landslides in Aizawl district"
+        },
+        {
+          "src": "../assets/img/thesis/tlangnuam-2022.jpg",
+          "caption": "2022 · Tlangnuam tehsil and the Aizawl urban area",
+          "alt": "2022 map of hazard zones in Tlangnuam tehsil around Aizawl"
+        }
+      ]
+    },
+    {
+      "id": "city",
+      "label": "Tlangnuam",
+      "heading": "Critical services on the same ridges",
+      "body": "Inside Tlangnuam I mapped what a response would depend on: hospitals, government offices, communication centres, schools, community buildings and the road network. They are concentrated in the city core, on the same ridges as the high-hazard cells. North of the city, the upper part of the tehsil and the district beyond it depend on a single road corridor. Critical services in the hazard zone and one route out: those two conditions shaped the proposals.\n\n<button class=\"jump\" data-jump data-view=\"combined\" data-fly=\"city\" data-on=\"fac,roads,admin\" data-off=\"slides\">Show facilities in the city</button>",
+      "figLayout": "one",
+      "figures": [
+        {
+          "src": "../assets/img/thesis/facilities-2022.jpg",
+          "caption": "2022 · Land cover, settlements and facilities in Tlangnuam and the municipal area",
+          "alt": "2022 maps of land cover, settlements, hospitals, government offices and communication centres in Tlangnuam and Aizawl"
+        }
+      ]
+    },
+    {
+      "id": "proposals",
+      "label": "Proposals",
+      "heading": "From hazard map to relief plan",
+      "body": "I framed the proposals around two sides of risk: **hazard and exposure** (earthquakes and landslides, population density, economic and physical losses, vulnerable groups) and **coping capacity** (governance, monitoring and building regulation; infrastructure, healthcare access and communication). Measures work at two levels.\n\n**Policy level, top-down: reduce risk before an event**\n\n- **Zonal restrictions on development.** Land-use allowances and building restrictions in high-hazard zones, set through the district disaster management plan and carried into the master plan and zonal plans.\n- **Siting guidelines** for buildings, infrastructure and utilities on earthquake-prone slopes, so slope stability and landslide susceptibility are assessed before any new construction, rehabilitation or resettlement.\n- **Funding, records and monitoring:** dedicated financial flows for preparedness, a maintained disaster inventory with post-event analysis of losses, and an interdisciplinary technical group that uses them to monitor hazards.\n- **A traffic protocol** that halts non-essential movement for a period after an event, to keep evacuation and relief routes clear.\n\n**Regional level, bottom-up: response capacity in Tlangnuam**\n\n- **Retrofit public buildings**, institutional and community, for earthquake resistance. Schools and community halls inside the municipal area then double as temporary shelters.\n- **3 major evacuation shelters** (capacity 400 each) and **7 smaller shelters** (capacity 100), all on ground rated low or moderate in the combined map.\n- **12 refugee parking points** at intervals along the main roads, especially the corridor to the north, the only road link to the upper district, so evacuation can be staged.\n- **Early warning and awareness campaigns**, building community participation.\n\nThe plan concentrates on the stage between the event and permanent housing: relief camps, emergency shelters and intermediate shelters.\n\n<button class=\"jump\" data-jump data-view=\"combined\" data-fly=\"tlangnuam\" data-on=\"sites,roads,admin\" data-off=\"slides\">Show the proposal sites</button>",
+      "note": {
+        "title": "About the sites on the map",
+        "body": "The shelter and parking locations were drawn on my final review sheet rather than stored as a GIS layer. For this page I digitised them from that sheet, so their positions are indicative, to within about 100 m."
+      },
+      "figLayout": "two",
+      "figures": [
+        {
+          "src": "../assets/img/thesis/proposal-map-2022.jpg",
+          "caption": "2022 · Shelters and refugee parking on the siting-potential map",
+          "alt": "2022 proposal map of Tlangnuam with evacuation shelters and refugee parking locations"
+        },
+        {
+          "src": "../assets/img/thesis/proposal-sheet-2022.jpg",
+          "caption": "2022 · Final proposal sheet",
+          "alt": "Final 2022 review sheet with the policy-level and regional-level proposals"
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "label": "Looking back",
+      "heading": "What rebuilding it taught me",
+      "body": "Rebuilding the model from my original layers for this page was the first time I re-ran it end to end. It showed me four things I would handle differently now.\n\n- **The structure layer only existed along features.** Roads, streams and faults were mapped as lines, and cells away from them had no value, so the landslide index covered only about a third of the district. In the overlay, the unscored cells counted as the lowest landslide class. Switch *Cells away from roads, streams, faults* on the map to see what scoring them changes.\n- **The earthquake index mixes hazard with exposure.** Built-up land and distance to roads and hospitals describe who is exposed and how fast help arrives, not how hard the ground shakes. I would now keep hazard, exposure and vulnerability as separate layers and combine them explicitly as risk.\n- **The validation data were rainfall landslides.** None of the 402 inventory records lists an earthquake as the trigger (325 cite rainfall), and many are recorded along road sections. The inventory check tests landslide susceptibility, and partly the road network, but not co-seismic behaviour.\n- **The weights were expert judgement.** The sliders show how much the map and the tehsil ranking move when they change.\n\nWhat I would do now:\n\n- Fit a data-driven susceptibility model (logistic regression or random forest) on the inventory, with spatially blocked cross-validation and AUC instead of a visual overlap check.\n- Model the earthquake side from scenario ground shaking (peak ground acceleration) and a Newmark displacement approach, and test it against an inventory from a comparable earthquake.\n- Build exposure from building footprints and population grids, and plan shelter catchments with network travel times rather than points on a map.\n\nThat is the step from planning judgement to spatial data science that I want my master's to build."
+    }
+  ],
+  "next": {
+    "label": "Next: Engineering a city-scale parcel-mapping practice",
+    "href": "planning-saga.html"
+  }
+}
