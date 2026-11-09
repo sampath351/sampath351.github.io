@@ -3,7 +3,7 @@
 .demo-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
 .demo-head .mono { color: var(--cyan); font-size: 10.5px; letter-spacing: .1em; }
 /* let demos run wider than the text column on large screens */
-@media (min-width: 1200px) { .chapter .demo { margin-right: calc(-1 * min(26vw, 380px)); } }
+@media (min-width: 1200px) { .chapter .demo { margin-right: calc(-1 * min(24vw, 360px)); } }
 
 /* ---------- pipeline ---------- */
 .pl { display: grid; grid-template-columns: minmax(0, 1fr) 270px; }
