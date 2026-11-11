@@ -82,30 +82,17 @@
   $("#writing").hidden = !notes.length;
   $("#writing-list").innerHTML = notes.length ? `<div class="ledger">${notes.map((w) => `<a class="row" href="${esc(w.href)}"><span class="y">${esc(w.date)}</span><h4>${esc(w.title)}</h4><span class="tg"></span><p>${esc(w.note)}</p></a>`).join("")}</div>` : "";
 
-  // photos keep their own aspect ratios: each row is a flex line where every photo grows in proportion to its
-  // width/height, so a row shares one height and fills the frame exactly.
-  // Width/height and row are optional (photos added through the admin): missing sizes are read from the image
-  // itself, and photos without a row are packed automatically, about three landscape frames' worth per row.
-  const ph = (S.personal.photos || []).filter((x) => x && x.src);
-  const frame = (x) => `<figure class="photo rv" style="--ar:${(x.ar || 1.5).toFixed(4)}"><img loading="lazy" decoding="async" src="${esc(x.src)}" alt="${esc(x.caption || "Photograph by Sampath Kakarla")}"${x.w ? ` width="${x.w}" height="${x.h}"` : ""}>${x.caption ? `<figcaption class="c">${esc(x.caption)}</figcaption>` : ""}</figure>`;
-  const sizeOf = (x) => x.w && x.h ? Promise.resolve(x.w / x.h) : new Promise((res) => { const im = new Image(); im.onload = () => res(im.naturalWidth / im.naturalHeight || 1.5); im.onerror = () => res(1.5); im.src = x.src; });
-  if (ph.length) {
-    Promise.all(ph.map(sizeOf)).then((ars) => {
-      const items = ph.map((x, i) => ({ ...x, ar: ars[i] }));
-      const rows = []; let auto = [], sum = 0;
-      items.forEach((x) => {
-        if (x.row) { (rows[x.row] = rows[x.row] || []).push(x); return; }
-        auto.push(x); sum += x.ar; if (sum >= 3.2) { rows.push(auto); auto = []; sum = 0; }
-      });
-      if (auto.length) {   // a lone leftover joins the previous automatic row instead of filling the width alone
-        const prev = rows[rows.length - 1];
-        if (auto.length === 1 && prev && !prev[0].row && prev.reduce((t, x) => t + x.ar, 0) + auto[0].ar <= 6) prev.push(auto[0]); else rows.push(auto);
-      }
-      $("#photos").innerHTML = rows.filter((r) => r && r.length).map((row) => `<div class="ph-row">${row.map(frame).join("")}</div>`).join("");
-      reveal();
-    });
+  // Personal photographs (assets/js/photos.js): the home page shows the photos switched to "Home" in the admin,
+  // in self-arranging rows, with a link to photography.html, which shows every photo switched on.
+  const PS = S.personal, allPh = (PS.photos || []).filter((x) => x && x.src);
+  const homePh = allPh.filter((x) => x.home).map((x) => ({ ...x, feature: false }));
+  const nAll = allPh.filter((x) => x.show !== false).length;
+  const box = $("#photos");
+  if (homePh.length && window.Photos) {
+    Photos.prepare(homePh).then((items) => { Photos.render(box, items, { layout: "rows", size: PS.homeSize || "m" }); reveal(); });
+    if (nAll > homePh.length) box.insertAdjacentHTML("afterend", `<p class="ph-all rv"><a href="photography.html">See all ${nAll} photographs →</a></p>`);
   } else {
-    $("#photos").innerHTML = `<div class="ph-row">${Array(6).fill(0).map((_, i) => `<div class="photo ph rv">FRAME ${String(i + 1).padStart(2, "0")}</div>`).join("")}</div>`;
+    box.innerHTML = `<div class="ph-row">${Array(6).fill(0).map((_, i) => `<div class="photo ph rv">FRAME ${String(i + 1).padStart(2, "0")}</div>`).join("")}</div>`;
   }
 
   const t = S.contact.title.split(" ");
