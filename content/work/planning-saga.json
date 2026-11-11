@@ -1,7 +1,7 @@
 {
   "title": "Engineering a city-scale parcel-mapping practice",
   "crumb": "01 / Planning Saga",
-  "subtitle": "How a core team of about ten delivered 1.5 million+ attributed land parcels across 35–40 cities on five continents, and the delivery system, automation and planning model that made it repeatable.",
+  "subtitle": "How a core team of about ten delivered 1.5 million+ attributed land parcels across 35–40 cities on five continents, often several cities at once, and the workflow, automation and planning that made it repeatable.",
   "meta": [
     {
       "label": "Role",
@@ -20,73 +20,186 @@
       "value": "Core team of ~10; 20+ hired and trained"
     }
   ],
+  "glance": [
+    {
+      "tag": "Problem",
+      "big": "35–40 cities",
+      "text": "real cities as clean, addressed land parcels for a global platform, all to one delivery standard."
+    },
+    {
+      "tag": "How",
+      "big": "4 groups",
+      "text": "a ten-stage workflow checked at two levels, scripts around the GIS work, and a planning model."
+    },
+    {
+      "tag": "Outcome",
+      "big": "1.5M+",
+      "text": "attributed parcels on five continents, from a core team of about ten."
+    },
+    {
+      "tag": "Limits",
+      "big": "Rule-based",
+      "text": "every new edge case still needed someone to write the next rule."
+    }
+  ],
   "chapters": [
     {
       "id": "brief",
       "label": "Brief",
       "heading": "Every parcel, every city, one standard",
-      "body": "The client, a global metaverse real-estate platform, needed real cities as plot-level land parcels. Each parcel had to be a clean polygon with an address and attributes, delivered as GeoJSON and ready to load straight into their platform.\n\nThe cities spanned Europe, the Americas, Australia, the Middle East and East Asia, and no two had the same starting point. Some had open cadastral data, some had usable OpenStreetMap coverage, and some had nothing but imagery. The delivery standard stayed fixed regardless: no overlaps or slivers, addresses matched to the right parcel, and attributes formatted exactly to the client's specification.\n\n*The client is not named here, and every map and number in the interactive parts of this page is fictional.*"
-    },
-    {
-      "id": "constraint",
-      "label": "Constraint",
-      "heading": "One on-ground lead",
-      "body": "The consultancy was small. The founding partner set the direction from the Netherlands, and the work on the ground in India ran through me: production, systems, hiring, training and the weekly client relationship.\n\nThat shaped every decision that followed. **The system had to work without me checking every parcel.** Quality had to be built into the process through stage procedures, QA gates and automated checks, not added at the end by one person."
+      "body": "The cities spanned Europe, the Americas, Australia, the Middle East and East Asia, and several were usually in production at once. The founding partner led the consultancy from the Netherlands while pursuing higher studies there; I led the work on the ground in India: production, systems, hiring, training and the weekly client relationship.\n\n*The client is not named here. The workflow is shown only at the level of its four groups, and the interactive parts use fictional data or real geometry with location, addresses and attributes removed.*",
+      "lead": "Real cities as plot-level land parcels: clean polygons with addresses and attributes, ready to load into a global metaverse real-estate platform."
     },
     {
       "id": "system",
-      "label": "System",
-      "heading": "A 10-stage delivery framework",
-      "body": "I designed the framework, and refined it over four years, as ten stages in four phases. Every stage had a written **Workflow Procedure**, a step-by-step guide that let a new team member produce consistent work within days. QA gates sat at two levels: each **neighbourhood** was checked before moving on, and each **city** was checked before delivery. Every city started with a **preparation protocol** (source audit, client spec, edge cases) and ended with a **retrospective** that fed back into the procedures.\n\nParcels came from three routes, chosen city by city: digitising in QGIS over imagery where nothing usable existed, cleaning and restructuring open cadastral or OSM data where it did, and scripted processing on top of both.\n\nStep through the stages on a fictional town below:",
-      "embed": "pipeline-demo"
+      "label": "Workflow",
+      "heading": "Ten stages in four groups, checked at two levels",
+      "body": "Every stage had a written workflow procedure, so a new team member could produce consistent work within days. Every city started with a preparation protocol and market research on local property prices, so the price per square foot used for it stayed close to real market rates.",
+      "embed": "pipeline-demo",
+      "lead": "Each neighbourhood is checked twice, at the mapping review and the final clean, and each city once more as a whole.",
+      "cards": [
+        {
+          "title": "Spatial",
+          "text": "Parcels digitised in QGIS to our mapping criteria, or third-party data reworked to them where the client preferred it. Reviewed, then geometry-cleaned."
+        },
+        {
+          "title": "Textual",
+          "text": "An address for every parcel, cleaned and standardised to the client's format."
+        },
+        {
+          "title": "Spatial + textual",
+          "text": "Addresses checked against the map: consistent numbering along each street, no repeats, each landing on its own parcel. Where quality is decided."
+        },
+        {
+          "title": "Quality",
+          "text": "Each neighbourhood final-cleaned as a finished product; a manager-level review signs off the city."
+        }
+      ],
+      "cardsStyle": "plain"
     },
     {
       "id": "automation",
       "label": "Automation",
-      "heading": "A script layer around the GIS work",
-      "body": "Repetitive, rule-based work moved into scripts integrated with the GIS workflow. These scripts handled:\n\n- **Checking**: geometry validity, overlaps, gaps and missing attributes, before a human looked.\n- **Extracting and retrieving**: pulling data out of layers and source files, and calling external APIs (Google Geocoding and Places, in batches).\n- **Cleaning and integration**: parsing responses, standardising address components to each city's local conventions, and merging results back onto parcels.\n- **Formatting and QA**: shaping output to the client's schema and checking it against the delivery criteria automatically.\n\nThe clearest gain was **address extraction**, the 0.25 h benchmark you'll see in the planner below. Done manually, it took about 1.5 hours per 1,000 parcels. The automated pipeline batch-called the API, parsed and cleaned the response, and flagged only the exceptions (missing numbers, ambiguous matches, addresses falling outside the parcel) for a person to review. That brought it down to about **0.25 hours per 1,000 parcels, an 83% reduction**. Across the 1M+ parcels processed after deployment, that works out to roughly **1,250 person-hours saved**.",
-      "code": "# Illustrative sketch of the logic, not the production code (that belongs to the company)\nfor batch in chunk(parcels, size=BATCH):\n    responses = geocode_batch([p.centroid for p in batch])   # rate-limited, retried\n    for parcel, resp in zip(batch, responses):\n        parts  = parse_components(resp)                        # number, street, postcode, city\n        addr   = clean(parts, rules=CITY_RULES[city])          # local formats, casing, abbreviations\n        issues = validate(addr, parcel)                        # missing number, outside parcel, duplicate\n        parcel.address = addr\n        if issues:\n            review_queue.add(parcel, issues)                   # only exceptions reach a person",
-      "codeLabel": "address_pipeline.py · sketch",
+      "heading": "Where scripts took over",
+      "body": "Rule-based work moved into scripts that ran alongside the GIS work. Each change below replaced a manual step; people now handled only the exceptions the scripts flagged.",
       "note": {
-        "title": "How the 1,250 hours is derived",
-        "body": "(1.5 h − 0.25 h) per 1,000 parcels × ~1,000,000 parcels after deployment ≈ 1,250 hours. It's an estimate from the measured per-1,000 rates, not a logged total."
-      }
+        "title": "About 1,500 hours saved on address work",
+        "body": "1.5 h per 1,000 parcels by hand × ~1,000,000 parcels processed after the automation went live ≈ 1,500 hours. Each automated run takes about 0.25 h whatever its size. An estimate from the measured manual rate, not a logged total."
+      },
+      "compare": [
+        {
+          "group": "Spatial",
+          "step": "Geometry checks",
+          "before": "Topology checked and corrected by hand",
+          "after": "Scripted checks; manual fixes down by about 95% (from around 600 to around 10)"
+        },
+        {
+          "group": "Textual",
+          "step": "Address work",
+          "before": "Three separate stages: extraction, cleaning, merging · about 1.5 h per 1,000 parcels",
+          "after": "One automated step: geocoding API, auto-clean, auto-check, fix · a fixed run of about 0.25 h, however many parcels"
+        },
+        {
+          "group": "Spatial + textual",
+          "step": "Landing check",
+          "before": "A random sample checked by hand",
+          "after": "Every address in the batch checked, usually the whole city"
+        },
+        {
+          "group": "Quality",
+          "step": "Delivery format",
+          "before": "Output shaped to the client spec by hand",
+          "after": "Output shaped to the client schema and checked against the delivery criteria automatically"
+        }
+      ]
     },
     {
       "id": "planning",
       "label": "Planning",
-      "heading": "A capacity & deadline model that held its dates",
-      "body": "Committing to a city delivery date with a small team means accounting for everything that eats capacity. I built a capacity and deadline model, with AI help on the formula logic, that turns a city's scope into a dated plan. It has four sections:\n\n1. **Scope:** the target parcel count, plus status counts pulled from ClickUp (mapped, spatially cleaned, final-cleaned), so the model can re-plan a city that is already in progress. Each of the ten stages has a **benchmark in hours per 1,000 parcels**, and stage hours roll up into four groups: MP→AM, SC→SP, FC and global final review. City-prep tasks (preparation, pricing and landmarks, boundary cleaning per neighbourhood, pilot neighbourhoods) are checked against prep capacity.\n2. **Team capacity:** each person's hours per day and days per week, with part of the week allocated to final clean.\n3. **Rules:** structured deductions typed as **Must** (unavoidable: admin, management, onboarding ramp-up, holidays) or **Buffer** (conservative: unplanned leave, side projects). Each applies to mapping, final clean or both, for a person or the whole team, in hours per day, week or month, within an optional week window.\n4. **Weekly summary:** two scenarios, **S1** (gross minus Must) and **S2** (also minus Buffer), run week by week to give dated milestones. S2 is the date committed to.\n\nIn use, its finish dates held at about **95% accuracy** against actual completion, including the unexpected leave and extra work that always turn up.\n\nBelow is a working recreation. The logic is the same as the original model and reproduces its weekly figures exactly; people and the city have been removed. Change anything and the dates update.",
+      "heading": "A planning model for the manager's view",
+      "body": "To commit to delivery dates with a small team and several cities in parallel, I built a capacity and deadline model, with AI help on the formula logic. It was my management tool, not a product. It takes a city's scope, the team's real availability and everything that eats into it (admin, onboarding, holidays, unplanned leave and unplanned work), and gives a dated plan in two scenarios. The cautious one, with buffers, was the date we committed to.\n\nIn use, its finish dates held at about **95% accuracy** against actual completion.\n\nTry it below. The people and the city in it are fictional; change anything and the dates update.",
       "embed": "planner-demo"
     },
     {
       "id": "operations",
       "label": "Operations",
       "heading": "Running parallel cities with a small team",
-      "body": "Several cities ran at once through ClickUp: each **city is a project**, each **stage is a list** with its own checklist, and **dashboards with time tracking** showed where every neighbourhood stood and who was working on it. I used it together with the timeline model to drive all workload allocation and delivery planning.\n\nI also owned the people side end to end: sourcing, a technical screen, an **assignment-based evaluation** (candidates did a real mapping task) and around 100 interviews, then onboarding, training and performance reviews. Over four years that came to 20+ people, with a core team of about 10 at any time.\n\nAnd I wrote the documentation that held it together: workflow processes, technology, administrative and hiring processes, and **user manuals for every automation and tool** we built.",
-      "embed": "ops-demo"
+      "body": "Each **city was a project**, each **stage a list** with its own checklist, and **dashboards with time tracking** showed where every neighbourhood stood and who was on it.\n\nI also owned the people side end to end, and wrote the documentation that held it together: workflow processes, technology, administrative and hiring processes, and user manuals for every automation and tool we built.",
+      "embed": "ops-demo",
+      "lead": "Up to three cities in parallel, run through ClickUp and the planning model.",
+      "stats": [
+        {
+          "v": "20+",
+          "l": "people hired & trained",
+          "s": "over four years"
+        },
+        {
+          "v": "~100",
+          "l": "interviews",
+          "s": "with assignment-based evaluation"
+        },
+        {
+          "v": "~10",
+          "l": "core team",
+          "s": "at any time"
+        }
+      ]
     },
     {
       "id": "client",
       "label": "Client & growth",
       "heading": "Owning the relationship",
-      "body": "For more than three years I was the client's primary contact, sending weekly progress and strategy reports and handling scope questions city by city. I drafted the pre-final **client–consultant service agreement** from scratch, legal terms included.\n\nOn growth, I led outreach to **Dutch municipalities**, **Indian government tenders** and **freelance platforms**, backed by city-level desk research and stakeholder interviews to test where the practice could expand."
+      "body": "Weekly progress and strategy reports, and scope questions handled city by city. I drafted the pre-final **client–consultant service agreement** from scratch, legal terms included.\n\nI was also involved in business development, with market research and stakeholder interviews on where the practice could grow.",
+      "lead": "The client's primary contact for more than three years."
     },
     {
       "id": "outcomes",
       "label": "Outcomes",
       "heading": "What it added up to",
-      "body": "| | |\n|---|---|\n| Cities delivered | 35–40, across 5 continents |\n| Parcels | 1.5M+ individually attributed polygons |\n| Address processing | −83% time per 1,000 parcels |\n| Hours saved (est.) | ~1,250 across 1M+ parcels |\n| Planning accuracy | ~95% on finish dates |\n| Team | 20+ hired and trained over four years; core team of ~10 |\n| Client relationship | 3+ years as primary liaison |"
+      "body": "",
+      "lead": "Four years, one long-running engagement.",
+      "stats": [
+        {
+          "v": "35–40",
+          "l": "cities delivered",
+          "s": "across 5 continents"
+        },
+        {
+          "v": "1.5M+",
+          "l": "parcels",
+          "s": "individually attributed polygons"
+        },
+        {
+          "v": "~1,500 h",
+          "l": "saved on address work (est.)",
+          "s": "1.5 h per 1,000 parcels → a fixed ~0.25 h run"
+        },
+        {
+          "v": "~95%",
+          "l": "planning accuracy",
+          "s": "on finish dates"
+        },
+        {
+          "v": "20+",
+          "l": "hired & trained",
+          "s": "core team of ~10"
+        },
+        {
+          "v": "3+ yrs",
+          "l": "primary client liaison",
+          "s": "weekly progress & strategy reports"
+        }
+      ]
     },
     {
       "id": "reflection",
       "label": "Reflection",
       "heading": "What I'd build next",
-      "body": "Everything above is **rule-based**: procedures, scripts and checks I wrote by hand. It scaled, but each new city still needed people to digitise, and each new edge case needed a new rule.\n\nThe next step is to let models take on part of that work:\n\n- **Parcel extraction from imagery** with segmentation models, with people correcting the output rather than drawing from scratch.\n- **Learned match confidence** for addresses, so review effort goes only where the model is unsure.\n- **Anomaly detection in QA**, flagging parcels that look statistically unlike their neighbours.\n\nThat's the gap I want to close with formal training in spatial data science and GeoAI."
+      "body": "Everything above is **rule-based**: procedures, scripts and checks written and tuned by hand. It scaled to 35–40 cities, but every new edge case still needed someone to write the next rule, and the plan still ran on fixed benchmarks. What I'd build next:\n\n- **Quality gates as automated tests.** One versioned spatial database for every city, with each QA gate run as a test on every change, the way software is tested before release. Every parcel would carry its history: what changed, who changed it, and which check it passed.\n- **Review only where a model is unsure.** In the spatial + textual stage, learn from delivered cities how addresses run along streets, score every parcel, and send people only the low-confidence ones. Their decisions become the next round of training data.\n- **Plans that update themselves.** Feed the throughput the pipeline actually records back into the planning model, so finish dates move as the work moves, with a confidence range instead of a single date.\n\nThat's the gap I want to close with formal training in spatial data science and GeoAI."
     }
   ],
   "next": {
-    "label": "Next: Road-crash fatalities in Mumbai",
-    "href": "wri-road-safety.html"
+    "label": "Next: Earthquake-triggered landslide hazard, Aizawl",
+    "href": "aizawl-landslides.html"
   }
 }
