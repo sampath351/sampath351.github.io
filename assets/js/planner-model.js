@@ -20,7 +20,8 @@
       "GFR": T
     };
     // stage hours = ROUNDUP(remaining / base) × benchmark
-    const stages = inp.stages.map((s) => ({ ...s, hours: Math.ceil(Math.max(0, remaining[s.group]) / (s.base || 1000)) * s.bench }));
+    // fixed stages (the automated address run) cost the same whatever the parcel count
+    const stages = inp.stages.map((s) => ({ ...s, hours: s.fixed ? (remaining[s.group] > 0 ? s.bench : 0) : Math.ceil(Math.max(0, remaining[s.group]) / (s.base || 1000)) * s.bench }));
     const byGroup = (g) => stages.filter((s) => s.group === g).reduce((a, s) => a + s.hours, 0);
     const req = { mpToAm: byGroup("MP to AM"), scToSp: byGroup("SC to SP"), fc: byGroup("FC & FR"), gfr: byGroup("GFR") };
     req.teamTillSp = req.mpToAm + req.scToSp;

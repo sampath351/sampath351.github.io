@@ -189,6 +189,9 @@
     const S = state.w.reduce((s, x) => s + x, 0) || 1;
     state.w.forEach((wv, j) => { const r = document.getElementById("w" + j); r.value = wv; r.parentNode.querySelector(".wv").textContent = wv; r.parentNode.querySelector(".ws").textContent = Math.round(wv / S * 100) + "%"; });
     $("#mix-v").textContent = `landslide ${state.mix} · earthquake ${100 - state.mix}`;
+    // read-only "score pointers" for the six weights (the sliders live in the Adjust panel)
+    const pt = $("#pointers");
+    if (pt) pt.innerHTML = M.indicators.map((d, j) => `<div class="pt"><span>${d.n}</span><i><b style="left:${(state.w[j] / 10 * 100).toFixed(0)}%"></b></i><em>${state.w[j]}</em></div>`).join("");
   }
 
   let pending = false;
@@ -295,6 +298,7 @@
       if (d.ind) state.ind = +d.ind;
       if (d.gap) state.gap = d.gap;
       if (d.reset) { state.w = M.indicators.map((x) => x.w); state.mix = 50; $("#mix").value = 50; }
+      if ((d.view === "ind" || d.gap) && $("#adjust")) $("#adjust").open = true;
       (d.on || "").split(",").filter(Boolean).forEach((k) => (state.ov[k] = true));
       (d.off || "").split(",").filter(Boolean).forEach((k) => (state.ov[k] = false));
       overlays(); update();

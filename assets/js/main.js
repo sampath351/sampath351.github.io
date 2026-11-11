@@ -5,7 +5,7 @@
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let S;
   try { S = await C.load("content/site.json"); }
-  catch (e) { document.body.insertAdjacentHTML("afterbegin", `<p style="padding:60px 20px;color:#ff8a3d;font-family:monospace">Content failed to load. If you opened this file directly, run a local server (see README).</p>`); return; }
+  catch (e) { document.body.insertAdjacentHTML("afterbegin", `<p style="padding:60px 20px;color:#ff8a3d;font-family:sans-serif">Content failed to load. If you opened this file directly, run a local server (see README).</p>`); return; }
 
   /* ---------------- render ---------------- */
   fill(S);
@@ -16,7 +16,7 @@
       <span class="v">${esc(g.value)}</span>
       <span class="l">${esc(g.label)}</span>
       <span class="d">${esc(g.detail)}</span>
-      <span class="ev">evidence →</span>
+      <span class="ev" aria-hidden="true">→</span>
     </a>`).join("");
 
   const A = S.experience.anchor;
@@ -34,7 +34,7 @@
     <div class="role-row rv">
       <span class="mono">${esc(o.period)}</span>
       <div><h4>${esc(o.role)}</h4><div class="r-org">${esc(o.org)} · ${esc(o.place)}</div></div>
-      <div class="r-pts">${o.points.map((x) => `<p>${mdInline(x)}</p>`).join("")}${o.link ? `<a href="${esc(o.link)}" class="r-link">Case study →</a>` : ""}</div>
+      <div class="r-pts">${o.points.map((x) => `<p>${mdInline(x)}</p>`).join("")}${o.link ? `<a href="${esc(o.link)}" class="r-link">${esc(o.linkLabel || "Read more")} →</a>` : ""}</div>
     </div>`).join("");
   const E = S.experience.education;
   $("#edu").innerHTML = `<span class="mono">EDUCATION · ${esc(E.period)}</span><h4>${esc(E.degree)}, ${esc(E.school)}</h4><p>${mdInline(E.note)}</p>${E.languages ? `<p class="langs"><span class="mono">LANGUAGES</span> ${esc(E.languages)}</p>` : ""}`;
@@ -44,11 +44,12 @@
     return `<${tag} class="card rv ${w.status}" ${w.href && w.status === "live" ? `href="${esc(w.href)}"` : ""} data-id="${esc(w.id)}">
       <div class="ix">${esc(w.index)}</div>
       <div>
+        ${w.kind ? `<div class="kind">${esc(w.kind)}</div>` : ""}
         <h3>${esc(w.title)}</h3>
         <div class="org">${esc(w.org)}</div>
         <p>${mdInline(w.summary)}</p>
         <div class="tags">${(w.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
-        <span class="go">${w.status === "live" ? "Open case study" : "Case study in preparation"}</span>
+        <span class="go">${w.status === "live" ? esc(w.goLabel || "Open") : "In preparation"}</span>
       </div>
       <div class="thumb"><canvas></canvas><span class="badge ${w.status}">${w.status === "live" ? "interactive" : "in prep"}</span><span class="cap">${esc(w.coords)}</span></div>
     </${tag}>`;
@@ -64,8 +65,13 @@
     EV.rows.map((r) => { const g = r.group !== lastG ? r.group : ""; lastG = r.group;
       return `<tr><td class="g">${esc(g)}</td><th scope="row">${esc(r.skill)}</th>${EV.cols.map((c) => { const v = +r[c.key] || 0; return `<td>${v ? `<span class="m m${v}" title="${v === 2 ? "Core" : "Used"}"></span>` : ""}</td>`; }).join("")}</tr>`; }).join("")}</tbody>`;
 
-  $("#lab-list").innerHTML = S.lab.items.map((l) => l.href
-    ? `<a class="slot filled rv" href="${esc(l.href)}">${l.image ? `<img src="${esc(l.image)}" alt="">` : ""}<span class="t">${esc(l.title)}</span><span class="n">${esc(l.note)}</span></a>`
+  // Lab: a "draft" experiment shows only in the local preview; the section stays hidden on the live site
+  // until at least one finished experiment exists (placeholders alone don't count)
+  const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  const labItems = (S.lab.items || []).filter((l) => !l.draft || local);
+  $("#lab").hidden = !labItems.some((l) => l.href);
+  $("#lab-list").innerHTML = labItems.map((l) => l.href
+    ? `<a class="slot filled rv" href="${esc(l.href)}">${l.image ? `<img src="${esc(l.image)}" alt="">` : ""}<span class="t">${esc(l.title)}${l.draft ? ` <em class="draft">Draft · local preview only</em>` : ""}</span><span class="n">${esc(l.note)}</span></a>`
     : `<div class="slot rv"><span class="t">${esc(l.title)}</span><span class="n">${esc(l.note)}</span></div>`).join("");
 
   $("#ledger").innerHTML = S.academic.items.map((a) => `
@@ -76,10 +82,31 @@
   $("#writing").hidden = !notes.length;
   $("#writing-list").innerHTML = notes.length ? `<div class="ledger">${notes.map((w) => `<a class="row" href="${esc(w.href)}"><span class="y">${esc(w.date)}</span><h4>${esc(w.title)}</h4><span class="tg"></span><p>${esc(w.note)}</p></a>`).join("")}</div>` : "";
 
-  const ph = S.personal.photos || [];
-  $("#photos").innerHTML = (ph.length ? ph : Array(6).fill(null)).map((x, i) => x
-    ? `<figure class="photo rv"><img loading="lazy" src="${esc(x.src)}" alt="${esc(x.caption)}"><span class="c">${esc(x.caption)}</span></figure>`
-    : `<div class="photo ph rv">FRAME ${String(i + 1).padStart(2, "0")}</div>`).join("");
+  // photos keep their own aspect ratios: each row is a flex line where every photo grows in proportion to its
+  // width/height, so a row shares one height and fills the frame exactly.
+  // Width/height and row are optional (photos added through the admin): missing sizes are read from the image
+  // itself, and photos without a row are packed automatically, about three landscape frames' worth per row.
+  const ph = (S.personal.photos || []).filter((x) => x && x.src);
+  const frame = (x) => `<figure class="photo rv" style="--ar:${(x.ar || 1.5).toFixed(4)}"><img loading="lazy" decoding="async" src="${esc(x.src)}" alt="${esc(x.caption || "Photograph by Sampath Kakarla")}"${x.w ? ` width="${x.w}" height="${x.h}"` : ""}>${x.caption ? `<figcaption class="c">${esc(x.caption)}</figcaption>` : ""}</figure>`;
+  const sizeOf = (x) => x.w && x.h ? Promise.resolve(x.w / x.h) : new Promise((res) => { const im = new Image(); im.onload = () => res(im.naturalWidth / im.naturalHeight || 1.5); im.onerror = () => res(1.5); im.src = x.src; });
+  if (ph.length) {
+    Promise.all(ph.map(sizeOf)).then((ars) => {
+      const items = ph.map((x, i) => ({ ...x, ar: ars[i] }));
+      const rows = []; let auto = [], sum = 0;
+      items.forEach((x) => {
+        if (x.row) { (rows[x.row] = rows[x.row] || []).push(x); return; }
+        auto.push(x); sum += x.ar; if (sum >= 3.2) { rows.push(auto); auto = []; sum = 0; }
+      });
+      if (auto.length) {   // a lone leftover joins the previous automatic row instead of filling the width alone
+        const prev = rows[rows.length - 1];
+        if (auto.length === 1 && prev && !prev[0].row && prev.reduce((t, x) => t + x.ar, 0) + auto[0].ar <= 6) prev.push(auto[0]); else rows.push(auto);
+      }
+      $("#photos").innerHTML = rows.filter((r) => r && r.length).map((row) => `<div class="ph-row">${row.map(frame).join("")}</div>`).join("");
+      reveal();
+    });
+  } else {
+    $("#photos").innerHTML = `<div class="ph-row">${Array(6).fill(0).map((_, i) => `<div class="photo ph rv">FRAME ${String(i + 1).padStart(2, "0")}</div>`).join("")}</div>`;
+  }
 
   const t = S.contact.title.split(" ");
   $("#contact-title").innerHTML = `${esc(t.slice(0, -1).join(" "))}<br><span>${esc(t.slice(-1)[0])}</span>`;

@@ -1,5 +1,5 @@
 /* WRI India — Mumbai road crashes 2017–2020. Aggregated data only (see scripts/build_wri_public*.py).
-   Analysis layers: fatalities by ward · fatal-crash density · fatal-crash locations (~35 m cells)
+   Analysis layers: fatalities by ward · fatal-crash density · fatal-crash locations (100 m grid squares, no counts)
                     · all-crash density 2018–20 · fatal share of crashes by ward 2018–20
    Context layers:  suburban rail + stations · metro/monorail · express highways · major roads · park, rivers, airport */
 (function () {
@@ -15,7 +15,7 @@
   const LAYERS = {
     wards: { t: "Fatalities per ward", years: [2017, 2018, 2019, 2020] },
     density: { t: "Fatal-crash density (relative)", years: [2017, 2018, 2019, 2020] },
-    locations: { t: "Fatal-crash locations (~35 m cells)", years: [2017, 2018, 2019, 2020] },
+    locations: { t: "100 m squares with at least one fatal crash", years: [2017, 2018, 2019, 2020] },
     alldensity: { t: "All-crash density, 2018–20 (relative)", years: [2018, 2019, 2020] },
     share: { t: "Fatal share of all crashes, 2018–20", years: [2018, 2019, 2020] }
   };
@@ -146,7 +146,12 @@
     const hs = map.getSource("heat"); if (hs) { hs.play(); setTimeout(() => hs.pause(), 120); }
     if (state.view === "locations") {
       const feats = [];
-      for (let i = 0; i < n; i++) if (cnt[i]) { const [lon, lat] = cellToLngLat(i % w + .5, Math.floor(i / w) + .5); feats.push({ type: "Feature", properties: { c: cnt[i] }, geometry: { type: "Point", coordinates: [lon, lat] } }); }
+      // each flag marks the centre pixel of a 3 x 3 block (~105 m); draw the whole block as a square
+      for (let i = 0; i < n; i++) if (cnt[i]) {
+        const c0 = i % w - 1, r0 = Math.floor(i / w) - 1, c1 = c0 + 3, r1 = r0 + 3;
+        const ring = [cellToLngLat(c0, r0), cellToLngLat(c1, r0), cellToLngLat(c1, r1), cellToLngLat(c0, r1), cellToLngLat(c0, r0)];
+        feats.push({ type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } });
+      }
       map.getSource("cells").setData({ type: "FeatureCollection", features: feats });
     }
   }
@@ -173,9 +178,7 @@
     map.addLayer({ id: "rail", type: "line", source: "rail", paint: { "line-color": "#a9b6be", "line-width": 1.2, "line-dasharray": [3, 2], "line-opacity": .6 } });
     map.addLayer({ id: "c-metro", type: "line", source: "ctx", filter: K("metro"), layout: { visibility: "none" }, paint: { "line-color": "#c6f26b", "line-width": 2, "line-opacity": .8 } });
     map.addLayer({ id: "ward-line", type: "line", source: "wards", paint: { "line-color": "#e6ecef", "line-opacity": .35, "line-width": ["case", ["boolean", ["feature-state", "hover"], false], 2, .7] } });
-    map.addLayer({ id: "dots", type: "circle", source: "cells", layout: { visibility: "none" }, paint: {
-      "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, ["+", 1.6, ["*", .7, ["get", "c"]]], 15, ["+", 4.5, ["*", 1.6, ["get", "c"]]]],
-      "circle-color": "#ffd166", "circle-opacity": .85, "circle-stroke-color": "#07090b", "circle-stroke-width": .6 } });
+    map.addLayer({ id: "dots", type: "fill", source: "cells", layout: { visibility: "none" }, paint: { "fill-color": "#ffd166", "fill-opacity": .8, "fill-outline-color": "#07090b" } });
     map.addLayer({ id: "c-rail-stn", type: "circle", source: "ctx", filter: K("rail_stn"), minzoom: 11, paint: { "circle-radius": 2.4, "circle-color": "#07090b", "circle-stroke-color": "#e6ecef", "circle-stroke-width": 1.2 } });
     map.addLayer({ id: "c-metro-stn", type: "circle", source: "ctx", filter: K("metro_stn"), layout: { visibility: "none" }, paint: { "circle-radius": 2.6, "circle-color": "#07090b", "circle-stroke-color": "#c6f26b", "circle-stroke-width": 1.4 } });
     map.addLayer({ id: "c-airport", type: "circle", source: "ctx", filter: K("airport"), paint: { "circle-radius": 5, "circle-color": "rgba(94,200,216,.25)", "circle-stroke-color": "#5ec8d8", "circle-stroke-width": 1.2 } });
