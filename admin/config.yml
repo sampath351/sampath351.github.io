@@ -266,15 +266,40 @@ collections:
             fields:
               - { name: title, label: Section title, widget: string }
               - { name: intro, label: Intro, widget: text, required: false }
-              - name: photos
-                label: Photos (shown at their own aspect ratio, in rows)
+              - { name: homeSize, label: "Photo size on the home page", widget: select, default: "m", required: false, options: [{ label: "Small", value: "s" }, { label: "Medium", value: "m" }, { label: "Large", value: "l" }] }
+              - { name: galleryTitle, label: "Photography page: title", widget: string, required: false }
+              - { name: galleryIntro, label: "Photography page: intro line", widget: text, required: false }
+              - name: layout
+                label: "Photography page: layout"
+                widget: select
+                default: rows
+                options:
+                  - { label: "Rows: each photo at its own shape, rows arrange themselves (default)", value: rows }
+                  - { label: "Mosaic: columns, like a pinboard", value: mosaic }
+                  - { label: "Filmstrip: one row that scrolls sideways", value: strip }
+              - { name: size, label: "Photography page: photo size (Rows layout)", widget: select, default: "m", required: false, options: [{ label: "Small", value: "s" }, { label: "Medium", value: "m" }, { label: "Large", value: "l" }] }
+              - name: places
+                label: "Places on the map: add one here whenever a photo uses a new place. The name must match the photos' Place exactly. Coordinates: right-click the spot in Google Maps and copy the numbers (latitude first)"
                 widget: list
                 required: false
-                summary: "row {{row}} · {{caption}}"
+                summary: "{{name}}  ({{lat}}, {{lon}})"
                 fields:
+                  - { name: name, label: "Place (same spelling as in the photos)", widget: string }
+                  - { name: lat, label: "Latitude (e.g. 28.3949)", widget: number, value_type: float }
+                  - { name: lon, label: "Longitude (e.g. 84.1240)", widget: number, value_type: float }
+              - name: photos
+                label: "Photos: drag to change the order. Rows arrange themselves around whatever is switched on"
+                widget: list
+                required: false
+                summary: "{{caption}}  ·  {{place}}  ·  page: {{show}} · home: {{home}}"
+                fields:
+                  - { name: show, label: "Show on the Photography page", widget: boolean, default: true, required: false }
+                  - { name: home, label: "Also show on the home page (pick about 6)", widget: boolean, default: false, required: false }
                   - { name: src, label: "Photo: upload the copy made by prepare_photos.bat (from Photography/web), not the original", widget: image }
-                  - { name: caption, label: "Caption (shown on hover)", widget: string, required: false }
-                  - { name: row, label: "Row number (optional: photos with the same number share a row, 2–3 per row; leave blank to arrange automatically)", widget: number, value_type: int, required: false }
+                  - { name: caption, label: "Caption", widget: string, required: false }
+                  - { name: place, label: "Place: city or location. Photos with the same place form one group (and one point on the map); spell it exactly as in Places on the map", widget: string, required: false }
+                  - { name: year, label: "Year (optional)", widget: string, required: false }
+                  - { name: feature, label: "Feature: a row of its own on the Photography page", widget: boolean, default: false, required: false }
                   - { name: w, label: "Width in px (optional: read from the photo if blank)", widget: number, value_type: int, required: false }
                   - { name: h, label: "Height in px (optional: read from the photo if blank)", widget: number, value_type: int, required: false }
               - name: extras
