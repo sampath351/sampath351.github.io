@@ -14,9 +14,9 @@
     "portfolioPdf": ""
   },
   "hero": {
-    "kicker": "Geospatial operations · GIS engineering · Spatial data",
+    "kicker": "GIS production · Spatial analysis · Workflow automation",
     "headline": "Urban planner. Geospatial technical lead.",
-    "statement": "For four years I was the sole on-ground lead of a geospatial consultancy. I designed the delivery system, wrote the automations, hired and trained the team, and ran the client relationship behind 1.5 million+ mapped land parcels across 35–40 cities on five continents.",
+    "statement": "For four years I ran delivery at a geospatial consultancy, leading a team of about ten that mapped 1.5 million+ land parcels across 35–40 cities on five continents. I designed the delivery system and its automations, hired and trained the team, and handled client communications.",
     "intro": "Currently a GIS Associate at Artelia Consulting Engineers, on APIIC's BHAVYA scheme projects. Next, I want the statistical and machine-learning depth to move from production mapping to spatial modelling.",
     "glanceTitle": "Profile at a glance",
     "glance": [
@@ -33,9 +33,9 @@
         "link": "work/planning-saga.html"
       },
       {
-        "value": "−83%",
-        "label": "Processing time",
-        "detail": "Address extraction after automation: 1.5 h → 0.25 h per 1,000 parcels",
+        "value": "~1,500 h",
+        "label": "Saved on address work (est.)",
+        "detail": "1.5 h per 1,000 parcels by hand, replaced by one fixed ~15-minute automated run, across 1M+ parcels",
         "link": "work/planning-saga.html#automation"
       },
       {
@@ -49,6 +49,12 @@
         "label": "People hired & trained",
         "detail": "Over four years at Planning Saga: about 100 interviews and a core team of about 10 at any time",
         "link": "#experience"
+      },
+      {
+        "value": "B.Plan",
+        "label": "SPA Vijayawada · CGPA 7.74 / 10",
+        "detail": "2018–22 · First Class with Distinction · thesis graded A",
+        "link": "#edu"
       }
     ]
   },
@@ -75,20 +81,21 @@
           "period": "Sep 2024 – Jun 2026"
         }
       ],
-      "summary": "One long-running brief: plot-level land-parcel data, city after city, for a global metaverse real-estate platform. The founding partner set the direction from the Netherlands; on the ground in India, I led production, systems, the team and the day-to-day client relationship.",
+      "summary": "One long-running engagement: plot-level land-parcel data for a global metaverse real-estate platform, usually with several cities in production at once. The founding partner led the firm from the Netherlands while pursuing higher studies there; on the ground in India, I ran the production system, day-to-day operations, the team and the client relationship.",
       "pillars": [
         {
           "title": "Delivery system",
           "points": [
             "Designed and refined a 10-stage GIS delivery framework with QA gates at neighbourhood and city level",
-            "Wrote the workflow procedures for every stage, plus city-preparation protocols and post-delivery retrospectives"
+            "Wrote the workflow procedures for every stage, plus city-preparation protocols and post-delivery retrospectives",
+            "Researched local property prices for every city, so the price per square foot (or local unit) we used stayed close to real market rates"
           ]
         },
         {
           "title": "Automation & tooling",
           "points": [
             "Built a script layer integrated with the GIS workflow for checks, data extraction, API calls, cleaning, formatting to client spec and automated QA",
-            "Cut address-processing time by 83%, applied across 1M+ parcels",
+            "Replaced manual address extraction (1.5 h per 1,000 parcels) with a fixed ~15-minute automated run, applied across 1M+ parcels",
             "Built a capacity & deadline model that forecast city finish dates to ~95% accuracy"
           ]
         },
@@ -106,12 +113,12 @@
           "points": [
             "Primary client liaison for 3+ years, with weekly progress and strategy reporting",
             "Drafted the pre-final client–consultant service agreement, including its legal terms",
-            "Led outreach to Dutch municipalities, Indian government tenders and freelance platforms, backed by city-level research and stakeholder interviews"
+            "Involved in business development: market research and stakeholder interviews on where the practice could grow"
           ]
         }
       ],
       "link": "work/planning-saga.html",
-      "linkLabel": "Read the full case study"
+      "linkLabel": "Inside the role"
     },
     "others": [
       {
@@ -157,7 +164,8 @@
         "points": [
           "Road-crash data analysis and mapping for Mumbai and Maharashtra districts. Credited in the published report [Road Accidents in Maharashtra – 2020](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf) (Maharashtra Police)"
         ],
-        "link": "work/wri-road-safety.html"
+        "link": "work/wri-road-safety.html",
+        "linkLabel": "Internship project"
       },
       {
         "hidden": false,
@@ -180,18 +188,19 @@
     }
   },
   "work": {
-    "title": "Case studies",
+    "title": "Selected work",
     "titleMuted": "",
-    "intro": "Each case study covers the context, data, method, results and limits, with an interactive map or tool you can use yourself.",
+    "intro": "The role I held longest, my B.Plan thesis and an internship project, each with a map or tool you can try.",
     "items": [
       {
         "id": "saga",
         "status": "live",
         "href": "work/planning-saga.html",
         "index": "01",
+        "kind": "Professional work",
         "title": "Engineering a city-scale parcel-mapping practice",
         "org": "Planning Saga · 2022–2026",
-        "summary": "The 10-stage system, automation layer and capacity model behind 1.5M+ attributed parcels across 35–40 cities. Includes a working recreation of the capacity & deadline model and a stage-by-stage walkthrough.",
+        "summary": "The delivery system, automation and planning behind 1.5M+ attributed parcels across 35–40 cities, from running production and the team to owning the client relationship. Includes a working recreation of my capacity & deadline model.",
         "tags": [
           "QGIS",
           "Python",
@@ -200,30 +209,15 @@
           "ClickUp",
           "Process design"
         ],
-        "coords": "35–40 cities · 5 continents"
-      },
-      {
-        "id": "wri",
-        "status": "live",
-        "href": "work/wri-road-safety.html",
-        "index": "02",
-        "title": "Spatial patterns of road-crash fatalities in Mumbai",
-        "org": "World Resources Institute India · 2021",
-        "summary": "1,681 fatal crashes (2017–2020) analysed across Mumbai's 24 wards in ArcGIS and Excel. Pedestrians made up 47% of road-user fatalities in 2018–20. The 2021 layers can now be explored on an interactive map.",
-        "tags": [
-          "ArcGIS",
-          "Excel",
-          "Spatial join",
-          "Kernel density",
-          "Thematic mapping"
-        ],
-        "coords": "19.0760° N, 72.8777° E"
+        "coords": "35–40 cities · 5 continents",
+        "goLabel": "Inside the role"
       },
       {
         "id": "thesis",
         "status": "live",
         "href": "work/aizawl-landslides.html",
-        "index": "03",
+        "index": "02",
+        "kind": "Academic project",
         "title": "Earthquake-triggered landslide hazard in Aizawl",
         "org": "B.Plan dissertation · 2022",
         "summary": "Two multi-criteria indices, landslide hazard and earthquake vulnerability, overlaid across Aizawl district to set a priority tehsil and a relief plan for Aizawl city. Rebuilt as a live model you can re-weight, with a look back at what the rebuild showed.",
@@ -234,39 +228,59 @@
           "Hazard zonation",
           "Disaster-risk planning"
         ],
-        "coords": "23.7271° N, 92.7176° E"
+        "coords": "23.7271° N, 92.7176° E",
+        "goLabel": "Open the project"
+      },
+      {
+        "id": "wri",
+        "status": "live",
+        "href": "work/wri-road-safety.html",
+        "index": "03",
+        "kind": "Internship project",
+        "title": "Spatial patterns of road-crash fatalities in Mumbai",
+        "org": "World Resources Institute India · 2021",
+        "summary": "1,681 fatal crashes (2017–2020) analysed across Mumbai's 24 wards in ArcGIS and Excel. Pedestrians made up 47% of road-user fatalities in 2018–20. The 2021 layers can now be explored on an interactive map.",
+        "tags": [
+          "ArcGIS",
+          "Excel",
+          "Spatial join",
+          "Kernel density",
+          "Thematic mapping"
+        ],
+        "coords": "19.0760° N, 72.8777° E",
+        "goLabel": "Open the project"
       }
     ]
   },
   "approach": {
     "title": "How I use AI",
     "titleMuted": "",
-    "intro": "I use AI daily, the way an engineer uses a good toolchain. It lets one person build what would otherwise need a small development team. I own the specification, the judgement and the checking.",
+    "intro": "I draft the idea, the intent and the flow; AI does most of the execution. Before anything is used, I check what comes out against real data.",
     "items": [
       {
         "title": "Code & automation",
-        "body": "Python, Apps Script and API pipelines drafted and debugged with AI, then tested against real data before going near production. At Planning Saga the automation layer (checks, data pulls, API calls, cleaning, formatting to client spec, QA) and the capacity & deadline model were built this way.",
+        "body": "Python, Apps Script and API pipelines: I designed the logic and the flow, AI wrote most of the code, and I tested it against real data before it went near production. At Planning Saga the automation layer (checks, data pulls, API calls, cleaning, formatting to client spec, QA) and the capacity & deadline model were built this way.",
         "tag": "Production"
       },
       {
         "title": "Tools, end to end",
-        "body": "Complete tools built with AI as a pair-programmer: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and personal quality-of-life tools such as custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries.",
+        "body": "Tools I designed and AI built: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and personal quality-of-life tools such as custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries.",
         "tag": "Building"
       },
       {
         "title": "Systems & documentation",
-        "body": "Workflow procedures, training material, client reports, proposals and a service-agreement draft, structured with AI and written and checked by me.",
+        "body": "Workflow procedures, training material, client reports, proposals and a service-agreement draft. I set out what each needed, AI helped structure and draft, and I wrote and checked the final versions.",
         "tag": "Operations"
       },
       {
         "title": "Research & fast learning",
-        "body": "Getting productive quickly in new methods and tools, and desk research for business development, from Dutch municipal mapping needs to Indian tender markets.",
+        "body": "Getting productive quickly in new methods and tools, and desk research for business development and new markets.",
         "tag": "Learning"
       }
     ],
     "principleTitle": "My rule",
-    "principle": "AI drafts; data decides. Every output gets checked against something independent: a published total, a hand-checked sample, or a QA gate.",
-    "principleExample": "Example: the capacity & deadline model for city projects. AI helped write the formula logic across four sections and two scenarios. I set the rules and benchmarks, then checked its dates against actual completions, where it held to about 95%.",
+    "principle": "I set the idea and the flow, AI executes, and data decides. Every output gets checked against something independent: a published total, a hand-checked sample, or a QA gate.",
+    "principleExample": "Example: the capacity & deadline model for city projects. I designed its four sections, the rules and the benchmarks; AI wrote the formula logic. I then checked its dates against actual completions, where it held to about 95%.",
     "principleLink": "work/planning-saga.html#planning",
     "note": "For context: everything before Planning Saga, including my B.Plan thesis, studio work and internships such as WRI India, predates these tools and was done without AI."
   },
@@ -408,6 +422,13 @@
     "intro": "Short projects on open data, each with a notebook and a map.",
     "items": [
       {
+        "title": "01 · Address-order checker · Helsinki",
+        "note": "Five address checks on open OpenStreetMap data, tested against planted errors. Map and notebook.",
+        "href": "lab/address-order.html",
+        "image": "assets/img/lab/address-order.webp",
+        "draft": true
+      },
+      {
         "title": "Next experiment",
         "note": "In progress",
         "href": "",
@@ -430,7 +451,7 @@
         "year": "2022",
         "title": "Earthquake-triggered landslide hazard, Aizawl district",
         "tag": "B.Plan dissertation · grade A",
-        "note": "Landslide and earthquake indices overlaid to set a priority tehsil and a relief plan for Aizawl city. [Case study with live model →](work/aizawl-landslides.html)"
+        "note": "Landslide and earthquake indices overlaid to set a priority tehsil and a relief plan for Aizawl city. [Project page with live model →](work/aizawl-landslides.html)"
       },
       {
         "year": "2022",
@@ -491,7 +512,71 @@
   "personal": {
     "title": "Personal",
     "intro": "I photograph everything. I also build small quality-of-life tools for my own devices: custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries. They are for personal use, not for sale.",
-    "photos": [],
+    "photos": [
+      {
+        "src": "assets/img/personal/hill-town.jpg",
+        "caption": "Hill town",
+        "w": 1200,
+        "h": 1600,
+        "row": 1
+      },
+      {
+        "src": "assets/img/personal/snow-line-mist.jpg",
+        "caption": "Snow line in the mist",
+        "w": 1600,
+        "h": 900,
+        "row": 1
+      },
+      {
+        "src": "assets/img/personal/valley-settlement.jpg",
+        "caption": "Valley settlement",
+        "w": 1229,
+        "h": 1600,
+        "row": 1
+      },
+      {
+        "src": "assets/img/personal/old-city-lane.jpg",
+        "caption": "Old city lane",
+        "w": 1600,
+        "h": 900,
+        "row": 2
+      },
+      {
+        "src": "assets/img/personal/clay-idol.jpg",
+        "caption": "Clay idol in the making",
+        "w": 1067,
+        "h": 1600,
+        "row": 2
+      },
+      {
+        "src": "assets/img/personal/temple-woodwork.jpg",
+        "caption": "Carved temple woodwork",
+        "w": 1600,
+        "h": 938,
+        "row": 2
+      },
+      {
+        "src": "assets/img/personal/forest-light.jpg",
+        "caption": "Forest light",
+        "w": 1600,
+        "h": 1067,
+        "row": 3
+      },
+      {
+        "src": "assets/img/personal/terraced-fields.jpg",
+        "caption": "Terraced fields",
+        "w": 1600,
+        "h": 900,
+        "row": 3
+      },
+      {
+        "src": "assets/img/personal/village-street.jpg",
+        "caption": "Village street",
+        "w": 1600,
+        "h": 681,
+        "row": 3
+      }
+    ],
     "extras": []
   },
   "contact": {
