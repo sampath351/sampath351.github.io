@@ -59,8 +59,7 @@ Open http://localhost:8000 (double-clicking the HTML files won't load the conten
 ---
 
 ## 3. Fonts
-- **Acumin Pro** (Adobe Fonts, licensed while your Creative Cloud plan is active): fonts.adobe.com → add *Acumin Pro* and *Acumin Pro Condensed* to a **Web Project** → add `sampath351.github.io` and `localhost` as allowed domains → copy the kit ID → in `index.html` and `work/*.html` uncomment the `use.typekit.net/KITID.css` line and replace `KITID`.
-- **Fallback:** Archivo + JetBrains Mono are self-hosted in `assets/fonts` (SIL Open Font License). If the Adobe kit lapses, the site falls back automatically.
+- **Archivo** only, self-hosted in `assets/fonts` (SIL Open Font License), variable width: condensed for headings and numbers, normal for text and labels. Two-font rule: no second family is used (the Adobe Acumin kit is not available). The JetBrains Mono files in `assets/fonts` are no longer used.
 
 ---
 
@@ -104,3 +103,8 @@ scripts                     data-processing scripts (Python)
 ```
 
 Files left over from v1 that you can delete: `content/site.js`, `assets/docs/README.txt`, `assets/img/personal/`, `data/wri/crashes.geojson` (all ignored by git anyway).
+
+## Home page contour backdrop (11 Nov 2026)
+- `assets/js/bg-terrain.js` draws real contours of the Eastern Ghats (Kondapalli hills) north-west of Vijayawada behind the whole home page: right side only, fading towards the middle (CSS mask on `#bg-terrain`), drifting up far slower than the page scroll, with a gentle swell under the pointer.
+- Heightmap: `assets/terrain/eastern-ghats.png` (220 × 316, 16-bit in R,G; bbox 80.33–80.73 E, 16.50–17.05 N), metadata in `assets/terrain/terrain.json`. Source: SRTM-based Terrain Tiles (Mapzen / AWS Open Data), lightly smoothed.
+- Case-study pages still use `terrain.js` for their hero contours.

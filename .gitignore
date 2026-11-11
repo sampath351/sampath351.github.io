@@ -4,12 +4,20 @@ data/wri/crashes.geojson
 portfolio_private/
 # obsolete files from v1
 content/site.js
-# local preview helper
+# original photographs (only the web copies in assets/img/personal are published)
+Photography/
+# local preview helpers
 preview.bat
+preview_server.py
+strip_provenance.py
+strip_provenance.bat
+prepare_photos.py
+prepare_photos.bat
 out/
 # OS / editor
 Thumbs.db
 desktop.ini
 .DS_Store
 assets/docs/README.txt
-assets/img/personal/
+__pycache__/
+assets/img/personal/README.txt
