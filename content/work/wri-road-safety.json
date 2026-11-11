@@ -1,6 +1,7 @@
 {
-  "title": "Spatial patterns of road-crash fatalities in Mumbai, 2017–2020",
+  "title": "Spatial patterns of road-crash fatalities in Mumbai City, 2017–2020",
   "crumb": "03 / WRI India",
+  "back": null,
   "subtitle": "Fatal-crash records from the Mumbai Traffic Police, analysed across the city's 24 municipal wards during my internship at WRI India in 2021, using ArcGIS and Excel. The original 2021 layers are presented below as an interactive map.",
   "meta": [
     {
@@ -20,6 +21,28 @@
       "value": "Credited in [*Road Accidents in Maharashtra – 2020*](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf)"
     }
   ],
+  "glance": [
+    {
+      "tag": "Problem",
+      "big": "1,681",
+      "text": "fatal crashes in Mumbai, 2017–20. Where, when, and which road users?"
+    },
+    {
+      "tag": "How",
+      "big": "24 wards",
+      "text": "Crash records joined to the city's wards and mapped as density, in ArcGIS and Excel."
+    },
+    {
+      "tag": "Findings",
+      "big": "47%",
+      "text": "of road-user fatalities were pedestrians. 60% happened off-peak; six wards held 41%."
+    },
+    {
+      "tag": "Limits",
+      "big": "Raw counts",
+      "text": "No traffic or population denominator: the map shows where, not how risky."
+    }
+  ],
   "chapters": [
     {
       "id": "context",
@@ -27,21 +50,37 @@
       "heading": "A road-safety review at two scales",
       "lead": "In 2021 WRI India was preparing a state-of-road-safety review for Maharashtra. I joined through WIPRO Earthian's programme, one of the students shortlisted from SPA Vijayawada, and owned the data and the maps.",
       "body": "",
+      "stats": [],
+      "bars": null,
       "cards": [
         {
+          "big": "",
           "title": "State",
           "text": "District crash returns compiled by the Highway Police."
         },
         {
+          "big": "",
           "title": "City",
           "text": "Geolocated fatal-crash records for Mumbai from the Traffic Police."
         },
         {
+          "big": "",
           "title": "My part",
           "text": "Cleaning and standardising the spreadsheets, building the GIS layers, and the thematic maps and charts for the review deck and the published report."
         }
       ],
-      "cardsStyle": "plain"
+      "cardsStyle": "plain",
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
+      "figures": [],
+      "figLayout": "",
+      "more": "",
+      "compare": []
     },
     {
       "id": "question",
@@ -49,21 +88,37 @@
       "heading": "Where, when and which road users?",
       "lead": "City-wide totals hide the pattern. The Mumbai analysis asked three questions.",
       "body": "",
+      "stats": [],
+      "bars": null,
       "cards": [
         {
+          "big": "",
           "title": "Where?",
           "text": "Which wards and corridors account for the most fatalities, and is that stable year to year?"
         },
         {
+          "big": "",
           "title": "Who?",
           "text": "Which road users make up the fatalities, and which vehicles are involved?"
         },
         {
+          "big": "",
           "title": "When?",
           "text": "Is this a peak-hour congestion problem, or something else?"
         }
       ],
-      "cardsStyle": "q"
+      "cardsStyle": "q",
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
+      "figures": [],
+      "figLayout": "",
+      "more": "",
+      "compare": []
     },
     {
       "id": "data",
@@ -93,7 +148,20 @@
           "s": "Highway Police spreadsheets, in several formats"
         }
       ],
-      "more": "- **Fatal-crash records, 2017–2020:** 1,681 geolocated crashes. Each record carries the number of fatalities, peak/off-peak timing, a school-peak flag, the vehicles involved, and age bands. Road-user category is recorded from 2018 onwards.\n- **All reported crashes, 2018–2020:** 7,553 geolocated crashes of every severity (fatal, grievous and minor), linked to the fatal records by record ID.\n- **Boundaries and context:** the 24 BMC administrative wards, the OpenStreetMap road network, suburban rail and metro lines, the express highways, Sanjay Gandhi National Park and rivers.\n- **State-level returns:** district spreadsheets from the Highway Police, in several different formats."
+      "bars": null,
+      "cards": [],
+      "cardsStyle": "",
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
+      "figures": [],
+      "figLayout": "",
+      "more": "- **Fatal-crash records, 2017–2020:** 1,681 geolocated crashes. Each record carries the number of fatalities, peak/off-peak timing, a school-peak flag, the vehicles involved, and age bands. Road-user category is recorded from 2018 onwards.\n- **All reported crashes, 2018–2020:** 7,553 geolocated crashes of every severity (fatal, grievous and minor), linked to the fatal records by record ID.\n- **Boundaries and context:** the 24 BMC administrative wards, the OpenStreetMap road network, suburban rail and metro lines, the express highways, Sanjay Gandhi National Park and rivers.\n- **State-level returns:** district spreadsheets from the Highway Police, in several different formats.",
+      "compare": []
     },
     {
       "id": "method",
@@ -101,32 +169,50 @@
       "heading": "From spreadsheets to ward-level analysis",
       "lead": "Five steps, in ArcGIS and Excel.",
       "body": "",
+      "stats": [],
+      "bars": null,
+      "cards": [],
+      "cardsStyle": "",
+      "lessons": [],
+      "embed": "",
       "steps": [
         {
           "title": "Clean & harmonise",
-          "text": "Fixed column drift between years and standardised vehicle and road-user categories in Excel."
+          "text": "Fixed column drift between years and standardised vehicle and road-user categories in Excel.",
+          "highlight": false
         },
         {
           "title": "Point layers",
-          "text": "XY to point layers for each year in ArcGIS, plus combined 2018–20 layers."
+          "text": "XY to point layers for each year in ArcGIS, plus combined 2018–20 layers.",
+          "highlight": false
         },
         {
           "title": "Ward join",
-          "text": "Spatial join to the 24 BMC wards, then tabulation by ward, road user, age and time of day."
+          "text": "Spatial join to the 24 BMC wards, then tabulation by ward, road user, age and time of day.",
+          "highlight": false
         },
         {
           "title": "Map & hotspot",
-          "text": "Thematic maps for each variable, plus a kernel-density surface to identify corridors and junctions."
+          "text": "Thematic maps for each variable, plus a kernel-density surface to identify corridors and junctions.",
+          "highlight": false
         },
         {
           "title": "Report",
-          "text": "Maps and charts for the review deck and the published Mumbai section of the report."
+          "text": "Maps and charts for the review deck and the published Mumbai section of the report.",
+          "highlight": false
         }
       ],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
       "note": {
         "title": "About the interactive map",
         "body": "The map on this page was prepared for this portfolio from the original 2021 project layers. It shows aggregated data only: ward totals, smoothed density, and crash locations on a 100 m grid without counts, and its totals reconcile with the figures published in [*Road Accidents in Maharashtra – 2020*](https://cdnbbsr.s3waas.gov.in/s35dec707028b05bcbd3a1db5640f842c5/uploads/2025/08/20250828713555868.pdf): 467, 456, 420 and 338 fatal crashes, and 475, 447 and 350 fatalities for 2018–20."
-      }
+      },
+      "figures": [],
+      "figLayout": "",
+      "more": "",
+      "compare": []
     },
     {
       "id": "findings",
@@ -134,8 +220,10 @@
       "heading": "Vulnerable road users, off-peak hours, a few wards",
       "lead": "Pedestrians and two-wheeler riders, outside rush hour, in a handful of wards.",
       "body": "",
+      "stats": [],
       "bars": {
         "title": "Who died · share of 1,272 road-user fatalities, 2018–20",
+        "max": 100,
         "items": [
           {
             "label": "Pedestrian",
@@ -152,15 +240,16 @@
           {
             "label": "Heavy vehicle",
             "value": 14,
-            "text": "14%"
+            "text": "14%",
+            "hl": false
           },
           {
             "label": "Cyclist",
             "value": 2,
-            "text": "2%"
+            "text": "2%",
+            "hl": false
           }
         ],
-        "max": 100,
         "note": "Categories are logged per crash and can overlap. Two-wheelers, heavy vehicles and cars were the vehicles most often involved; the fatalities fell on pedestrians and two-wheeler riders."
       },
       "cards": [
@@ -190,6 +279,14 @@
           "text": "of fatalities with a recorded age were 18–35 (2017–20)."
         }
       ],
+      "cardsStyle": "",
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
       "figures": [
         {
           "src": "../assets/img/wri/heatmap.jpg",
@@ -208,7 +305,8 @@
         }
       ],
       "figLayout": "",
-      "more": "Figures recomputed from the original layers. The two-wheeler share comes out at 41% here, while the 2021 deck quoted 43%. The 2021 report also estimated that about 30% of fatalities occurred on the two express highways alone. July–November accounts for 39% of fatal crashes."
+      "more": "Figures recomputed from the original layers. The two-wheeler share comes out at 41% here, while the 2021 deck quoted 43%. The 2021 report also estimated that about 30% of fatalities occurred on the two express highways alone. July–November accounts for 39% of fatal crashes.",
+      "compare": []
     },
     {
       "id": "limits",
@@ -216,30 +314,47 @@
       "heading": "What this analysis cannot show",
       "lead": "The map shows where fatal crashes happened, not how risky a road is.",
       "body": "",
+      "stats": [],
+      "bars": null,
       "cards": [
         {
+          "big": "",
           "title": "No exposure denominator",
           "text": "Raw counts: wards with more road, traffic or people rank higher whatever the underlying risk."
         },
         {
+          "big": "",
           "title": "Per-crash attributes",
           "text": "Road user and age are counted per crash and not linked, so shares are approximate."
         },
         {
+          "big": "",
           "title": "Gaps by year",
           "text": "No road-user field in 2017, some crashes without vehicles, and 5 just outside the ward polygons."
         },
         {
+          "big": "",
           "title": "Location precision",
           "text": "Coordinates used as recorded; a planar density surface over-smooths along roads."
         },
         {
+          "big": "",
           "title": "2020 is atypical",
           "text": "Lockdowns cut traffic for months, so 2020 sits off the trend."
         }
       ],
       "cardsStyle": "plain",
-      "more": "- **No exposure denominator.** These are raw counts. Wards with more road length, traffic or population will rank higher regardless of underlying risk. A fair comparison needs fatalities per vehicle-kilometre or per capita, and ward-level traffic data was not available.\n- **Per-crash, not per-person, attributes.** Road-user category and age are logged as counts per crash and are not linked to each other. Road-user categories also sum to more than total fatalities, so shares are reported against total fatalities and treated as approximate.\n- **Gaps by year.** 2017 has no road-user field, the vehicles involved are missing for some crashes, and 5 crashes fall just outside the ward polygons along the coastline.\n- **Location precision unknown.** Coordinates are used as recorded. A planar density surface also over-smooths along the road network.\n- **2020 is atypical.** Pandemic lockdowns reduced traffic for months, so 2020 does not sit on a simple trend line."
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
+      "figures": [],
+      "figLayout": "",
+      "more": "- **No exposure denominator.** These are raw counts. Wards with more road length, traffic or population will rank higher regardless of underlying risk. A fair comparison needs fatalities per vehicle-kilometre or per capita, and ward-level traffic data was not available.\n- **Per-crash, not per-person, attributes.** Road-user category and age are logged as counts per crash and are not linked to each other. Road-user categories also sum to more than total fatalities, so shares are reported against total fatalities and treated as approximate.\n- **Gaps by year.** 2017 has no road-user field, the vehicles involved are missing for some crashes, and 5 crashes fall just outside the ward polygons along the coastline.\n- **Location precision unknown.** Coordinates are used as recorded. A planar density surface also over-smooths along the road network.\n- **2020 is atypical.** Pandemic lockdowns reduced traffic for months, so 2020 does not sit on a simple trend line.",
+      "compare": []
     },
     {
       "id": "next",
@@ -247,47 +362,41 @@
       "heading": "What I would do with it now",
       "lead": "This is where I first ran into the limits of descriptive mapping: a density surface shows where crashes happened, not where a road is more dangerous than expected, or why.",
       "body": "",
+      "stats": [],
+      "bars": null,
       "cards": [
         {
+          "big": "",
           "title": "Network hotspots",
           "text": "Network-constrained density (NKDE) and Getis-Ord Gi* on road segments, in place of planar heatmaps."
         },
         {
+          "big": "",
           "title": "Exposure-adjusted rates",
           "text": "Fatalities relative to traffic, from counts or OSM road and land-use proxies."
         },
         {
+          "big": "",
           "title": "A count model",
           "text": "Negative binomial or spatial GLM linking segment fatalities to road design, speed and land use."
         }
       ],
-      "cardsStyle": "plain"
+      "cardsStyle": "plain",
+      "lessons": [],
+      "embed": "",
+      "steps": [],
+      "bodyAfter": "",
+      "code": "",
+      "codeLabel": "",
+      "note": null,
+      "figures": [],
+      "figLayout": "",
+      "more": "",
+      "compare": []
     }
   ],
   "next": {
     "label": "Next: Engineering a city-scale parcel-mapping practice",
     "href": "planning-saga.html"
-  },
-  "glance": [
-    {
-      "tag": "Problem",
-      "big": "1,681",
-      "text": "fatal crashes in Mumbai, 2017–20. Where, when, and which road users?"
-    },
-    {
-      "tag": "How",
-      "big": "24 wards",
-      "text": "Crash records joined to the city's wards and mapped as density, in ArcGIS and Excel."
-    },
-    {
-      "tag": "Findings",
-      "big": "47%",
-      "text": "of road-user fatalities were pedestrians. 60% happened off-peak; six wards held 41%."
-    },
-    {
-      "tag": "Limits",
-      "big": "Raw counts",
-      "text": "No traffic or population denominator: the map shows where, not how risky."
-    }
-  ]
+  }
 }
