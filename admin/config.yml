@@ -96,7 +96,7 @@ collections:
                         label: Points
                         widget: list
                         field: { name: p, label: Point, widget: text }
-                  - { name: link, label: Case study link, widget: string, required: false }
+                  - { name: link, label: Project page link, widget: string, required: false }
                   - { name: linkLabel, label: Link text, widget: string, required: false }
               - name: others
                 label: Other roles
@@ -112,7 +112,8 @@ collections:
                     label: Points
                     widget: list
                     field: { name: p, label: Point, widget: text }
-                  - { name: link, label: Case study link, widget: string, required: false }
+                  - { name: link, label: Project page link, widget: string, required: false }
+                  - { name: linkLabel, label: Link text, widget: string, required: false }
               - name: education
                 label: Education
                 widget: object
@@ -124,7 +125,7 @@ collections:
                   - { name: languages, label: Languages, widget: string, required: false }
 
           - name: work
-            label: Case-study cards
+            label: Selected work cards
             widget: object
             collapsed: true
             fields:
@@ -140,6 +141,7 @@ collections:
                   - { name: status, label: Status, widget: select, options: [live, soon] }
                   - { name: href, label: Page link, widget: string, required: false }
                   - { name: index, label: Number, widget: string }
+                  - { name: kind, label: "Type (Professional work / Internship project / Academic project)", widget: string, required: false }
                   - { name: title, label: Title, widget: string }
                   - { name: org, label: Organisation · year, widget: string }
                   - { name: summary, label: Summary, widget: text }
@@ -148,6 +150,7 @@ collections:
                     widget: list
                     field: { name: t, label: Tag, widget: string }
                   - { name: coords, label: Thumbnail caption, widget: string, required: false }
+                  - { name: goLabel, label: Link text, widget: string, required: false }
 
           - name: approach
             label: How I work (AI)
@@ -218,6 +221,7 @@ collections:
                   - { name: note, label: Note, widget: string, required: false }
                   - { name: href, label: Link (leave empty for a placeholder), widget: string, required: false }
                   - { name: image, label: Image, widget: image, required: false }
+                  - { name: draft, label: "Draft (shows only in the local preview, not on the live site)", widget: boolean, required: false, default: false }
 
           - name: academic
             label: Academic & studio
@@ -263,13 +267,16 @@ collections:
               - { name: title, label: Section title, widget: string }
               - { name: intro, label: Intro, widget: text, required: false }
               - name: photos
-                label: Photos (6 work best)
+                label: Photos (shown at their own aspect ratio, in rows)
                 widget: list
                 required: false
-                summary: "{{caption}}"
+                summary: "row {{row}} · {{caption}}"
                 fields:
-                  - { name: src, label: Photo, widget: image }
-                  - { name: caption, label: Caption, widget: string, required: false }
+                  - { name: src, label: "Photo: upload the copy made by prepare_photos.bat (from Photography/web), not the original", widget: image }
+                  - { name: caption, label: "Caption (shown on hover)", widget: string, required: false }
+                  - { name: row, label: "Row number (optional: photos with the same number share a row, 2–3 per row; leave blank to arrange automatically)", widget: number, value_type: int, required: false }
+                  - { name: w, label: "Width in px (optional: read from the photo if blank)", widget: number, value_type: int, required: false }
+                  - { name: h, label: "Height in px (optional: read from the photo if blank)", widget: number, value_type: int, required: false }
               - name: extras
                 label: Other items (reserved)
                 widget: list
@@ -288,7 +295,7 @@ collections:
 
   # ------------------------------------------------------------------ CASE STUDIES
   - name: casestudies
-    label: Case studies
+    label: Project pages
     icon: map
     files:
       - name: saga
@@ -298,6 +305,14 @@ collections:
         fields: &csfields
           - { name: title, label: Title, widget: string }
           - { name: crumb, label: Breadcrumb, widget: string }
+          - name: back
+            label: Back link (Lab pages only; leave empty for Work)
+            widget: object
+            required: false
+            collapsed: true
+            fields:
+              - { name: label, label: Text, widget: string, required: false }
+              - { name: href, label: Link, widget: string, required: false }
           - { name: subtitle, label: Subtitle, widget: text }
           - name: meta
             label: Key facts row
@@ -306,6 +321,15 @@ collections:
             fields:
               - { name: label, label: Label, widget: string }
               - { name: value, label: Value, widget: string }
+          - name: glance
+            label: At a glance (4 cards under the title)
+            widget: list
+            required: false
+            summary: "{{tag}}: {{big}}"
+            fields:
+              - { name: tag, label: "Tag (Problem / How / Findings / Limits)", widget: string }
+              - { name: big, label: Big number or phrase, widget: string }
+              - { name: text, label: One line, widget: text }
           - name: chapters
             label: Chapters
             widget: list
@@ -314,7 +338,54 @@ collections:
               - { name: id, label: "Anchor id (used in links — avoid changing)", widget: string, required: false }
               - { name: label, label: Side label, widget: string }
               - { name: heading, label: Heading, widget: string }
-              - { name: body, label: Text, widget: markdown }
+              - { name: lead, label: Takeaway line (shown large), widget: text, required: false }
+              - { name: body, label: Text, widget: markdown, required: false }
+              - name: stats
+                label: Number tiles (optional)
+                widget: list
+                required: false
+                summary: "{{v}} {{l}}"
+                fields:
+                  - { name: v, label: Number, widget: string }
+                  - { name: l, label: Label, widget: string }
+                  - { name: s, label: Small text, widget: string, required: false }
+              - name: bars
+                label: Bar chart (optional)
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: Title, widget: string, required: false }
+                  - { name: max, label: "Scale maximum (e.g. 100)", widget: number, value_type: float, required: false }
+                  - name: items
+                    label: Bars
+                    widget: list
+                    summary: "{{label}} {{text}}"
+                    fields:
+                      - { name: label, label: Label, widget: string }
+                      - { name: value, label: Value, widget: number, value_type: float }
+                      - { name: text, label: Shown as, widget: string, required: false }
+                      - { name: hl, label: Highlight, widget: boolean, required: false }
+                  - { name: note, label: Note under the chart, widget: text, required: false }
+              - name: cards
+                label: Cards (optional)
+                widget: list
+                required: false
+                summary: "{{big}} {{title}}"
+                fields:
+                  - { name: big, label: Big number (optional), widget: string, required: false }
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text, required: false }
+              - { name: cardsStyle, label: "Card style (blank; q = questions; plain = no numbers)", widget: select, options: ["", "q", "plain"], required: false }
+              - name: lessons
+                label: Lesson cards with a diagram (optional)
+                widget: list
+                required: false
+                summary: "{{title}}"
+                fields:
+                  - { name: d, label: "Diagram (gaps / split / triggers / weights)", widget: select, options: ["gaps", "split", "triggers", "weights"] }
+                  - { name: title, label: Title, widget: string }
+                  - { name: then, label: What happened, widget: text }
+                  - { name: now, label: "What I'd do now", widget: text }
               - { name: embed, label: "Interactive block (do not change)", widget: string, required: false }
               - name: steps
                 label: Process steps (optional)
@@ -345,6 +416,17 @@ collections:
                   - { name: caption, label: Caption, widget: string }
                   - { name: alt, label: Description for screen readers, widget: string, required: false }
               - { name: figLayout, label: "Image layout (blank = 3 across; two; one = full width; tall = single portrait map)", widget: select, options: ["", "two", "one", "tall"], required: false }
+              - { name: more, label: "More detail (folded, optional)", widget: markdown, required: false }
+              - name: compare
+                label: Before → after rows (optional)
+                widget: list
+                required: false
+                summary: "{{step}}"
+                fields:
+                  - { name: group, label: Group, widget: string }
+                  - { name: step, label: Step, widget: string }
+                  - { name: before, label: Before, widget: text }
+                  - { name: after, label: After, widget: text }
           - name: next
             label: Next-page link
             widget: object
