@@ -52,8 +52,8 @@
       },
       {
         "value": "B.Plan",
-        "label": "SPA Vijayawada · CGPA 7.74 / 10",
-        "detail": "2018–22 · First Class with Distinction · thesis graded A",
+        "label": "SPA Vijayawada",
+        "detail": "2018–22 · First Class with Distinction",
         "link": "#edu"
       }
     ]
@@ -131,7 +131,8 @@
           "Key point of contact with APIIC for my team on projects under the BHAVYA scheme",
           "Client communication and coordination, GIS and technical support, and presentations, building on four years of running delivery at Planning Saga"
         ],
-        "link": ""
+        "link": "",
+        "linkLabel": ""
       },
       {
         "hidden": false,
@@ -142,7 +143,8 @@
         "points": [
           "Planned the course structure and taught weekly sessions to M.Arch students, from GIS data types and spatial analysis to thematic mapping and introductory BIM"
         ],
-        "link": ""
+        "link": "",
+        "linkLabel": ""
       },
       {
         "hidden": false,
@@ -153,7 +155,8 @@
         "points": [
           "Worked on the Master Plan and Perspective Plan for the Visakhapatnam–Kakinada–Srikakulam Special Development Zone during public consultation and revision"
         ],
-        "link": ""
+        "link": "",
+        "linkLabel": ""
       },
       {
         "hidden": false,
@@ -176,7 +179,8 @@
         "points": [
           "Shared responsibility for the complete GIS dataset of the Bhimavaram land-use master plan and managed it through to the draft stage"
         ],
-        "link": ""
+        "link": "",
+        "linkLabel": ""
       }
     ],
     "education": {
@@ -258,24 +262,24 @@
     "intro": "I draft the idea, the intent and the flow; AI does most of the execution. Before anything is used, I check what comes out against real data.",
     "items": [
       {
+        "tag": "Production",
         "title": "Code & automation",
-        "body": "Python, Apps Script and API pipelines: I designed the logic and the flow, AI wrote most of the code, and I tested it against real data before it went near production. At Planning Saga the automation layer (checks, data pulls, API calls, cleaning, formatting to client spec, QA) and the capacity & deadline model were built this way.",
-        "tag": "Production"
+        "body": "Python, Apps Script and API pipelines: I designed the logic and the flow, AI wrote most of the code, and I tested it against real data before it went near production. At Planning Saga the automation layer (checks, data pulls, API calls, cleaning, formatting to client spec, QA) and the capacity & deadline model were built this way."
       },
       {
+        "tag": "Building",
         "title": "Tools, end to end",
-        "body": "Tools I designed and AI built: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and personal quality-of-life tools such as custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries.",
-        "tag": "Building"
+        "body": "Tools I designed and AI built: a local Node.js CV editor, this portfolio (including its map engine and data pipeline), plugins and add-ons for software I use daily, and personal quality-of-life tools such as custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries."
       },
       {
+        "tag": "Operations",
         "title": "Systems & documentation",
-        "body": "Workflow procedures, training material, client reports, proposals and a service-agreement draft. I set out what each needed, AI helped structure and draft, and I wrote and checked the final versions.",
-        "tag": "Operations"
+        "body": "Workflow procedures, training material, client reports, proposals and a service-agreement draft. I set out what each needed, AI helped structure and draft, and I wrote and checked the final versions."
       },
       {
+        "tag": "Learning",
         "title": "Research & fast learning",
-        "body": "Getting productive quickly in new methods and tools, and desk research for business development and new markets.",
-        "tag": "Learning"
+        "body": "Getting productive quickly in new methods and tools, and desk research for business development and new markets."
       }
     ],
     "principleTitle": "My rule",
@@ -318,60 +322,111 @@
       {
         "group": "Code",
         "skill": "Python: pandas, geopandas, requests",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Code",
         "skill": "API pipelines: Geocoding, Places, batch",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Code",
         "skill": "Apps Script automation & planning models",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Code",
         "skill": "AI-assisted development & prompt engineering",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Code",
         "skill": "GeoJSON & web-map data delivery",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Digitising, topology & geometry QA",
         "saga": 2,
-        "amrut": 2
+        "thesis": null,
+        "wri": null,
+        "amrut": 2,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Multi-criteria & raster analysis",
-        "thesis": 2
+        "saga": null,
+        "thesis": 2,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Hazard zonation & disaster-risk planning",
-        "thesis": 2
+        "saga": null,
+        "thesis": 2,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Spatial joins, kernel density, hotspot mapping",
+        "saga": 1,
+        "thesis": null,
         "wri": 2,
-        "saga": 1
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Spreadsheet data cleaning & harmonisation",
-        "wri": 2,
         "saga": 1,
-        "amrut": 1
+        "thesis": null,
+        "wri": 2,
+        "amrut": 1,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Spatial",
         "skill": "Network analysis",
+        "saga": null,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
         "studio": 2
       },
       {
@@ -381,34 +436,55 @@
         "thesis": 2,
         "wri": 2,
         "amrut": 1,
-        "teach": 1
+        "teach": 1,
+        "studio": null
       },
       {
         "group": "Delivery",
         "skill": "Process design & QA frameworks",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Delivery",
         "skill": "Project planning & timeline modelling",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Delivery",
         "skill": "Hiring, training & team leadership",
         "saga": 2,
-        "teach": 1
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": 1,
+        "studio": null
       },
       {
         "group": "Delivery",
         "skill": "Client management & business development",
-        "saga": 2
+        "saga": 2,
+        "thesis": null,
+        "wri": null,
+        "amrut": null,
+        "teach": null,
+        "studio": null
       },
       {
         "group": "Delivery",
         "skill": "Thematic cartography & reporting",
-        "wri": 2,
+        "saga": null,
         "thesis": 2,
+        "wri": 2,
         "amrut": 1,
         "teach": 2,
         "studio": 1
@@ -432,7 +508,8 @@
         "title": "Next experiment",
         "note": "In progress",
         "href": "",
-        "image": ""
+        "image": "",
+        "draft": false
       }
     ]
   },
@@ -516,65 +593,65 @@
       {
         "src": "assets/img/personal/hill-town.jpg",
         "caption": "Hill town",
+        "row": 1,
         "w": 1200,
-        "h": 1600,
-        "row": 1
+        "h": 1600
       },
       {
         "src": "assets/img/personal/snow-line-mist.jpg",
         "caption": "Snow line in the mist",
+        "row": 1,
         "w": 1600,
-        "h": 900,
-        "row": 1
+        "h": 900
       },
       {
         "src": "assets/img/personal/valley-settlement.jpg",
         "caption": "Valley settlement",
+        "row": 1,
         "w": 1229,
-        "h": 1600,
-        "row": 1
+        "h": 1600
       },
       {
         "src": "assets/img/personal/old-city-lane.jpg",
         "caption": "Old city lane",
+        "row": 2,
         "w": 1600,
-        "h": 900,
-        "row": 2
+        "h": 900
       },
       {
         "src": "assets/img/personal/clay-idol.jpg",
         "caption": "Clay idol in the making",
+        "row": 2,
         "w": 1067,
-        "h": 1600,
-        "row": 2
+        "h": 1600
       },
       {
         "src": "assets/img/personal/temple-woodwork.jpg",
         "caption": "Carved temple woodwork",
+        "row": 2,
         "w": 1600,
-        "h": 938,
-        "row": 2
+        "h": 938
       },
       {
         "src": "assets/img/personal/forest-light.jpg",
         "caption": "Forest light",
+        "row": 3,
         "w": 1600,
-        "h": 1067,
-        "row": 3
+        "h": 1067
       },
       {
         "src": "assets/img/personal/terraced-fields.jpg",
         "caption": "Terraced fields",
+        "row": 3,
         "w": 1600,
-        "h": 900,
-        "row": 3
+        "h": 900
       },
       {
         "src": "assets/img/personal/village-street.jpg",
         "caption": "Village street",
+        "row": 3,
         "w": 1600,
-        "h": 681,
-        "row": 3
+        "h": 681
       }
     ],
     "extras": []
