@@ -276,12 +276,110 @@ table.matrix { border-collapse: collapse; width: 100%; min-width: 760px; font-si
 .photo.ph::before, .photo.ph::after { content: ""; position: absolute; width: 14px; height: 14px; border: 1px solid var(--t-3); }
 .photo.ph::before { left: 8px; top: 8px; border-right: 0; border-bottom: 0; }
 .photo.ph::after { right: 8px; bottom: 8px; border-left: 0; border-top: 0; }
-/* phones: one wrapping flow; basis ∝ aspect ratio keeps each line at one height */
+.photo .c span { display: block; }
+.photo .c small { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; color: var(--t-1); letter-spacing: .02em; }
+/* a featured photo (or any photo alone in its row) keeps its shape but never grows taller than the screen */
+.ph-row.solo { justify-content: center; }
+.ph-row.solo .photo { flex: 0 1 auto; width: min(100%, calc(78vh * var(--ar, 1.5))); }
+/* mosaic: columns like a pinboard, each photo at its own shape */
+.photos.lay-mosaic { display: block; columns: 3 260px; column-gap: 8px; }
+.lay-mosaic .photo { display: block; width: 100%; margin: 0 0 8px; break-inside: avoid; }
+/* filmstrip: one scrolling row at a fixed height */
+.photos.lay-strip { flex-direction: row; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 10px; scrollbar-color: var(--rule-2) transparent; }
+.lay-strip .photo { flex: 0 0 auto; height: min(62vh, 520px); scroll-snap-align: start; }
+/* rows are worked out in photos.js for every screen width; an underfilled last row keeps the target height */
+.ph-row.short .photo { flex: 0 0 calc(var(--h) * var(--ar)); }
+.photo[data-i] { cursor: zoom-in; }
+.photo[data-i]:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.ph-all { margin: 18px 0 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.ph-all a { color: var(--sig); }
+/* photography page */
+.ph-hero { padding: calc(var(--hud-h) + 70px) 0 28px; position: relative; z-index: 2; }
+.ph-hero h1 { font-family: var(--f-cond); font-stretch: 74%; font-weight: 700; font-size: clamp(44px, 7.5vw, 112px); line-height: .9; margin: 22px 0 0; }
+.ph-hero .sub { color: var(--t-1); font-size: clamp(17px, 1.6vw, 20px); font-weight: 300; max-width: 720px; margin: 20px 0 0; }
+.ph-filters .chip span { opacity: .6; margin-left: 3px; }
+section.block.ph-block { padding-top: 0; }
+/* gallery + map backdrop: a dim, zoomed-in map of India fills the screen behind the page (like the contour
+   backdrop on the other pages); its camera glides to the place being looked at. Photos run down the left. */
+.gallery-page main { position: relative; z-index: 1; }
+.ph-layout { display: block; }
+.ph-main { width: min(100%, 58vw); position: relative; z-index: 2; }
+.ph-bar { position: sticky; top: var(--hud-h); z-index: 5; padding: 12px 0 16px; background: linear-gradient(var(--ink-0) 75%, #07090b00);
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 68%); mask-image: linear-gradient(90deg, #000 40%, transparent 68%); }
+.ph-bg { position: fixed; top: var(--hud-h); right: 0; bottom: 0; left: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 18%, #000 60%); mask-image: linear-gradient(90deg, transparent 18%, #000 60%); }
+.pm-cam { position: absolute; left: 0; top: 0; transition: transform 1.5s cubic-bezier(.65, 0, .25, 1); will-change: transform; }
+.pm-drift { will-change: transform; }
+.pm-backdrop svg { display: block; overflow: visible; }
+.pm-backdrop .pm-land path { fill: #ff8a3d03; stroke: #ff8a3d24; }
+.pm-backdrop .pm-land .pm-ind { fill: #ff8a3d06; stroke: #ff8a3d4d; stroke-width: 1.3; }
+.pm-backdrop .pm-land .pm-npl { stroke: #ff8a3d38; }
+.pm-backdrop .pm-s { transform: scale(calc(var(--u, 1) * 1.6)); }
+.pm-backdrop .pm-core { fill: #ff8a3d55; stroke: none; }
+.pm-backdrop .pm-pin { fill: #ff8a3dcc; }
+.pm-backdrop .pm-ring.r1 { stroke: #ff8a3d4d; }
+.pm-backdrop .pm-label { fill: #a9b6be8c; }
+.pm-backdrop .pm-label { font-size: calc(var(--u, 1) * 14px); stroke-width: calc(var(--u, 1) * 4px); font-weight: 500; }
+.pm-backdrop .pm-cross line { stroke: #ff8a3d26; }
+.ph-bg .pm-read { position: absolute; right: 3vw; bottom: 3vh; font-size: 14px; text-align: right; }
+.ph-mini { display: none; }
+.ph-group { margin: 6px 0 46px; scroll-margin-top: calc(var(--hud-h) + 64px); }
+.ph-gh { display: flex; align-items: baseline; gap: 14px; margin: 0 0 12px; }
+.ph-gh h2 { font-family: var(--f-cond); font-stretch: 74%; font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1; margin: 0; }
+.ph-gh span { color: var(--t-2); font-size: 13px; font-variant-numeric: tabular-nums; }
+/* the map */
+.pm-land path { fill: #ff8a3d05; stroke: #ff8a3d40; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.pm-land .pm-ind { fill: #ff8a3d0a; stroke: #ff8a3d99; stroke-width: 1.2; }
+.pm-land .pm-npl { stroke: #ff8a3d73; }
+.pm-cross line { stroke: #ff8a3d55; stroke-width: 1; stroke-dasharray: 3 5; vector-effect: non-scaling-stroke; }
+.pm-cross { transition: opacity .3s; }
+.pm-dot { cursor: pointer; outline: none; }
+.pm-hit { fill: transparent; }
+.pm-core { fill: #a9b6be; stroke: #07090b; stroke-width: 2; transition: fill .2s; }
+.pm-dot:hover .pm-core, .pm-dot:focus-visible .pm-core { fill: var(--t-0); }
+.pm-dot.on .pm-core { fill: var(--sig); }
+
+.pm-pin { fill: var(--sig); stroke: #07090b; stroke-width: 2.5; }
+/* the point is steady (no pulsing): one faint ring around it */
+.pm-ring { fill: none; stroke: #ff8a3d59; stroke-width: 1.5; transform: scale(2.2); transform-box: fill-box; transform-origin: center; }
+.pm-ring.r2 { display: none; }
+.pm-live.pop { animation: pm-fade .6s ease-out; }
+.pm-label { fill: var(--t-0); font: 600 17px var(--f-sans); letter-spacing: .02em; paint-order: stroke; stroke: #07090b; stroke-width: 6px; stroke-linejoin: round; }
+.pm-read { margin-top: 10px; font-size: 12.5px; color: var(--t-3); font-variant-numeric: tabular-nums; }
+.pm-read b { color: #ff8a3d99; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+@keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pm-live.pop { animation: none; } }
+/* narrower screens: the photos need the full width; the backdrop stays behind and a small locator is pinned top right */
+@media (max-width: 1000px) {
+  .ph-main { width: 100%; }
+  .ph-bar { padding-right: 96px; -webkit-mask-image: none; mask-image: none; }
+  .ph-bg { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%); mask-image: linear-gradient(90deg, transparent 0%, #000 55%); opacity: .7; }
+  .ph-bg .pm-read, .pm-backdrop .pm-label { display: none; }
+  .ph-mini { display: block; position: fixed; top: calc(var(--hud-h) + 6px); right: max(8px, env(safe-area-inset-right)); width: 84px; z-index: 6; padding: 4px; background: #07090bd9; border: 1px solid var(--rule); }
+  .pm-mini svg { display: block; width: 100%; height: auto; }
+  .pm-mini .pm-label, .pm-mini .pm-cross { display: none; }
+  .pm-mini .pm-core { stroke-width: 4; }
+}
+}
+/* full-screen viewer */
+.pv { position: fixed; inset: 0; z-index: 100; background: #050607f2; display: none; place-items: center; }
+.pv.on { display: grid; }
+.pv figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 94vw; }
+.pv img { max-width: 92vw; max-height: 82vh; object-fit: contain; display: block; }
+.pv figcaption { text-align: center; color: var(--t-0); font-size: 14px; max-width: 760px; }
+.pv figcaption small { display: block; color: var(--t-1); font-size: 12px; margin-top: 3px; }
+.pv figcaption em { display: block; font-style: normal; color: var(--t-3); font-size: 11px; margin-top: 4px; letter-spacing: .06em; }
+.pv button { position: absolute; background: #0c1014cc; color: var(--t-0); border: 1px solid var(--rule-2); width: 44px; height: 44px; font-size: 26px; line-height: 1; cursor: pointer; border-radius: 2px; }
+.pv button:hover { border-color: var(--sig); color: var(--sig); }
+.pv .pv-x { top: 16px; right: 16px; }
+.pv .pv-p { left: 16px; top: 50%; transform: translateY(-50%); }
+.pv .pv-n2 { right: 16px; top: 50%; transform: translateY(-50%); }
+/* phones */
 @media (max-width: 620px) {
-  .photos { flex-direction: row; flex-wrap: wrap; }
-  .ph-row { display: contents; }
-  .photo { flex: var(--ar, 1) 1 calc(var(--ar, 1) * 100px); }
-  .photo .c { opacity: 1; transform: none; font-size: 11.5px; }
+  .pv .pv-p, .pv .pv-n2 { top: auto; bottom: 16px; transform: none; }
+  .photos.lay-mosaic { columns: 2; }
+  .lay-strip .photo { height: 46vh; }
+  .photo .c { display: none; }   /* phones: captions live in the full-screen view (tap a photo) */
 }
 
 /* ---------- Contact / footer ---------- */
@@ -782,3 +880,7 @@ body { timeline-scope: --overview; }
 .slot .draft { font-style: normal; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--heat-1); border: 1px solid var(--heat-1); padding: 1px 5px; margin-left: 6px; }
 /* phones: text spans the full width, so keep the contours softer behind it */
 @media (max-width: 700px) { .cs-hero .vignette { background: linear-gradient(90deg, var(--ink-0) 0%, #07090be0 50%, #07090b99 100%), linear-gradient(to top, var(--ink-0) 0%, transparent 30%); } }
+/* map markers keep a readable size whatever the map's width (scaled around each point) */
+.pm-mini .pm-s { transform: scale(6.5); }
+@media (max-width: 1000px) { .ph-group { scroll-margin-top: calc(var(--hud-h) + 104px); } }
+.gallery-page .foot { position: relative; z-index: 2; background: var(--ink-0); }
