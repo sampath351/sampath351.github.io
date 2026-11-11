@@ -589,69 +589,220 @@
   "personal": {
     "title": "Personal",
     "intro": "I photograph everything. I also build small quality-of-life tools for my own devices: custom apps for my e-readers, desktop organisers, and maintenance scripts for my photo and media libraries. They are for personal use, not for sale.",
+    "homeSize": "m",
+    "galleryTitle": "Photographs",
+    "galleryIntro": "Grouped by place. The map behind follows the place you're looking at; click a photo to see it full size.",
+    "layout": "rows",
+    "size": "m",
+    "places": [
+      {
+        "name": "Shimla",
+        "lat": 31.1048,
+        "lon": 77.1734
+      },
+      {
+        "name": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639
+      },
+      {
+        "name": "Nepal",
+        "lat": 28.3949,
+        "lon": 84.124
+      },
+      {
+        "name": "Pondicherry",
+        "lat": 11.9416,
+        "lon": 79.8083
+      }
+    ],
     "photos": [
       {
         "src": "assets/img/personal/hill-town.jpg",
-        "caption": "Hill town",
-        "row": 1,
+        "show": true,
+        "home": true,
+        "caption": "A town stacked up the hillside, roof over roof",
+        "place": "Shimla",
+        "year": "2021",
+        "feature": false,
         "w": 1200,
         "h": 1600
       },
       {
-        "src": "assets/img/personal/snow-line-mist.jpg",
-        "caption": "Snow line in the mist",
-        "row": 1,
-        "w": 1600,
-        "h": 900
-      },
-      {
-        "src": "assets/img/personal/valley-settlement.jpg",
-        "caption": "Valley settlement",
-        "row": 1,
-        "w": 1229,
+        "src": "assets/img/personal/red-roofs-in-the-forest.jpg",
+        "show": true,
+        "home": false,
+        "caption": "A cluster of red roofs in a dark conifer forest",
+        "place": "Shimla",
+        "year": "2021",
+        "feature": false,
+        "w": 1067,
         "h": 1600
       },
       {
+        "src": "assets/img/personal/forest-light.jpg",
+        "show": true,
+        "home": false,
+        "caption": "Low sun filtering through a pine forest",
+        "place": "Shimla",
+        "year": "2021",
+        "feature": false,
+        "w": 1600,
+        "h": 1067
+      },
+      {
         "src": "assets/img/personal/old-city-lane.jpg",
-        "caption": "Old city lane",
-        "row": 2,
+        "show": true,
+        "home": false,
+        "caption": "Balconies, signboards and wires leaning into a narrow lane",
+        "place": "Kolkata",
+        "year": "2024",
+        "feature": false,
         "w": 1600,
         "h": 900
       },
       {
         "src": "assets/img/personal/clay-idol.jpg",
-        "caption": "Clay idol in the making",
-        "row": 2,
+        "show": true,
+        "home": true,
+        "caption": "Hands finishing an unpainted clay idol",
+        "place": "Kolkata",
+        "year": "2024",
+        "feature": false,
         "w": 1067,
         "h": 1600
       },
       {
-        "src": "assets/img/personal/temple-woodwork.jpg",
-        "caption": "Carved temple woodwork",
-        "row": 2,
-        "w": 1600,
-        "h": 938
+        "src": "assets/img/personal/clay-face-in-shadow.jpg",
+        "show": true,
+        "home": false,
+        "caption": "An unpainted clay face, half in shadow",
+        "place": "Kolkata",
+        "year": "2024",
+        "feature": false,
+        "w": 1067,
+        "h": 1600
       },
       {
-        "src": "assets/img/personal/forest-light.jpg",
-        "caption": "Forest light",
-        "row": 3,
+        "src": "assets/img/personal/shopkeeper-at-dusk.jpg",
+        "show": true,
+        "home": false,
+        "caption": "A shopkeeper on his doorstep, eyes on his phone",
+        "place": "Kolkata",
+        "year": "2024",
+        "feature": false,
         "w": 1600,
-        "h": 1067
+        "h": 965
+      },
+      {
+        "src": "assets/img/personal/town-along-the-riverbed.jpg",
+        "show": true,
+        "home": true,
+        "caption": "A town spread along a wide riverbed, seen from the ridge above",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1600,
+        "h": 774
+      },
+      {
+        "src": "assets/img/personal/valley-settlement.jpg",
+        "show": true,
+        "home": false,
+        "caption": "Haze in layers between the peaks and the town on the valley floor",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1229,
+        "h": 1600
+      },
+      {
+        "src": "assets/img/personal/summit-in-cloud.jpg",
+        "show": true,
+        "home": true,
+        "caption": "Fresh snow on the summit, the rest of the range already in shadow",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1600,
+        "h": 1000
       },
       {
         "src": "assets/img/personal/terraced-fields.jpg",
-        "caption": "Terraced fields",
-        "row": 3,
+        "show": true,
+        "home": false,
+        "caption": "Terraces stepping down towards the river valley",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
         "w": 1600,
         "h": 900
       },
       {
         "src": "assets/img/personal/village-street.jpg",
-        "caption": "Village street",
-        "row": 3,
+        "show": true,
+        "home": false,
+        "caption": "Stone houses and slate roofs along a quiet hill road",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
         "w": 1600,
         "h": 681
+      },
+      {
+        "src": "assets/img/personal/slate-roofs-prayer-flags.jpg",
+        "show": true,
+        "home": true,
+        "caption": "Slate roofs, whitewashed stone walls and prayer flags",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1600,
+        "h": 1067
+      },
+      {
+        "src": "assets/img/personal/terraces-through-pines.jpg",
+        "show": true,
+        "home": false,
+        "caption": "Terraced fields and farmhouses, seen through the pines",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1600,
+        "h": 734
+      },
+      {
+        "src": "assets/img/personal/suspension-bridge.jpg",
+        "show": true,
+        "home": false,
+        "caption": "Two children crossing a suspension bridge towards the pines",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1067,
+        "h": 1600
+      },
+      {
+        "src": "assets/img/personal/temple-woodwork.jpg",
+        "show": true,
+        "home": false,
+        "caption": "Carved wooden pillars and a serpent bracket set into brick",
+        "place": "Nepal",
+        "year": "2025",
+        "feature": false,
+        "w": 1600,
+        "h": 938
+      },
+      {
+        "src": "assets/img/personal/mending-nets.jpg",
+        "show": true,
+        "home": true,
+        "caption": "Mending nets beside a beached fishing boat in the evening light",
+        "place": "Pondicherry",
+        "year": "2026",
+        "feature": false,
+        "w": 1600,
+        "h": 1200
       }
     ],
     "extras": []
