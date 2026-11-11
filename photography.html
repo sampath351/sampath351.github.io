@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photographs — Sampath Kakarla</title>
+  <meta name="description" content="Photographs by Sampath Kakarla, grouped by the places they were taken, with a locator map.">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="gallery-page">
+
+<header class="hud">
+  <a class="id" href="index.html">Sampath Kakarla</a>
+  <nav aria-label="Site">
+    <a href="assets/docs/Sampath_Kakarla_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+<div class="ph-bg" id="ph-bg" aria-hidden="true"></div>
+<div class="ph-mini" id="ph-mini" aria-label="Where these were taken"></div>
+
+<main>
+  <section class="ph-hero" id="top">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html#personal">← Personal</a></div>
+      <h1 data-c="personal.galleryTitle">Photographs</h1>
+      <p class="sub" data-c="personal.galleryIntro"></p>
+    </div>
+  </section>
+  <section class="block ph-block" aria-label="Photographs">
+    <div class="wrap ph-layout">
+      <div class="ph-main">
+        <div class="ph-bar"><div class="chips ph-filters" id="ph-filters" role="group" aria-label="Show photos from"></div></div>
+        <div id="gallery"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© <span id="year"></span> Sampath Kakarla · all photographs · Map outline: Natural Earth (India view)</span><a href="index.html">← Back to the portfolio</a></div></footer>
+
+<script src="assets/vendor/marked.umd.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/photos.js"></script>
+<script src="assets/js/places-map.js"></script>
+<script>
+/* Photography page. Content: site.json → personal (edited in the admin: Home page → Personal).
+   Every photo switched on ("Show") appears, grouped by its Place, in list order. The chips show one place or all;
+   the locator map marks the place you're looking at (in "All", it follows the group in view as you scroll). */
+(async function () {
+  const S = await C.load("content/site.json"), P = S.personal || {};
+  C.fill(S);
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const esc = C.esc;
+  const items = await Photos.prepare((P.photos || []).filter((x) => x && x.src && x.show !== false));
+  const OTHER = "Other places";
+  const placeOf = (x) => x.place || OTHER;
+  const names = [...new Set(items.map(placeOf))];
+  const groups = names.map((n) => {
+    const list = items.filter((x) => placeOf(x) === n), ys = [...new Set(list.map((x) => x.year).filter(Boolean))].sort();
+    return { name: n, list, years: ys.length > 1 ? `${ys[0]}–${ys[ys.length - 1]}` : ys[0] || "" };
+  });
+  const info = (g) => g ? `<b>${esc(g.name)}</b>${g.years ? ` · ${esc(g.years)}` : ""} · ${g.list.length} photo${g.list.length > 1 ? "s" : ""}` : `<b>All places</b> · ${items.length} photos`;
+
+  const box = document.getElementById("gallery"), bar = document.getElementById("ph-filters");
+  // the dim, zoomed-in backdrop (all screens) and the small locator (phones), kept in step
+  const used = (P.places || []).filter((p) => names.includes(p.name)), GEO = "assets/geo/south-asia.json";
+  const maps = await Promise.all([PlacesMap(document.getElementById("ph-bg"), GEO, used, { mode: "backdrop" }),
+                                  PlacesMap(document.getElementById("ph-mini"), GEO, used, { mode: "mini", onPick: (n) => pick(n, true) })]);
+  const map = { set: (n, i) => maps.forEach((m) => m.set(n, i)) };
+  let sel = "*", spyOn = false, spyRaf = 0;
+
+  function paintChips() {
+    const chip = (v, label, n) => `<button class="chip${v === sel ? " on" : ""}" type="button" data-v="${esc(v)}" aria-pressed="${v === sel}">${esc(label)} <span>${n}</span></button>`;
+    bar.innerHTML = chip("*", "All", items.length) + groups.map((g) => chip(g.name, g.name, g.list.length)).join("");
+  }
+  function draw() {
+    spyOn = false;
+    const show = sel === "*" ? groups : groups.filter((g) => g.name === sel);
+    box.innerHTML = show.map((g, i) => `<section class="ph-group" data-g="${esc(g.name)}"><header class="ph-gh rv"><h2>${esc(g.name)}</h2><span>${g.years ? esc(g.years) + " · " : ""}${g.list.length} photo${g.list.length > 1 ? "s" : ""}</span></header><div class="photos" data-gi="${i}"></div></section>`).join("");
+    box.querySelectorAll(".photos[data-gi]").forEach((el) => Photos.render(el, show[+el.dataset.gi].list, { layout: P.layout || "rows", size: P.size || "m" }));
+    C.reveal(); setTimeout(() => box.querySelectorAll(".rv").forEach((e) => e.classList.add("in")), 80);
+    if (sel !== "*") { map.set(sel, info(groups.find((g) => g.name === sel))); return; }
+    // "All": the map follows the group in view (the last group whose top has passed 40% of the screen;
+    // at the very bottom of the page, the last group)
+    spyOn = true; spy();
+  }
+  function spy() {
+    if (!spyOn) return;
+    const secs = [...box.querySelectorAll(".ph-group")], ref = innerHeight * .4;
+    let el = secs[0];
+    secs.forEach((s) => { if (s.getBoundingClientRect().top <= ref) el = s; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) el = secs[secs.length - 1];
+    const g = el && groups.find((q) => q.name === el.dataset.g);
+    if (g) map.set(g.name, info(g));
+  }
+  addEventListener("scroll", () => { if (!spyRaf) spyRaf = requestAnimationFrame(() => { spyRaf = 0; spy(); }); }, { passive: true });
+  function pick(v, fromMap) {
+    sel = v; paintChips(); draw();
+    if (fromMap || scrollY > box.getBoundingClientRect().top + scrollY - 140) box.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+  bar.addEventListener("click", (e) => { const b = e.target.closest("button[data-v]"); if (b) pick(b.dataset.v); });
+  paintChips(); draw();
+})();
+</script>
+</body>
+</html>
