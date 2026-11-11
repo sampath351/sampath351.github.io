@@ -4,10 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Earthquake-Triggered Landslides, Aizawl — Sampath Kakarla</title>
-  <meta name="description" content="Case study: B.Plan dissertation (2022) on earthquake-triggered landslide hazard in Aizawl district, Mizoram, rebuilt as an interactive multi-criteria model you can re-weight.">
+  <meta name="description" content="Academic project: B.Plan dissertation (2022) on earthquake-triggered landslide hazard in Aizawl district, Mizoram, rebuilt as an interactive multi-criteria model you can re-weight.">
   <meta name="theme-color" content="#07090b">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-  <!-- <link rel="stylesheet" href="https://use.typekit.net/KITID.css"> -->
   <link rel="preload" href="../assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
   <link rel="stylesheet" href="../assets/css/main.css">
@@ -31,53 +30,61 @@
   <section class="console wide" id="explore" data-rail="Interactive model" aria-label="Interactive hazard model">
     <aside class="side">
       <div class="ctl">
-        <h5>Map layer</h5>
-        <div class="layer-list" role="radiogroup" aria-label="Map layer">
-          <button class="lyr on" data-view="combined" role="radio" aria-checked="true"><i class="sw5"></i>Combined hazard<small>landslide + earthquake · live</small></button>
-          <button class="lyr" data-view="lhi" role="radio" aria-checked="false"><i class="swc"></i>Landslide index<small>6 indicators · live</small></button>
-          <button class="lyr" data-view="eq" role="radio" aria-checked="false"><i class="sw5"></i>Earthquake index<small>2022 layer · fixed</small></button>
-          <button class="lyr" data-view="orig" role="radio" aria-checked="false"><i class="sw5"></i>Combined, as submitted<small>2022 output, for comparison</small></button>
-          <button class="lyr" data-view="ind" role="radio" aria-checked="false"><i class="swi"></i>One indicator<small>class scores, 0–9</small></button>
+        <h5>Map</h5>
+        <div class="seg" role="radiogroup" aria-label="Map layer">
+          <button class="lyr on" data-view="combined" role="radio" aria-checked="true">Combined<small>live</small></button>
+          <button class="lyr" data-view="lhi" role="radio" aria-checked="false">Landslide<small>live</small></button>
+          <button class="lyr" data-view="eq" role="radio" aria-checked="false">Earthquake<small>2022</small></button>
+          <button class="lyr" data-view="orig" role="radio" aria-checked="false">As submitted<small>2022</small></button>
         </div>
-        <div class="chips" id="ind-chips" hidden style="margin-top:6px"></div>
-      </div>
-
-      <div class="ctl" id="ctl-weights">
-        <h5>Indicator weights <button class="chip mini" id="reset">reset to 2022</button></h5>
-        <div class="sliders" id="sliders"></div>
-        <p class="note" style="margin:6px 0 0">Landslide index = Σ weight × class score ÷ Σ weights, on a 0–9 scale.</p>
-      </div>
-
-      <div class="ctl" id="ctl-gap">
-        <h5>Cells away from roads, streams, faults</h5>
-        <div class="chips">
-          <button class="chip on" data-gap="2022" aria-pressed="true">Unscored (2022)</button>
-          <button class="chip" data-gap="zero" aria-pressed="false">Score structure as 0</button>
-        </div>
-        <p class="note" id="gap-note" style="margin:6px 0 0"></p>
-      </div>
-
-      <div class="ctl" id="ctl-mix">
-        <h5>Overlay balance <span id="mix-v">50 / 50</span></h5>
-        <input type="range" class="rng" id="mix" min="0" max="100" step="10" value="50" aria-label="Landslide share of the combined index">
-        <div class="rng-ends"><span>earthquake</span><span>landslide</span></div>
-      </div>
-
-      <div class="ctl">
-        <h5 id="share-t">Share of district</h5>
-        <div class="stack" id="stack"></div>
-        <div class="stack-l" id="stack-l"></div>
       </div>
 
       <div class="ctl" id="ctl-inv">
         <h5>Inventory check <span>402 GSI landslides</span></h5>
         <div class="readout" id="readout" aria-live="polite"></div>
         <p class="note" id="inv-note" style="margin:6px 0 0"></p>
+        <p class="note" style="margin:4px 0 0">The live model runs on a 100 m grid, so its default (about 37%, 3.2×) differs slightly from the 2022 map as submitted (about 40%, 3.4×).</p>
       </div>
 
       <div class="ctl" id="ctl-teh">
         <h5 id="teh-t">Tehsils, high + very high <span>click to zoom</span></h5>
         <div class="bars teh" id="bars"></div>
+      </div>
+
+      <div class="ctl">
+        <h5>Landslide weights <span>score out of 10</span></h5>
+        <div class="pointers" id="pointers"></div>
+        <details class="adjust" id="adjust">
+          <summary>Adjust the model</summary>
+          <div class="ctl" id="ctl-weights">
+            <h5>Indicator weights <button class="chip mini" id="reset">reset to 2022</button></h5>
+            <div class="sliders" id="sliders"></div>
+            <p class="note" style="margin:6px 0 0">Landslide index = Σ weight × class score ÷ Σ weights, on a 0–9 scale.</p>
+          </div>
+          <div class="ctl" id="ctl-gap">
+            <h5>Cells away from roads, streams, faults</h5>
+            <div class="chips">
+              <button class="chip on" data-gap="2022" aria-pressed="true">Unscored (2022)</button>
+              <button class="chip" data-gap="zero" aria-pressed="false">Score structure as 0</button>
+            </div>
+            <p class="note" id="gap-note" style="margin:6px 0 0"></p>
+          </div>
+          <div class="ctl" id="ctl-mix">
+            <h5>Overlay balance <span id="mix-v">50 / 50</span></h5>
+            <input type="range" class="rng" id="mix" min="0" max="100" step="10" value="50" aria-label="Landslide share of the combined index">
+            <div class="rng-ends"><span>earthquake</span><span>landslide</span></div>
+          </div>
+          <div class="ctl">
+            <h5>One indicator on the map</h5>
+            <button class="lyr mini-lyr" data-view="ind" role="radio" aria-checked="false">Show one indicator<small>class scores, 0–9</small></button>
+            <div class="chips" id="ind-chips" hidden style="margin-top:6px"></div>
+          </div>
+          <div class="ctl">
+            <h5 id="share-t">Share of district</h5>
+            <div class="stack" id="stack"></div>
+            <div class="stack-l" id="stack-l"></div>
+          </div>
+        </details>
       </div>
 
       <div class="ctl">
