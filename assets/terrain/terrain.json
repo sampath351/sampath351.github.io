@@ -43,5 +43,21 @@
   "base": 20,
   "step": 15,
   "major": 75
+ },
+ "eastern-ghats": {
+  "min": 9.59,
+  "max": 475.32,
+  "bbox": [
+   80.33,
+   16.5,
+   80.73,
+   17.05
+  ],
+  "enc": "rg16",
+  "label": "Eastern Ghats, north-west of Vijayawada",
+  "src": "SRTM-based Terrain Tiles (Mapzen / AWS Open Data)",
+  "base": 60,
+  "step": 12,
+  "major": 60
  }
 }
