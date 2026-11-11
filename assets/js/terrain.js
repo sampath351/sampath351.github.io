@@ -51,8 +51,9 @@ window.Terrain = (function () {
           case 7: case 8: seg(left, top); break; case 10: seg(top, right); seg(left, bot); break;
         }
       }
-      ctx.strokeStyle = major ? `rgba(255,138,61,${(.30 + hi * .45) * alpha})` : `rgba(94,200,216,${(.14 + hi * .28) * alpha})`;
-      ctx.lineWidth = major ? 1.1 : .7; ctx.lineJoin = "round"; ctx.stroke();
+      // same strength as the home-page backdrop, so the contours read clearly on the right of the hero
+      ctx.strokeStyle = major ? `rgba(255,138,61,${(.42 + hi * .5) * alpha})` : `rgba(94,200,216,${(.24 + hi * .36) * alpha})`;
+      ctx.lineWidth = major ? 1.15 : .75; ctx.lineJoin = "round"; ctx.stroke();
     });
     const cap = cv.parentElement.querySelector(".terrain-cap");
     if (cap && !cap.textContent) cap.textContent = `Contours: ${M.label} · ${M.step} m interval · ${M.src}`;
