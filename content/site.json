@@ -592,7 +592,7 @@
     "homeSize": "l",
     "galleryTitle": "Photographs",
     "galleryIntro": "Grouped by place. The map behind follows the place you're looking at; click a photo to see it full size.",
-    "layout": "rows",
+    "layout": "mosaic",
     "size": "m",
     "places": [
       {
