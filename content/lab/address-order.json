@@ -1,0 +1,88 @@
+{
+  "title": "Address-order checker",
+  "crumb": "01 · Open data",
+  "back": { "label": "Lab", "href": "../index.html#lab" },
+  "subtitle": "Five checks that compare a city's addresses with its streets, from spelling to position. Run on an open OpenStreetMap extract of central Helsinki and tested against planted errors.",
+  "meta": [
+    { "label": "Data", "value": "OpenStreetMap, central Helsinki · April 2019 snapshot (ODbL)" },
+    { "label": "Scale", "value": "1,535 address tags → 580 addresses on 64 streets" },
+    { "label": "Result", "value": "43 flags to review, each with a reason" },
+    { "label": "Tools", "value": "Python · GeoPandas · Shapely · osmium · MapLibre" },
+    { "label": "Code", "value": "[Notebook](https://github.com/sampath351/sampath351.github.io/blob/main/lab/address-order.ipynb) · [Script](https://github.com/sampath351/sampath351.github.io/blob/main/lab/address_order.py)" }
+  ],
+  "glance": [
+    { "tag": "Read", "big": "1,535", "text": "address tags from shops, offices and buildings" },
+    { "tag": "Match", "big": "572", "text": "addresses matched to a street in the extract; 8 left unchecked" },
+    { "tag": "Check", "big": "5", "text": "checks, from spelling to running order" },
+    { "tag": "Flag", "big": "43", "text": "addresses to review, each with a reason" },
+    { "tag": "Test", "big": "248 / 250", "text": "planted errors caught" }
+  ],
+  "chapters": [
+    {
+      "id": "why",
+      "label": "Why",
+      "heading": "Address checks, on data I can show",
+      "body": "Address work was one of the stages we automated at Planning Saga. That data belongs to the client, so the method can't be shown on it. This lab rebuilds the same kind of checks on open OpenStreetMap data, where every step, threshold and result is public.\n\nHelsinki, because a small extract of its centre ships with the open-source pyrosm library: anyone can rerun the notebook without downloading anything else."
+    },
+    {
+      "id": "checks",
+      "label": "Checks",
+      "heading": "Five checks, from text to geometry",
+      "lead": "Every flag comes with a reason. An address is counted once, under its most serious flag; two of the duplicates also carry a text flag.",
+      "cards": [
+        { "big": "22", "title": "Text", "text": "Street name written differently from the street's own name (case, hyphen, typo, a building name in front), or a floor or courtyard note in the house number." },
+        { "big": "3", "title": "Far", "text": "More than 120 m from the nearest mapped part of its street." },
+        { "big": "12", "title": "Duplicate", "text": "The same address on buildings more than 25 m apart. Shops inside one building count as one place." },
+        { "big": "3", "title": "Side", "text": "An odd number on the even side, or the reverse, judged against the rest of the street." },
+        { "big": "3", "title": "Sequence", "text": "A number more than 15 m outside the stretch where its neighbours put it." }
+      ],
+      "more": "**Matching the street.** Exact name first, then the part after a comma (a building name typed in front), then the same name ignoring case and hyphens, then a close spelling (similarity 0.88 or more) only if that street is within 120 m. Anything still unmatched is left *unchecked*: its street isn't in the extract.\n\n**One record per address.** Tags are collapsed by street and number. A tag stands for the building it sits in, so twenty shops in one shopping centre are one place.\n\n**Side and order.** Each street gets one axis, its main direction. An address is projected to its nearest point on the street; the street's local direction there gives the side, and the projection gives the position along it. For side, every other number on the street votes on which side the odd numbers are on. For sequence, the longest run of numbers in order along each side is kept and the rest are measured against it. Ranges like 4-6 are left out of sequence because they overlap their own numbers."
+    },
+    {
+      "id": "findings",
+      "label": "Findings",
+      "heading": "What the 43 flags turned out to be",
+      "stats": [
+        { "v": "43", "l": "flags to review", "s": "7.5% of 572 checked addresses" },
+        { "v": "22", "l": "text only", "s": "floor notes, building names, case and typos" },
+        { "v": "8", "l": "left unchecked", "s": "street not in the extract" }
+      ],
+      "body": "Most text flags are notes typed into the wrong field: *Mannerheimintie 8, Floor 6* in the house number, *Kaivopiha, Mannerheimintie* (a building name) in the street. Three are probable typos the matcher resolved: *Kluuvinkatu* for Kluuvikatu, *Snellmankatu* for Snellmaninkatu, *Asemanaukio* for Asema-aukio.\n\nThe spatial flags are fewer and need a person to decide. On Simonkatu, number 20 sits 135 m short of number 10 along the street. On Mannerheimintie, 13 A sits 164 m from the street.",
+      "note": {
+        "title": "Flags, not errors",
+        "body": "A first run flagged seven addresses at the south end of Keskuskatu as 160–250 m from their street. The street was the problem: that stretch is a pedestrian street mapped as an area, and the first version only read street lines. Reading areas too cleared them. Every flag is a question for a reviewer, and sometimes the answer is that the street data is wrong."
+      }
+    },
+    {
+      "id": "test",
+      "label": "Test",
+      "heading": "Does it catch what it should?",
+      "lead": "Clean addresses were broken on purpose and the checks ran again: five rounds, ten planted errors of each kind.",
+      "bars": {
+        "title": "Planted errors caught, of 50 per check",
+        "max": 50,
+        "items": [
+          { "label": "Text", "value": 50, "text": "50" },
+          { "label": "Far", "value": 50, "text": "50" },
+          { "label": "Duplicate", "value": 50, "text": "50" },
+          { "label": "Side", "value": 48, "text": "48", "hl": true },
+          { "label": "Sequence", "value": 50, "text": "50" }
+        ],
+        "note": "Text, far and duplicate errors were planted large (a dropped letter, a 250 m move, a copy 150 m away), so they test the plumbing. Side (address mirrored across its street) and sequence (two numbers swapped) are the real test. Errors were planted only where a check applies: side covers 75% of checked addresses, sequence 64%."
+      }
+    },
+    {
+      "id": "limits",
+      "label": "Limits",
+      "heading": "What it doesn't do",
+      "body": "- **Coverage.** Side needs at least four other numbers on the street, sequence a run of four on one side. Short streets and squares get neither check.\n- **Thresholds are judgement calls:** 120 m, 25 m, 15 m and 0.88 similarity. A misspelling heavier than one dropped letter falls below 0.88 and lands as unchecked, not as a typo.\n- **Positions come from shop nodes and building centres**, not entrances. The 15 m tolerance absorbs corner buildings.\n- **One snapshot from April 2019.** It says nothing about OpenStreetMap today."
+    },
+    {
+      "id": "build",
+      "label": "Build",
+      "heading": "How it was built",
+      "body": "Built with AI (Claude). The checks follow my address work in parcel delivery; the code was written with AI, and the planted-error test above is how it was checked. The notebook walks through each step on the bundled extract."
+    }
+  ],
+  "next": { "label": "Planning Saga, where these checks come from", "href": "../work/planning-saga.html" }
+}
