@@ -360,7 +360,6 @@ section.block.ph-block { padding-top: 0; }
   .pm-mini .pm-label, .pm-mini .pm-cross { display: none; }
   .pm-mini .pm-core { stroke-width: 4; }
 }
-}
 /* full-screen viewer */
 .pv { position: fixed; inset: 0; z-index: 100; background: #050607f2; display: none; place-items: center; }
 .pv.on { display: grid; }
