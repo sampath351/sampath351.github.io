@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Address-order checker — Sampath Kakarla</title>
+  <meta name="description" content="Lab project: five address checks (text, distance, duplicates, odd/even side, running order) run on an open OpenStreetMap extract of central Helsinki and tested against planted errors.">
+  <meta name="theme-color" content="#07090b">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header class="hud">
+  <a class="id" href="../index.html">Sampath Kakarla</a>
+  <button class="sec-btn" type="button" aria-expanded="false" aria-controls="rail">Sections</button>
+  <nav aria-label="Site">
+    <a href="../assets/docs/Sampath_Kakarla_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+</header>
+<nav class="rail" id="rail" aria-label="On this page"></nav>
+
+<main>
+  <section class="cs-hero" id="top"><canvas class="cs-terrain" id="ao-hero" aria-hidden="true"></canvas><div class="vignette"></div><div class="wrap" id="cs-hero"></div></section>
+
+  <!-- ===================== MAP CONSOLE ===================== -->
+  <section class="console" id="explore" data-rail="Map" aria-label="Map of address flags">
+    <aside class="side">
+      <div class="ctl">
+        <h5>Checks <span>tap to show / hide</span></h5>
+        <div class="layer-list ao-kinds" id="ao-kinds"></div>
+      </div>
+      <div class="ao-pick" id="ao-pick" aria-live="polite"><p class="note">Click an address on the map, or one in the list below, to see why it was flagged.</p></div>
+      <div class="ctl">
+        <h5>Flagged addresses <span>click to zoom</span></h5>
+        <div class="ao-list" id="ao-list"></div>
+      </div>
+      <p class="note">Data: OpenStreetMap extract of central Helsinki, April 2019 (© OpenStreetMap contributors, ODbL), as bundled with pyrosm. Buildings and streets on the map come from the same extract.</p>
+    </aside>
+    <div id="map">
+      <div class="map-hud" id="map-hud">hover or tap an address</div>
+    </div>
+  </section>
+
+  <div class="cs-body"><div class="wrap"><div id="chapters"></div><nav class="next" id="next"></nav></div></div>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© <span id="year"></span> Sampath Kakarla</span><span>Data: © OpenStreetMap contributors (ODbL), Helsinki extract, April 2019</span></div></footer>
+
+<script src="../assets/vendor/maplibre-gl.js"></script>
+<script src="../assets/vendor/marked.umd.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/rail.js"></script>
+<script src="../assets/js/lab-address-map.js"></script>
+<script>C.caseStudy("../content/lab/address-order.json");</script>
+</body>
+</html>
