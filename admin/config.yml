@@ -469,3 +469,8 @@ collections:
         file: content/work/aizawl-landslides.json
         format: json
         fields: *csfields
+      - name: lab-address
+        label: Lab 01 — Address-order checker
+        file: content/lab/address-order.json
+        format: json
+        fields: *csfields
