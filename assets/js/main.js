@@ -90,7 +90,7 @@
   const box = $("#photos");
   if (homePh.length && window.Photos) {
     Photos.prepare(homePh).then((items) => { Photos.render(box, items, { layout: "rows", size: PS.homeSize || "m" }); reveal(); });
-    if (nAll > homePh.length) box.insertAdjacentHTML("afterend", `<p class="ph-all rv"><a href="photography.html">See all ${nAll} photographs →</a></p>`);
+    if (nAll > homePh.length) box.insertAdjacentHTML("afterend", `<p class="ph-all rv"><a href="photography.html">See all photographs →</a></p>`);
   } else {
     box.innerHTML = `<div class="ph-row">${Array(6).fill(0).map((_, i) => `<div class="photo ph rv">FRAME ${String(i + 1).padStart(2, "0")}</div>`).join("")}</div>`;
   }
