@@ -1,0 +1,64 @@
+{
+ "addresses": 580,
+ "checked": 572,
+ "streets": 64,
+ "flagged": 43,
+ "primary": {
+  "text": 22,
+  "far": 3,
+  "dup": 12,
+  "side": 3,
+  "sequence": 3,
+  "ok": 529,
+  "unchecked": 8
+ },
+ "any": {
+  "text": 24,
+  "far": 3,
+  "dup": 12,
+  "side": 3,
+  "sequence": 3
+ },
+ "coverage": {
+  "side": 0.75,
+  "sequence": 0.638
+ },
+ "bbox": [
+  24.93518,
+  60.16416,
+  24.9534,
+  60.17901
+ ],
+ "snapshot": "April 2019",
+ "thresholds": {
+  "far_m": 120,
+  "dup_m": 25,
+  "fuzzy": 0.88,
+  "min_group": 4,
+  "majority": 0.75,
+  "seq_tol_m": 15
+ },
+ "tags": 1535,
+ "planted_test": {
+  "text": {
+   "planted": 50,
+   "caught": 50
+  },
+  "far": {
+   "planted": 50,
+   "caught": 50
+  },
+  "dup": {
+   "planted": 50,
+   "caught": 50
+  },
+  "side": {
+   "planted": 50,
+   "caught": 48
+  },
+  "sequence": {
+   "planted": 50,
+   "caught": 50
+  }
+ }
+}
